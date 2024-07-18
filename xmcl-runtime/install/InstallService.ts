@@ -3,6 +3,7 @@ import { DownloadBaseOptions } from '@xmcl/file-transfer'
 import { DEFAULT_FORGE_MAVEN, DEFAULT_RESOURCE_ROOT_URL, DownloadTask, InstallForgeOptions, InstallJarTask, InstallProfile, LiteloaderVersion, MinecraftVersion, Options, installAssetsTask, installByProfileTask, installFabric, installForgeTask, installLabyMod4Task, installLibrariesTask, installLiteloaderTask, installNeoForgedTask, installOptifineTask, installQuiltVersion, installResolvedAssetsTask, installResolvedLibrariesTask, installVersionTask } from '@xmcl/installer'
 import { Asset, InstallService as IInstallService, InstallFabricOptions, InstallLabyModOptions, InstallNeoForgedOptions, InstallOptifineOptions, InstallQuiltOptions, InstallServiceKey, InstallableLibrary, LockKey, MutableState, Resource, ResourceDomain, Settings, InstallForgeOptions as _InstallForgeOptions, isFabricLoaderLibrary, isForgeLibrary } from '@xmcl/runtime-api'
 import { AbortableTask, CancelledError, task } from '@xmcl/task'
+import { spawn } from 'child_process'
 import { existsSync } from 'fs'
 import { ensureFile, readFile, unlink, writeFile } from 'fs-extra'
 import { errors } from 'undici'
@@ -18,65 +19,6 @@ import { joinUrl } from '~/util/url'
 import { VersionService } from '~/version'
 import { AnyError } from '../util/error'
 import { missing } from '../util/fs'
-import { spawn } from 'child_process'
-
-class InstallFabricTask extends AbortableTask<string> {
-  private controller: AbortController | undefined
-  private apis: string[]
-
-  constructor(
-    url: URL, apiSets: string[],
-    preferDefault: boolean,
-    private dest: string,
-    id: string,
-    private app: LauncherApp,
-    private side?: 'client' | 'server') {
-    super()
-    this.name = 'installFabric'
-    this.param = { id }
-    const apis = apiSets.map(a => a + '/fabric-meta')
-    if (preferDefault) {
-      apis.unshift(url.protocol + '//' + url.host)
-    } else {
-      apis.push(url.protocol + '//' + url.host)
-    }
-    this.apis = apis.map(a => new URL(a)).map(a => {
-      const realUrl = new URL(url.toString())
-      realUrl.host = a.host
-      realUrl.pathname = (a.pathname === '/' ? '' : a.pathname) + url.pathname
-      return realUrl.toString()
-    })
-    this._to = dest
-  }
-
-  protected async process(): Promise<string> {
-    let err: any
-    this.controller = new AbortController()
-    while (this.apis.length > 0) {
-      try {
-        const api = this.apis[0]
-        this._from = api
-        this.update(0)
-        const resp = await this.app.fetch(api, { signal: this.controller.signal })
-        const artifact = await resp.json() as any
-        const result = await installFabric(artifact, this.dest, { side: this.side })
-        return result
-      } catch (e) {
-        err = e
-        this.apis.shift()
-      }
-    }
-    throw err
-  }
-
-  protected abort(): void {
-    this.controller?.abort()
-  }
-
-  protected isAbortedError(e: any): boolean {
-    return e instanceof errors.RequestAbortedError
-  }
-}
 
 /**
  * Version install service provide some functions to install Minecraft/Forge/Liteloader, etc. version
@@ -502,24 +444,31 @@ export class InstallService extends AbstractService implements IInstallService {
     try {
       this.log(`Start to install fabric: yarn ${options.yarn}, loader ${options.loader}.`)
       const path = this.getPath()
+      const apiSets = getApiSets(this.settings).map(a => a.url)
+      const preferDefault = shouldOverrideApiSet(this.settings, this.gfw.inside)
 
-      const versionId = await this.submit(
-        new InstallFabricTask(
-          new URL('https://meta.fabricmc.net/v2/versions/loader/' + options.minecraft + '/' + options.loader),
-          getApiSets(this.settings).map(a => a.url),
-          shouldOverrideApiSet(this.settings, this.gfw.inside),
-          path,
-          options.minecraft,
-          this.app,
-          options.side,
-        ))
-      if (options.side === 'server') {
-        const folder = new MinecraftFolder(path)
-        const jsonPath = folder.getVersionServerJson(versionId)
-        const content = JSON.parse(await readFile(jsonPath, 'utf8')) as Version
-        const libs = Version.resolveLibraries(content.libraries)
-        await this.installLibraries(libs, versionId)
-      }
+      const versionId = await installFabric({
+        minecraft: path,
+        minecraftVersion: options.minecraft,
+        side: options.side,
+        version: options.loader,
+        fetch: (i, init) => {
+          const url = new URL(i)
+          const apis = apiSets.map(a => a + '/fabric-meta')
+          if (preferDefault) {
+            apis.unshift(url.protocol + '//' + url.host)
+          } else {
+            apis.push(url.protocol + '//' + url.host)
+          }
+          const urls = apis.map(a => new URL(a)).map(a => {
+            const realUrl = new URL(url.toString())
+            realUrl.host = a.host
+            realUrl.pathname = (a.pathname === '/' ? '' : a.pathname) + url.pathname
+            return realUrl.toString()
+          })
+          return Promise.race(urls.map(a => this.app.fetch(a, init)))
+        },
+      })
       this.log(`Success to install fabric: yarn ${options.yarn}, loader ${options.loader}. The new version is ${versionId}`)
       return versionId
     } catch (e) {
@@ -533,22 +482,31 @@ export class InstallService extends AbstractService implements IInstallService {
   async installQuilt(options: InstallQuiltOptions) {
     const side = options.side ?? 'client'
     const mc = MinecraftFolder.from(this.getPath())
-    if (side === 'client') {
-      const version = await installQuiltVersion({
-        minecraft: mc,
-        minecraftVersion: options.minecraftVersion,
-        version: options.version,
-      })
-      return version
-    }
-    const resp = await this.app.fetch(`https://meta.quiltmc.org/v3/versions/loader/${options.minecraftVersion}/${options.version}/server/json`)
-    const versionJson = await resp.json() as Version
-    const serverJsonPath = mc.getVersionServerJson(versionJson.id)
-    await ensureFile(serverJsonPath)
-    await writeFile(serverJsonPath, JSON.stringify(versionJson, null, 2))
-    const libs = Version.resolveLibraries(versionJson.libraries)
-    await this.installLibraries(libs, versionJson.id)
-    return versionJson.id
+    const apiSets = getApiSets(this.settings).map(a => a.url)
+    const preferDefault = shouldOverrideApiSet(this.settings, this.gfw.inside)
+    const version = await installQuiltVersion({
+      minecraft: mc,
+      minecraftVersion: options.minecraftVersion,
+      version: options.version,
+      side,
+      fetch: (i, init) => {
+        const url = new URL(i)
+        const apis = apiSets.map(a => a + '/quilt-meta')
+        if (preferDefault) {
+          apis.unshift(url.protocol + '//' + url.host)
+        } else {
+          apis.push(url.protocol + '//' + url.host)
+        }
+        const urls = apis.map(a => new URL(a)).map(a => {
+          const realUrl = new URL(url.toString())
+          realUrl.host = a.host
+          realUrl.pathname = (a.pathname === '/' ? '' : a.pathname) + url.pathname
+          return realUrl.toString()
+        })
+        return Promise.race(urls.map(a => this.app.fetch(a, init)))
+      },
+    })
+    return version
   }
 
   async installOptifineAsResource(options: InstallOptifineOptions) {

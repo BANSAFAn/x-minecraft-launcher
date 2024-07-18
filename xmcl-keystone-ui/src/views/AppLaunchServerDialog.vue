@@ -272,7 +272,8 @@ const { refresh: onPlay, refreshing: loading } = useRefreshable(async () => {
       saveName: linkedWorld.value,
     })
   }
-  await launch('server', nogui.value)
+  await launch('server', { nogui: nogui.value })
+  await launch('client', { server: { host: '127.0.0.1', port: port.value } })
 })
 
 </script>
