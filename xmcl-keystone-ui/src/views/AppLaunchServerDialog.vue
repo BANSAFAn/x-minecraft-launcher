@@ -23,7 +23,7 @@
         </v-btn>
       </v-toolbar>
       <div
-        class="visible-scroll flex flex-col max-h-[600px] mx-0 overflow-y-auto overflow-x-hidden px-6 py-2"
+        class="visible-scroll flex flex-col max-h-[60vh] mx-0 overflow-y-auto overflow-x-hidden px-6 py-2"
       >
         <v-subheader>{{ t('baseSetting.title') }}</v-subheader>
         <div class="grid grid-cols-3 gap-3 pt-2 px-2">
@@ -59,7 +59,6 @@
           />
         </div>
         <v-subheader>{{ t('save.name') }}</v-subheader>
-        {{ linkedWorld }}
         <v-item-group
           v-model="selectedSave"
           mandatory
@@ -102,29 +101,41 @@
         </v-item-group>
 
         <template v-if="enabled.length > 0">
-          <v-subheader>{{ t('mod.name') }}</v-subheader>
+          <v-subheader class="mt-4">
+            {{ t('mod.name') }}
+          </v-subheader>
           <div
             class="pt-2 px-2"
           >
-            <v-list
-              dense
-              class="max-h-80 overflow-auto"
+            <v-data-table
+              v-model="selected"
+              show-select
+              :headers="headers"
+              :items="enabled"
             >
-              <v-list-item
-                v-for="m of enabled"
-                :key="m.path"
-              >
+              <template #item.name="{ item }">
+                <!-- <v-chip
+                  :color="getColor(item.calories)"
+                  dark
+                >
+                  {{ item.calories }}
+                </v-chip> -->
                 <v-list-item-avatar :size="30">
                   <img
-                    ref="iconImage"
-                    :src="m.icon || unknownPack"
+                    :src="item.icon || unknownPack"
                   >
                 </v-list-item-avatar>
-                <v-list-item-title class="flex overflow-hidden">
-                  {{ m.name }}
-                </v-list-item-title>
-              </v-list-item>
-            </v-list>
+
+                {{ item.name }}
+              </template>
+              <!-- <template #top>
+                <v-switch
+                  v-model="singleSelect"
+                  label="Single select"
+                  class="pa-3"
+                />
+              </template> -->
+            </v-data-table>
           </div>
         </template>
 
@@ -205,7 +216,6 @@ const selectedSave = computed({
   get() {
     if (linkedWorld.value === '') return 0
     const i = saves.value.findIndex(s => s.path === linkedWorld.value)
-    console.log(i)
     return i + 1
   },
   set(v) {
@@ -242,7 +252,24 @@ const { saves } = injection(kInstanceSave)
 const { mods } = injection(kInstanceModsContext)
 const enabled = computed(() => mods.value.filter(m => m.enabled))
 
-const { installDependencies, installMinecraftServerJar } = useService(InstallServiceKey)
+// watch(mods, (v) => {
+//   console.log(v)
+// })
+
+const headers = computed(() => [
+  {
+    text: t('mod.name'),
+    value: 'name',
+  },
+  {
+    text: t('modrinth.side'),
+    value: 'side',
+  },
+])
+
+const selected = ref<string[]>([])
+
+const { installDependencies, installMinecraftJar } = useService(InstallServiceKey)
 
 const { refresh: onPlay, refreshing: loading } = useRefreshable(async () => {
   if (!_eula) {
@@ -258,10 +285,12 @@ const { refresh: onPlay, refreshing: loading } = useRefreshable(async () => {
     })
   }
   const runtimeValue = runtime.value
+  let version = serverVersionId.value
   if (!serverVersionId.value) {
     const versionIdToInstall = await installServer(runtimeValue, path.value, versionId.value)
     await installMinecraftServerJar(runtimeValue.minecraft)
     await installDependencies(versionIdToInstall, 'server')
+    version = versionIdToInstall
   } else {
     await installMinecraftServerJar(runtimeValue.minecraft)
     await installDependencies(serverVersionId.value, 'server')
@@ -272,8 +301,8 @@ const { refresh: onPlay, refreshing: loading } = useRefreshable(async () => {
       saveName: linkedWorld.value,
     })
   }
-  await launch('server', { nogui: nogui.value })
-  await launch('client', { server: { host: '127.0.0.1', port: port.value } })
+  await launch('server', { nogui: nogui.value, version })
+  // await launch('client', { server: { host: '127.0.0.1', port: port.value } })
 })
 
 </script>

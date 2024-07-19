@@ -69,6 +69,7 @@ export function useInstanceVersion(instance: Ref<Instance>, local: Ref<LocalVers
   const serverVersionHeader = computed(() => {
     const runtime = instance.value.runtime
     const onlyMinecraft = Object.entries(runtime).filter(([k, v]) => k !== 'minecraft' && !!v).length === 0
+    console.log(servers.value)
     for (const s of servers.value) {
       if (s.minecraft !== runtime.minecraft) {
         continue

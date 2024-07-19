@@ -209,6 +209,12 @@ export class VersionService extends StatefulService<LocalVersions> implements IV
           fabric: libs.find(isFabricLoaderLibrary)?.version ?? '',
           quilt: libs.find(isQuiltLibrary)?.version ?? '',
         }
+        if (Object.values(resolved).every(v => !v)) {
+          const forgeVersionIndex = profile.arguments?.game.indexOf('--fml.forgeVersion')
+          if (forgeVersionIndex && forgeVersionIndex !== -1) {
+            resolved.forge = profile.arguments!.game[forgeVersionIndex + 1] as string
+          }
+        }
         const [existed] = Object.entries(resolved).filter(([_, v]) => !!v)
         type = existed?.[0] as any
         minecraft = profile.inheritsFrom

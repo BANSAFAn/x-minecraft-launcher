@@ -97,7 +97,7 @@ export function useInstanceLaunch(
   }
 
   async function generateLaunchOptions(instancePath: string, operationId: string, side = 'client' as 'client' | 'server', overrides?: Partial<LaunchOptions>) {
-    const ver = side === 'client' ? version.value : serverVersion.value
+    const ver = overrides?.version ?? side === 'client' ? version.value : serverVersion.value
 
     if (!ver) {
       throw new LaunchException({ type: 'launchNoVersionInstalled' })

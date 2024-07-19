@@ -357,6 +357,7 @@ export class LaunchService extends AbstractService implements ILaunchService {
       const processLog = async (buf: any) => {
         const encoding = await this.encoder.guessEncodingByBuffer(buf).catch(e => undefined)
         const result = await this.encoder.decode(buf, encoding || UTF8)
+        console.log(result)
         this.emit('minecraft-stdout', { pid: process.pid, stdout: result })
       }
 

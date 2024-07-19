@@ -237,6 +237,7 @@ export class InstanceModsService extends AbstractService implements IInstanceMod
         this.warn(`Skip to disable disabled mod file on ${resource.path}!`)
       } else {
         promises.push(rename(resource.path, resource.path + '.disabled').catch(e => {
+          this.warn(e)
           // if (e.code === 'ENOENT') {
           //   // Force remove
           //   this.state.instanceModRemove([resource])
