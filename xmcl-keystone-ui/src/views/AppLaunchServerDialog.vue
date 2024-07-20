@@ -101,15 +101,49 @@
         </v-item-group>
 
         <template v-if="enabled.length > 0">
-          <v-subheader class="mt-4">
-            {{ t('mod.name') }}
-          </v-subheader>
+          <div class="flex items-center mt-4 gap-2">
+            <v-subheader class="">
+              {{ t('mod.name') }}
+            </v-subheader>
+            <div class="flex-grow" />
+            <v-btn
+              v-shared-tooltip="_ => 'Select All'"
+              text
+              icon
+              @click="selectAll"
+            >
+              <v-icon>
+                select_all
+              </v-icon>
+            </v-btn>
+            <v-btn
+              v-shared-tooltip="_ => 'Select None'"
+              text
+              icon
+              @click="selectNone"
+            >
+              <v-icon>
+                deselect
+              </v-icon>
+            </v-btn>
+            <v-text-field
+              v-model="search"
+              class="max-w-50 pl-1"
+              dense
+              outlined
+              flat
+              prepend-inner-icon="search"
+              hide-details
+            />
+          </div>
           <div
             class="pt-2 px-2"
           >
             <v-data-table
               v-model="selected"
+              item-key="path"
               show-select
+              :search="search"
               :headers="headers"
               :items="enabled"
             >
@@ -127,6 +161,9 @@
                 </v-list-item-avatar>
 
                 {{ item.name }}
+              </template>
+              <template #item.side="{ item }">
+                {{ getSide(item) }}
               </template>
               <!-- <template #top>
                 <v-switch
@@ -190,8 +227,10 @@ import { kInstanceVersionInstall } from '@/composables/instanceVersionInstall'
 import { kInstanceSave } from '@/composables/save'
 import { useService } from '@/composables/service'
 import { vFallbackImg } from '@/directives/fallbackImage'
+import { vSharedTooltip } from '@/directives/sharedTooltip'
 import { injection } from '@/util/inject'
-import { InstallServiceKey, InstanceOptionsServiceKey, InstanceSavesServiceKey } from '@xmcl/runtime-api'
+import { ModFile } from '@/util/mod'
+import { BaseServiceKey, InstallServiceKey, InstanceModsServiceKey, InstanceOptionsServiceKey, InstanceSavesServiceKey } from '@xmcl/runtime-api'
 
 defineProps<{ }>()
 
@@ -210,7 +249,7 @@ let _eula: boolean
 
 const { launch } = injection(kInstanceLaunch)
 const { installServer } = injection(kInstanceVersionInstall)
-const { versionId, serverVersionId } = injection(kInstanceVersion)
+const { versionId, serverVersionId, serverVersionHeader } = injection(kInstanceVersion)
 
 const selectedSave = computed({
   get() {
@@ -244,6 +283,10 @@ const { isShown } = useDialog('launch-server', () => {
   getLinkedSaveWorld(path.value).then((v) => {
     linkedWorld.value = v ?? ''
   })
+  getServerInstanceMods(path.value).then((mods) => {
+    const all = enabled.value
+    selected.value = all.filter(m => mods.some(a => a.ino === m.resource.ino))
+  })
 })
 const { t } = useI18n()
 
@@ -251,10 +294,35 @@ const { runtime, path } = injection(kInstance)
 const { saves } = injection(kInstanceSave)
 const { mods } = injection(kInstanceModsContext)
 const enabled = computed(() => mods.value.filter(m => m.enabled))
+const search = ref('')
 
-// watch(mods, (v) => {
-//   console.log(v)
-// })
+function getSide(mod: ModFile) {
+  const fabric = mod.resource.metadata.fabric
+  if (fabric) {
+    if (fabric instanceof Array) {
+      for (const f of fabric) {
+        if (f.environment === 'client') {
+          return 'Client'
+        }
+        if (f.environment === 'server') {
+          return 'Server'
+        }
+      }
+      console.log(fabric)
+    } else {
+      if (fabric.environment === '*' || !fabric.environment) {
+        return 'Both'
+      }
+      if (fabric.environment === 'client') {
+        return 'Client'
+      }
+      if (fabric.environment === 'server') {
+        return 'Server'
+      }
+    }
+  }
+  return 'Both'
+}
 
 const headers = computed(() => [
   {
@@ -267,9 +335,18 @@ const headers = computed(() => [
   },
 ])
 
-const selected = ref<string[]>([])
+const selected = ref<ModFile[]>([])
 
 const { installDependencies, installMinecraftJar } = useService(InstallServiceKey)
+const { installToServerInstance, getServerInstanceMods } = useService(InstanceModsServiceKey)
+
+function selectAll() {
+  selected.value = enabled.value
+}
+
+function selectNone() {
+  selected.value = []
+}
 
 const { refresh: onPlay, refreshing: loading } = useRefreshable(async () => {
   if (!_eula) {
@@ -287,12 +364,12 @@ const { refresh: onPlay, refreshing: loading } = useRefreshable(async () => {
   const runtimeValue = runtime.value
   let version = serverVersionId.value
   if (!serverVersionId.value) {
-    const versionIdToInstall = await installServer(runtimeValue, path.value, versionId.value)
-    await installMinecraftServerJar(runtimeValue.minecraft)
+    const versionIdToInstall = await installServer(runtimeValue, path.value, serverVersionId.value)
+    await installMinecraftJar(runtimeValue.minecraft, 'server')
     await installDependencies(versionIdToInstall, 'server')
     version = versionIdToInstall
   } else {
-    await installMinecraftServerJar(runtimeValue.minecraft)
+    await installMinecraftJar(runtimeValue.minecraft, 'server')
     await installDependencies(serverVersionId.value, 'server')
   }
   if (linkedWorld.value) {
@@ -301,6 +378,10 @@ const { refresh: onPlay, refreshing: loading } = useRefreshable(async () => {
       saveName: linkedWorld.value,
     })
   }
+  await installToServerInstance({
+    path: path.value,
+    mods: selected.value.map(v => v.resource),
+  })
   await launch('server', { nogui: nogui.value, version })
   // await launch('client', { server: { host: '127.0.0.1', port: port.value } })
 })

@@ -139,7 +139,10 @@ export interface InstallService {
    * Download and install a minecraft version
    */
   installMinecraft(meta: MinecraftVersion, side?: 'client' | 'server'): Promise<void>
-  installMinecraftServerJar(version: string): Promise<void>
+  /**
+   * Install minecraft jar to the game
+   */
+  installMinecraftJar(version: string, side?: 'client' | 'server'): Promise<void>
   /**
    * Install provided libraries to game.
    */

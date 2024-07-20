@@ -291,28 +291,15 @@ export class InstallService extends AbstractService implements IInstallService {
   }
 
   @Lock((v: string) => LockKey.version(v))
-  async installMinecraftServerJar(version: string) {
+  async installMinecraftJar(version: string, side?: 'client' | 'server') {
     const option = this.getInstallOptions()
-    option.side = 'server'
+    option.side = side ?? 'client'
     const folder = MinecraftFolder.from(this.getPath())
     const parsed = await this.versionService.resolveLocalVersion(version)
     try {
-      await this.submit(new InstallJarTask(parsed, folder, option).setName('version.jar'))
+      await this.submit(new InstallJarTask(parsed, folder, option).setName('installVersion.jar'))
     } catch (e) {
       this.warn(`An error ocurred during download server version ${version}`)
-      this.warn(e)
-    }
-  }
-
-  @Lock((v: MinecraftVersion) => LockKey.version(v.id))
-  async installMinecraftJar(version: ResolvedVersion, side: 'client' | 'server' = 'client') {
-    const option = this.getInstallOptions()
-
-    const task = new InstallJarTask(version, this.getPath(), { ...option, side }).setName('installVersion.jar', { id: version.id })
-    try {
-      await this.submit(task)
-    } catch (e) {
-      this.warn(`An error ocurred during download version ${version.id}`)
       this.warn(e)
     }
   }

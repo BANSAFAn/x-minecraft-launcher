@@ -455,7 +455,7 @@ function isVersionMatched(version: LocalVersionHeader,
   return true
 }
 
-export function getResolvedVersion(versions: LocalVersionHeader[], id: string,
+export function findMatchedVersion(versions: LocalVersionHeader[], id: string,
   minecraft: string | undefined,
   forge: string | undefined,
   neoForged: string | undefined,

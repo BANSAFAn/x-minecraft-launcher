@@ -32,7 +32,7 @@
         >
           {{ data.launcherError ? t('launchFailed.failedToLaunch') : data.isCrash ? t(`launchFailed.crash`) : t(`launchFailed.description`) }}
         </div>
-        <pre class="overflow-auto rounded bg-[rgba(0,0,0,0.1)] p-5 hover:bg-[rgba(0,0,0,0.2)]">{{ data.errorLog }}</pre>
+        <pre class="overflow-auto min-h-[200px] rounded bg-[rgba(0,0,0,0.1)] p-5 hover:bg-[rgba(0,0,0,0.2)]">{{ data.errorLog }}</pre>
         <div
           style="padding: 10px"
         >
@@ -99,7 +99,7 @@ on('minecraft-exit', ({ code, signal, crashReport, crashReportLocation, errorLog
   }
   if (code !== 0) {
     console.log(errorLog)
-    data.errorLog = errorLog
+    data.errorLog = errorLog || crashReport || ''
     if (crashReportLocation) {
       data.crashReportLocation = crashReportLocation
       data.isCrash = true

@@ -1,15 +1,15 @@
 import { Frame, parse } from '@xmcl/gamesetting'
-import { EditGameSettingOptions, EditShaderOptions, GameOptionsState, InstanceOptionsService as IInstanceOptionsService, InstanceOptionException, InstanceOptionsServiceKey, ResourceDomain, compareRelease, compareSnapshot, getInstanceGameOptionKey, isCompatible, isReleaseVersion, isSnapshotPreview, packFormatVersionRange, parseShaderOptions, stringifyShaderOptions } from '@xmcl/runtime-api'
-import { readFile, writeFile } from 'fs-extra'
+import { EditGameSettingOptions, EditShaderOptions, GameOptionsState, InstanceOptionsService as IInstanceOptionsService, InstanceOptionsServiceKey, ResourceDomain, getInstanceGameOptionKey, parseShaderOptions, stringifyShaderOptions } from '@xmcl/runtime-api'
+import { ensureFile, readFile, writeFile } from 'fs-extra'
 import watch from 'node-watch'
 import { basename, join, relative } from 'path'
+import { Inject, LauncherAppKey } from '~/app'
+import { ResourceService } from '~/resource'
+import { AbstractService, ExposeServiceKey, ServiceStateManager } from '~/service'
 import { LauncherApp } from '../app/LauncherApp'
-import { LauncherAppKey, Inject } from '~/app'
 import { AnyError, isSystemError } from '../util/error'
 import { missing } from '../util/fs'
 import { requireString } from '../util/object'
-import { ResourceService } from '~/resource'
-import { AbstractService, ExposeServiceKey, ServiceStateManager } from '~/service'
 
 /**
  * The service to watch game setting (options.txt) and shader options (optionsshader.txt)
@@ -32,7 +32,7 @@ export class InstanceOptionsService extends AbstractService implements IInstance
   }
 
   getServerProperties(instancePath: string): Promise<Record<string, string>> {
-    const path = join(instancePath, 'server.properties')
+    const path = join(instancePath, 'server', 'server.properties')
     const content = readFile(path, 'utf-8').catch(() => '')
     const properties = content.then((content) => {
       const lines = content.split('\n').filter(v => v.trim().length > 0)
@@ -43,13 +43,14 @@ export class InstanceOptionsService extends AbstractService implements IInstance
   }
 
   async setServerProperties(instancePath: string, properties: Record<string, string>): Promise<void> {
-    const path = join(instancePath, 'server.properties')
+    const path = join(instancePath, 'server', 'server.properties')
     const content = Object.entries(properties).map(([k, v]) => `${k}=${v}`).join('\n') + '\n'
+    await ensureFile(path)
     await writeFile(path, content)
   }
 
   async getEULA(instancePath: string): Promise<boolean> {
-    const optionsPath = join(instancePath, 'eula.txt')
+    const optionsPath = join(instancePath, 'server', 'eula.txt')
     try {
       const content = await readFile(optionsPath, 'utf-8')
       return content.includes('eula=true')
@@ -58,8 +59,9 @@ export class InstanceOptionsService extends AbstractService implements IInstance
     }
   }
 
-  setEULA(instancePath: string, value: boolean): Promise<void> {
-    const optionsPath = join(instancePath, 'eula.txt')
+  async setEULA(instancePath: string, value: boolean): Promise<void> {
+    const optionsPath = join(instancePath, 'server', 'eula.txt')
+    await ensureFile(optionsPath)
     return writeFile(optionsPath, `eula=${Boolean(value)}`)
   }
 

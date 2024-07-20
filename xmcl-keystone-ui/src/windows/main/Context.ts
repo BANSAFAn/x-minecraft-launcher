@@ -16,8 +16,7 @@ import { kInstanceOptions, useInstanceOptions } from '@/composables/instanceOpti
 import { kInstanceResourcePacks, useInstanceResourcePacks } from '@/composables/instanceResourcePack'
 import { kInstanceShaderPacks, useInstanceShaderPacks } from '@/composables/instanceShaderPack'
 import { kInstanceVersion, useInstanceVersion } from '@/composables/instanceVersion'
-import { kInstanceVersionDiagnose, useInstanceVersionDiagnose } from '@/composables/instanceVersionDiagnose'
-import { kInstanceVersionInstall, useInstanceVersionInstall } from '@/composables/instanceVersionInstall'
+import { kInstanceVersionInstall, useInstanceVersionInstallInstruction } from '@/composables/instanceVersionInstall'
 import { kInstances, useInstances } from '@/composables/instances'
 import { kJavaContext, useJavaContext } from '@/composables/java'
 import { kLaunchTask, useLaunchTask } from '@/composables/launchTask'
@@ -79,10 +78,8 @@ export default defineComponent({
     const resourcePackSearch = useResourcePackSearch(instance.runtime, resourcePacks.enabled, resourcePacks.disabled)
     const shaderPackSearch = useShaderPackSearch(instance.runtime, shaderPacks.shaderPack)
 
-    const install = useInstanceVersionInstall(localVersions.versions, localVersions.servers)
-    provide(kInstanceVersionInstall, install)
+    const install = useInstanceVersionInstallInstruction(instance.path, instanceVersion.resolvedVersion, localVersions.versions, localVersions.servers)
 
-    const versionDiagnose = useInstanceVersionDiagnose(instance.path, instance.runtime, instanceVersion.resolvedVersion, install)
     const javaDiagnose = useInstanceJavaDiagnose(instance.path, java.all, instanceJava.java, instanceJava.recommendation, queue)
     const filesDiagnose = useInstanceFilesDiagnose(files.files, files.install)
     const userDiagnose = useUserDiagnose(user.userProfile)
@@ -109,7 +106,7 @@ export default defineComponent({
     provide(kInstanceFiles, files)
     provide(kLaunchTask, task)
 
-    provide(kInstanceVersionDiagnose, versionDiagnose)
+    provide(kInstanceVersionInstall, install)
     provide(kInstanceJavaDiagnose, javaDiagnose)
     provide(kInstanceFilesDiagnose, filesDiagnose)
     provide(kUserDiagnose, userDiagnose)

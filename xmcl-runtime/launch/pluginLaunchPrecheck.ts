@@ -1,6 +1,6 @@
 import { LaunchPrecheck, MinecraftFolder, diagnoseJar, diagnoseLibraries } from '@xmcl/core'
-import { LaunchException, protocolToMinecraft, resolveForgeVersion } from '@xmcl/runtime-api'
-import { move, readlink, stat, symlink, unlink } from 'fs-extra'
+import { LaunchException, protocolToMinecraft, resolveFabricLoaderVersion, resolveForgeVersion, resolveQuiltVersion } from '@xmcl/runtime-api'
+import { ensureDir, move, readlink, stat, unlink } from 'fs-extra'
 import { join } from 'path'
 import { LauncherAppPlugin, kGameDataPath } from '~/app'
 import { InstallService } from '~/install'
@@ -8,30 +8,37 @@ import { InstanceService } from '~/instance'
 import { JavaService, JavaValidation } from '~/java'
 import { LaunchService } from '~/launch'
 import { PeerService } from '~/peer'
+import { createSymbolicLink, missing } from '~/util/fs'
 
 export const pluginLaunchPrecheck: LauncherAppPlugin = async (app) => {
   const launchService = await app.registry.get(LaunchService)
   const getPath = await app.registry.get(kGameDataPath)
 
-  const linkFolder = async (gameDirectory: string, folder: string) => {
-    const fromPath = getPath(folder)
-    const toPath = join(gameDirectory, folder)
+  const ensureLinkFolder = async (fromPath: string, toPath: string) => {
+    if (await missing(fromPath)) {
+      await ensureDir(fromPath)
+    }
     const linkTarget = await readlink(toPath).catch(() => undefined)
     if (linkTarget) {
       // relink
       if (linkTarget !== fromPath) {
         await unlink(toPath)
-        await symlink(fromPath, toPath)
+        await createSymbolicLink(fromPath, toPath, launchService)
       }
       return
     }
     const fstat = await stat(toPath).catch((e) => undefined)
     if (!fstat) {
-      await symlink(fromPath, toPath)
+      await createSymbolicLink(fromPath, toPath, launchService)
       return
     }
-    await move(toPath, join(gameDirectory, folder + '.bk'))
-    await symlink(fromPath, toPath)
+    await move(toPath, join(toPath + '.bk'))
+    await createSymbolicLink(fromPath, toPath, launchService)
+  }
+  const ensureLinkFolderFromRoot = async (gameDirectory: string, folder: string) => {
+    const fromPath = getPath(folder)
+    const toPath = join(gameDirectory, folder)
+    await ensureLinkFolder(fromPath, toPath)
   }
 
   launchService.registerMiddleware({
@@ -63,7 +70,7 @@ export const pluginLaunchPrecheck: LauncherAppPlugin = async (app) => {
           diagnoseJar(resolvedVersion, resourceFolder, { side: input.side }).then(async (issue) => {
             if (issue?.type === 'missing') {
               const installService = await app.registry.getOrCreate(InstallService)
-              return installService.installMinecraftJar(resolvedVersion, input.side)
+              return installService.installMinecraftJar(resolvedVersion.id, input.side)
             }
           }),
           diagnoseLibraries(resolvedVersion, resourceFolder).then(async (libs) => {
@@ -116,8 +123,8 @@ export const pluginLaunchPrecheck: LauncherAppPlugin = async (app) => {
 
   app.registry.get(InstanceService).then((serv) => {
     serv.state.subscribe('instanceAdd', ({ path }) => {
-      linkFolder(path, 'libraries')
-      linkFolder(path, 'versions')
+      ensureLinkFolderFromRoot(path, 'libraries')
+      ensureLinkFolderFromRoot(path, 'versions')
     })
   })
   launchService.registerMiddleware({
@@ -132,14 +139,43 @@ export const pluginLaunchPrecheck: LauncherAppPlugin = async (app) => {
           return
         }
         const forgeVersion = resolveForgeVersion(version as any)
-        if (!forgeVersion) {
-          return
+        if (forgeVersion) {
+          await ensureLinkFolderFromRoot(input.gameDirectory, 'libraries')
         }
-        await linkFolder(input.gameDirectory, 'libraries')
+
+        const fabricVersion = resolveFabricLoaderVersion(version as any)
+        if (fabricVersion) {
+          await Promise.all([
+            ensureLinkFolderFromRoot(input.gameDirectory, '.fabric'),
+            ensureLinkFolderFromRoot(input.gameDirectory, '.mixin.out'),
+          ])
+        }
+
+        const quilt = resolveQuiltVersion(version as any)
+        if (quilt) {
+          await ensureLinkFolderFromRoot(input.gameDirectory, '.cache')
+        }
       } else {
+        const dir = join(input.gameDirectory, 'server')
+        const { version } = payload
+
+        const fabricVersion = resolveFabricLoaderVersion(version as any)
+        if (fabricVersion) {
+          await Promise.all([
+            ensureLinkFolderFromRoot(dir, '.fabric'),
+            ensureLinkFolderFromRoot(dir, '.mixin.out'),
+          ])
+        }
+
+        const quilt = resolveQuiltVersion(version as any)
+        if (quilt) {
+          await ensureLinkFolderFromRoot(dir, '.cache')
+        }
+
         await Promise.all([
-          linkFolder(input.gameDirectory, 'libraries'),
-          linkFolder(input.gameDirectory, 'versions'),
+          ensureLinkFolderFromRoot(dir, 'libraries'),
+          ensureLinkFolderFromRoot(dir, 'versions'),
+          ensureLinkFolder(join(input.gameDirectory, 'config'), join(dir, 'config')),
         ])
       }
     },

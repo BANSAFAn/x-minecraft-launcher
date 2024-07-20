@@ -1,18 +1,18 @@
 import { injection } from '@/util/inject'
 import { TaskState } from '@xmcl/runtime-api'
-import { useDialog } from './dialog'
-import { LaunchStatusDialogKey } from './launch'
-import { kInstanceVersionDiagnose } from './instanceVersionDiagnose'
-import { kInstanceJavaDiagnose } from './instanceJavaDiagnose'
-import { kInstanceFilesDiagnose } from './instanceFilesDiagnose'
-import { kUserDiagnose } from './userDiagnose'
-import { kLaunchTask } from './launchTask'
-import { kInstanceFiles } from './instanceFiles'
-import { kInstanceVersion } from './instanceVersion'
-import { kInstance } from './instance'
-import { kInstanceLaunch } from './instanceLaunch'
-import { kInstances } from './instances'
 import { InjectionKey } from 'vue'
+import { useDialog } from './dialog'
+import { kInstance } from './instance'
+import { kInstanceFiles } from './instanceFiles'
+import { kInstanceFilesDiagnose } from './instanceFilesDiagnose'
+import { kInstanceJavaDiagnose } from './instanceJavaDiagnose'
+import { kInstanceLaunch } from './instanceLaunch'
+import { kInstanceVersion } from './instanceVersion'
+import { kInstanceVersionInstall } from './instanceVersionInstall'
+import { kInstances } from './instances'
+import { LaunchStatusDialogKey } from './launch'
+import { kLaunchTask } from './launchTask'
+import { kUserDiagnose } from './userDiagnose'
 
 export interface LaunchMenuItem {
   title: string
@@ -30,7 +30,7 @@ export function useLaunchButton() {
 
   const { path } = injection(kInstance)
   const { isValidating } = injection(kInstances)
-  const { issues: versionIssues, fix: fixVersionIssues, loading: loadingVersionIssues } = injection(kInstanceVersionDiagnose)
+  const { issues: versionIssues, fix: fixVersionIssues, loading: loadingVersionIssues } = injection(kInstanceVersionInstall)
   const { issue: javaIssue, fix: fixJavaIssue } = injection(kInstanceJavaDiagnose)
   const { issue: filesIssue, fix: fixInstanceFileIssue } = injection(kInstanceFilesDiagnose)
   const { issue: userIssue, fix: fixUserIssue } = injection(kUserDiagnose)

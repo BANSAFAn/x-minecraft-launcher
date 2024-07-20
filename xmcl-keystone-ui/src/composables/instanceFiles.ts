@@ -29,19 +29,24 @@ export function useInstanceFiles(instancePath: Ref<string>) {
   watch(isValidating, update)
 
   async function install() {
-    if (files.value.length > 0) {
-      // has unfinished files
-      try {
-        await installInstanceFiles({ files: files.value, path: instancePath.value })
-      } finally {
+    await installFiles(instancePath.value, files.value)
+  }
+
+  async function installFiles(path: string, files: InstanceFile[]) {
+    if (files.length > 0) {
+      await installInstanceFiles({
+        path,
+        files,
+      }).finally(() => {
         mutate()
-      }
+      })
     }
   }
 
   return {
     files,
     isValidating: _validating,
+    installFiles,
     mutate,
     error,
     install,

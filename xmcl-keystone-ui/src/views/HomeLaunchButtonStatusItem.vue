@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="item"
     class="ml-2 transition-opacity duration-500 select-none h-full flex flex-grow-0 whitespace-nowrap text-sm font-bold flex-col max-w-40 lg:max-w-full overflow-hidden text-ellipsis"
     :style="{
       opacity: active ? '1' : '0.5',
@@ -22,7 +23,7 @@
 <script lang="ts" setup>
 import { LaunchMenuItem } from '@/composables/launchButton'
 
-defineProps<{ active?: boolean; item: LaunchMenuItem }>()
+defineProps<{ active?: boolean; item?: LaunchMenuItem }>()
 const emit = defineEmits(['mouseenter', 'mouseleave'])
 
 </script>

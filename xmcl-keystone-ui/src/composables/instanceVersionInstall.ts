@@ -1,25 +1,47 @@
 import { getSWRV } from '@/util/swrvGet'
-import { ResolvedVersion } from '@xmcl/core'
-import { InstallServiceKey, LocalVersionHeader, RuntimeVersions, ServerVersionHeader, VersionServiceKey, parseOptifineVersion } from '@xmcl/runtime-api'
-import { Ref } from 'vue'
+import type { AssetIndexIssue, AssetIssue, LibraryIssue, MinecraftJarIssue, ResolvedVersion } from '@xmcl/core'
+import type { InstallProfileIssueReport } from '@xmcl/installer'
+import { DiagnoseServiceKey, InstallServiceKey, InstanceServiceKey, LocalVersionHeader, ReadWriteLock, RuntimeVersions, ServerVersionHeader, VersionServiceKey, getExpectVersion, parseOptifineVersion } from '@xmcl/runtime-api'
+import { InjectionKey, Ref, ShallowRef } from 'vue'
+import { InstanceResolveVersion } from './instanceVersion'
+import { LaunchMenuItem } from './launchButton'
 import { useService } from './service'
 import { kSWRVConfig } from './swrvConfig'
 import { getForgeVersionsModel, getLabyModManifestModel, getMinecraftVersionsModel, getNeoForgedVersionModel } from './version'
 
-export const kInstanceVersionInstall = Symbol('InstanceVersionInstall') as InjectionKey<ReturnType<typeof useInstanceVersionInstall>>
+export interface InstanceInstallInstruction {
+  instance: string
+  runtime: RuntimeVersions
+  fresh?: boolean
+  jar?: MinecraftJarIssue
+  profile?: InstallProfileIssueReport
+  libriares?: LibraryIssue[]
+  assets?: AssetIssue[]
+  assetIndex?: AssetIndexIssue
+  optifine?: {
+    minecraft: string
+    type: string
+    patch: string
+  }
+  forge?: {
+    minecraft: string
+    version: string
+  }
+}
 
-export function useInstanceVersionInstall(versions: Ref<LocalVersionHeader[]>, servers: Ref<ServerVersionHeader[]>) {
+export const kInstanceVersionInstall = Symbol('InstanceVersionInstall') as InjectionKey<ReturnType<typeof useInstanceVersionInstallInstruction>>
+
+function useInstanceVersionInstall(versions: Ref<LocalVersionHeader[]>, servers: Ref<ServerVersionHeader[]>) {
   const {
     installForge,
     installNeoForged,
     installMinecraft,
-    installMinecraftServerJar,
+    installMinecraftJar,
     installOptifine,
     installFabric,
     installQuilt,
     installLabyModVersion,
   } = useService(InstallServiceKey)
-
   const { refreshVersion } = useService(VersionServiceKey)
 
   const cfg = inject(kSWRVConfig)
@@ -117,7 +139,7 @@ export function useInstanceVersionInstall(versions: Ref<LocalVersionHeader[]>, s
     const { minecraft, forge, fabricLoader, quiltLoader, optifine, neoForged, labyMod } = runtime
 
     if (versionId) {
-      await installMinecraftServerJar(minecraft)
+      await installMinecraftJar(minecraft, 'server')
     } else {
       const mcVersions = await getSWRV(getMinecraftVersionsModel(), cfg)
       const metadata = mcVersions.versions.find(v => v.id === minecraft)!
@@ -159,6 +181,292 @@ export function useInstanceVersionInstall(versions: Ref<LocalVersionHeader[]>, s
   }
 
   return {
+    install,
+    installServer,
+  }
+}
+
+export function useInstanceVersionInstallInstruction(path: Ref<string>, resolvedVersion: Ref<InstanceResolveVersion | undefined>, versions: Ref<LocalVersionHeader[]>, servers: Ref<ServerVersionHeader[]>) {
+  const { diagnoseAssetIndex, diagnoseAssets, diagnoseJar, diagnoseLibraries, diagnoseProfile } = useService(DiagnoseServiceKey)
+  const { t } = useI18n()
+  const { installAssetsForVersion, installForge, installAssets, installMinecraftJar, installLibraries, installNeoForged, installDependencies, installOptifine, installByProfile } = useService(InstallServiceKey)
+  const { editInstance } = useService(InstanceServiceKey)
+
+  const { install, installServer } = useInstanceVersionInstall(versions, servers)
+
+  let abortController = new AbortController()
+  const instruction: ShallowRef<InstanceInstallInstruction | undefined> = shallowRef(undefined)
+  const loading = ref(false)
+  const config = inject(kSWRVConfig)
+
+  const instanceLock: Record<string, ReadWriteLock> = {}
+
+  const launcMenuItems = computed(() => {
+    const items = [] as LaunchMenuItem[]
+
+    const i = instruction.value
+    if (!i) return items
+
+    if (i.fresh) {
+      items.push(reactive({
+        title: computed(() => t('diagnosis.missingVersion.name', { version: getExpectVersion(i.runtime) })),
+        description: computed(() => t('diagnosis.missingVersion.message')),
+      }))
+    }
+    if (i.profile) {
+      items.push(reactive({
+        title: computed(() => t('diagnosis.badInstall.name', { version: (resolvedVersion.value as ResolvedVersion)!.id })),
+        description: computed(() => t('diagnosis.badInstall.message')),
+      }))
+    }
+    if (i.jar) {
+      items.push(i.jar.type === 'corrupted'
+        ? reactive({
+          title: computed(() => t('diagnosis.corruptedVersionJar.name', { version: i.jar!.version })),
+          description: computed(() => t('diagnosis.corruptedVersionJar.message')),
+        })
+        : reactive({
+          title: computed(() => t('diagnosis.missingVersionJar.name', { version: i.jar!.version })),
+          description: computed(() => t('diagnosis.missingVersionJar.message')),
+        }))
+    }
+    if (i.libriares) {
+      const libs = i.libriares
+      const options = { count: libs.length, name: libs[0].library.path }
+      items.push(libs.some(v => v.type === 'corrupted')
+        ? reactive({
+          title: computed(() => t('diagnosis.corruptedLibraries.name', options, libs.length)),
+          description: computed(() => t('diagnosis.corruptedLibraries.message')),
+        })
+        : reactive({
+          title: computed(() => t('diagnosis.missingLibraries.name', options, libs.length)),
+          description: computed(() => t('diagnosis.missingLibraries.message')),
+        }))
+    }
+    if (i.assets) {
+      const assets = i.assets
+      const count = assets.length
+      const name = assets[0]?.asset.name ?? ''
+      items.push(assets.some(v => v.type === 'corrupted')
+        ? reactive({
+          title: computed(() => t('diagnosis.corruptedAssets.name', { count, name })),
+          description: computed(() => t('diagnosis.corruptedAssets.message')),
+        })
+        : reactive({
+          title: computed(() => t('diagnosis.missingAssets.name', { count, name })),
+          description: computed(() => t('diagnosis.missingAssets.message')),
+        }))
+    }
+    if (i.assetIndex) {
+      items.push(i.assetIndex.type === 'corrupted'
+        ? reactive({
+          title: computed(() => t('diagnosis.corruptedAssetsIndex.name', { version: i.assetIndex!.version })),
+          description: computed(() => t('diagnosis.corruptedAssetsIndex.message')),
+        })
+        : reactive({
+          title: computed(() => t('diagnosis.missingAssetsIndex.name', { version: i.assetIndex!.version })),
+          description: computed(() => t('diagnosis.missingAssetsIndex.message')),
+        }))
+    }
+    if (i.forge) {
+      items.push(reactive({
+        title: computed(() => t('diagnosis.badInstall.name')),
+        description: computed(() => t('diagnosis.badInstall.message')),
+      }))
+    }
+    if (i.optifine) {
+      items.push(reactive({
+        title: computed(() => t('diagnosis.badInstall.name')),
+        description: computed(() => t('diagnosis.badInstall.message')),
+      }))
+    }
+
+    return items
+  })
+
+  async function _update(version: InstanceResolveVersion | undefined) {
+    if (!version) return
+    abortController.abort()
+    abortController = new AbortController()
+    abortController.signal.addEventListener('abort', () => {
+      loading.value = false
+    })
+    try {
+      loading.value = true
+      instruction.value = undefined
+      const lock = getInstanceLock(path.value)
+      await lock.write(async () => {
+        instruction.value = await getInstallInstruction(path.value, version.requirements, 'id' in version ? version : undefined, abortController.signal)
+      })
+    } finally {
+      loading.value = false
+    }
+  }
+
+  function getInstanceLock(path: string) {
+    const lock = instanceLock[path]
+    if (lock) {
+      return lock
+    }
+    const newLock = new ReadWriteLock()
+    instanceLock[path] = newLock
+    return newLock
+  }
+
+  async function getInstallInstruction(instance: string, runtime: RuntimeVersions, version: ResolvedVersion | undefined, abortSignal?: AbortSignal): Promise<InstanceInstallInstruction> {
+    const result: InstanceInstallInstruction = {
+      instance,
+      runtime,
+    }
+    if (!version) {
+      result.fresh = true
+      return result
+    }
+
+    const profileIssue = await diagnoseProfile(version.id, 'client', path.value)
+    if (abortSignal?.aborted) { throw new Error() }
+
+    if (profileIssue) {
+      result.profile = markRaw(profileIssue)
+      return result
+    }
+
+    const jarIssue = await diagnoseJar(version, 'client')
+    if (abortSignal?.aborted) { throw new Error() }
+    if (jarIssue) {
+      result.jar = markRaw(jarIssue)
+    }
+
+    const librariesIssue = await diagnoseLibraries(version)
+    if (abortSignal?.aborted) { throw new Error() }
+    if (librariesIssue.length > 0) {
+      const optifinesIssues = [] as LibraryIssue[]
+      const forgeIssues = [] as LibraryIssue[]
+      const commonIssues = [] as LibraryIssue[]
+      for (const i of librariesIssue) {
+        if (i.library.groupId === 'optifine') {
+          optifinesIssues.push(i)
+        } else if (i.library.groupId === 'net.minecraftforge' && i.library.artifactId === 'forge' && (i.library.classifier === 'client' || !i.library.classifier)) {
+          forgeIssues.push(i)
+        } else {
+          commonIssues.push(i)
+        }
+      }
+      if (commonIssues.length > 0) {
+        result.libriares = commonIssues
+      }
+      if (optifinesIssues.length > 0) {
+        const { type, patch } = parseOptifineVersion(runtime.optifine!)
+        result.optifine = {
+          minecraft: version.minecraftVersion,
+          type,
+          patch,
+        }
+      }
+      if (forgeIssues.length > 0) {
+        result.forge = {
+          minecraft: version.minecraftVersion,
+          version: runtime.forge!,
+        }
+      }
+    }
+
+    const assetIndexIssue = await diagnoseAssetIndex(version)
+    if (abortSignal?.aborted) { throw new Error() }
+
+    if (assetIndexIssue) {
+      result.assetIndex = assetIndexIssue
+    } else {
+      const assetsIssue = await diagnoseAssets(version)
+      if (abortSignal?.aborted) { throw new Error() }
+      if (assetsIssue.length > 0) {
+        result.assets = assetsIssue
+      }
+    }
+
+    return markRaw(result)
+  }
+
+  async function handleInstallInstruction(instruction: InstanceInstallInstruction) {
+    if (instruction.fresh || instruction.profile) {
+      const version = await install(instruction.runtime)
+      if (version) {
+        await installDependencies(version, 'client')
+      }
+      await editInstance({
+        instancePath: instruction.instance,
+        version,
+      })
+      return
+    }
+    if (instruction.optifine) {
+      const [version] = await installOptifine({
+        mcversion: instruction.optifine.minecraft,
+        type: instruction.optifine.type,
+        patch: instruction.optifine.patch,
+      })
+      if (version) {
+        await installDependencies(version, 'client')
+      }
+      await editInstance({
+        instancePath: instruction.instance,
+        version,
+      })
+      return
+    }
+    if (instruction.forge) {
+      const version = await installForge({
+        mcversion: instruction.forge.minecraft,
+        version: instruction.forge.version,
+      })
+      if (version) {
+        await installDependencies(version, 'client')
+      }
+      await editInstance({
+        instancePath: instruction.instance,
+        version,
+      })
+      return
+    }
+
+    if (instruction.jar) {
+      await installMinecraftJar(instruction.runtime.minecraft, 'client')
+    }
+    if (instruction.libriares) {
+      await installLibraries(instruction.libriares.map(v => v.library), instruction.instance, instruction.libriares.length < 15)
+    }
+    if (instruction.assetIndex) {
+      const list = await getSWRV(getMinecraftVersionsModel(), config)
+      await installAssetsForVersion(instruction.assetIndex.version, list.versions.filter(v => v.id === instruction.runtime.minecraft || v.id === instruction.runtime.assets))
+    } else if (instruction.assets) {
+      await installAssets(instruction.assets.map(v => v.asset), instruction.instance, instruction.assets.length < 15)
+    }
+  }
+
+  async function fix() {
+    if (!instruction.value) {
+      return
+    }
+    const i = instruction.value
+    const lock = getInstanceLock(path.value)
+    await lock.write(() => handleInstallInstruction(i))
+    await _update(resolvedVersion.value)
+  }
+
+  watch(resolvedVersion, _update)
+  onMounted(() => {
+    _update(resolvedVersion.value)
+  })
+
+  return {
+    issues: launcMenuItems,
+    fix,
+    loading,
+    getInstanceLock,
+
+    getInstallInstruction,
+    handleInstallInstruction,
+
     install,
     installServer,
   }

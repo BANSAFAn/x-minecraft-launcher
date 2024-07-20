@@ -1,9 +1,16 @@
+import { injection } from '@/util/inject'
 import { useInstanceModLoaderDefault } from '@/util/instanceModLoaderDefault'
+import { generateDistinctName } from '@/util/instanceName'
 import { isNoModLoader } from '@/util/isNoModloader'
+import { resolveModpackInstanceConfig } from '@/util/modpackFilesResolver'
 import { ProjectFile } from '@/util/search'
 import { Project, ProjectVersion } from '@xmcl/modrinth'
-import { ModrinthServiceKey, Resource, ResourceServiceKey, RuntimeVersions } from '@xmcl/runtime-api'
+import { CreateInstanceOption, InstanceServiceKey, ModpackServiceKey, ModrinthServiceKey, Resource, ResourceServiceKey, RuntimeVersions } from '@xmcl/runtime-api'
 import { InjectionKey, Ref } from 'vue'
+import { kInstanceFiles } from './instanceFiles'
+import { kInstanceVersion } from './instanceVersion'
+import { kInstanceVersionInstall } from './instanceVersionInstall'
+import { kInstances } from './instances'
 import { useService } from './service'
 
 export const kModrinthInstaller: InjectionKey<ReturnType<typeof useModrinthInstaller>> = Symbol('modrinthInstaller')
@@ -52,4 +59,54 @@ export function useModrinthInstaller(
   }
 
   return { installWithDependencies, install }
+}
+
+export function useModrinthInstallModpack(icon: Ref<string | undefined>) {
+  const { instances, selectedInstance } = injection(kInstances)
+  const { getModpackInstallFiles } = useService(ModpackServiceKey)
+  const { getVersionHeader, getResolvedVersion } = injection(kInstanceVersion)
+  const { createInstance } = useService(InstanceServiceKey)
+  const { installVersion } = useService(ModrinthServiceKey)
+  const { installFiles } = injection(kInstanceFiles)
+  const { getInstallInstruction, handleInstallInstruction, getInstanceLock } = injection(kInstanceVersionInstall)
+  const { currentRoute, push } = useRouter()
+  const installModpack = async (v: ProjectVersion) => {
+    const result = await installVersion({ version: v, icon: icon.value })
+    const resource = result.resources[0]
+
+    if (!resource) throw new Error('NO_RESOURCE')
+
+    const config = resolveModpackInstanceConfig(resource)
+
+    if (!config) throw new Error('NO_MODPACK_CONFIG')
+    const name = generateDistinctName(config.name, instances.value.map(i => i.name))
+    const existed = getVersionHeader(config.runtime)
+    const options: CreateInstanceOption = {
+      ...config,
+      name,
+    }
+    if (existed) {
+      options.version = existed.id
+    }
+    const path = await createInstance(options)
+
+    selectedInstance.value = path
+    if (currentRoute.path !== '/') {
+      push('/')
+    }
+
+    const files = await getModpackInstallFiles(resource.path)
+
+    installFiles(path, files)
+
+    const lock = getInstanceLock(path)
+    lock.write(async () => {
+      const resolved = existed ? await getResolvedVersion(existed) : undefined
+      const instruction = await getInstallInstruction(path, options.runtime!, resolved)
+      await handleInstallInstruction(instruction)
+    })
+  }
+  return {
+    installModpack,
+  }
 }

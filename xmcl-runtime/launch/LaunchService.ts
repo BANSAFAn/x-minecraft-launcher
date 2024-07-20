@@ -87,7 +87,7 @@ export class LaunchService extends AbstractService implements ILaunchService {
 
       extraExecOption: {
         detached: true,
-        cwd: minecraftFolder.root,
+        cwd: minecraftFolder.getPath('server'),
       },
 
       extraJVMArgs: jvmArgs,
@@ -346,18 +346,18 @@ export class LaunchService extends AbstractService implements ILaunchService {
         startTime,
       })
 
+      let encoding = undefined as string | undefined
       const processError = async (buf: Buffer) => {
-        const encoding = await this.encoder.guessEncodingByBuffer(buf).catch(e => { })
-        const result = await this.encoder.decode(buf, encoding || UTF8)
+        encoding = encoding || await this.encoder.guessEncodingByBuffer(buf).catch(e => UTF8) || encoding
+        const result = await this.encoder.decode(buf, encoding!)
         this.emit('minecraft-stderr', { pid: process.pid, stderr: result })
         const lines = result.split(EOL)
         errorLogs.push(...lines)
         this.warn(result)
       }
       const processLog = async (buf: any) => {
-        const encoding = await this.encoder.guessEncodingByBuffer(buf).catch(e => undefined)
-        const result = await this.encoder.decode(buf, encoding || UTF8)
-        console.log(result)
+        encoding = encoding || await this.encoder.guessEncodingByBuffer(buf).catch(e => UTF8) || encoding
+        const result = await this.encoder.decode(buf, encoding!)
         this.emit('minecraft-stdout', { pid: process.pid, stdout: result })
       }
 
@@ -374,6 +374,10 @@ export class LaunchService extends AbstractService implements ILaunchService {
       }).on('minecraft-exit', ({ code, signal, crashReport, crashReportLocation }) => {
         const endTime = Date.now()
         const playTime = endTime - startTime
+
+        if (crashReport && code === 0) {
+          code = 1
+        }
 
         this.log(`Minecraft exit: ${code}, signal: ${signal}`)
         if (crashReportLocation) {
@@ -424,7 +428,11 @@ export class LaunchService extends AbstractService implements ILaunchService {
       if (process.side === 'client') {
         process.process.kill()
       } else {
-        process.process.stdin?.write('/stop\n')
+        if (process.ready) {
+          process.process.stdin?.write('/stop\n')
+        } else {
+          process.process.kill()
+        }
       }
     }
   }

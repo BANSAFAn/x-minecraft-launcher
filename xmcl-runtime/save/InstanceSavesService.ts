@@ -13,7 +13,7 @@ import {
 import { open, readAllEntries } from '@xmcl/unzip'
 import filenamify from 'filenamify'
 import { existsSync } from 'fs'
-import { ensureDir, ensureFile, readdir, readlink, rename, rm, stat } from 'fs-extra'
+import { ensureDir, ensureFile, readdir, readlink, rename, rm } from 'fs-extra'
 import throttle from 'lodash.throttle'
 import watch from 'node-watch'
 import { basename, extname, isAbsolute, join, resolve } from 'path'
@@ -51,7 +51,7 @@ export class InstanceSavesService extends AbstractService implements IInstanceSa
   }
 
   async getLinkedSaveWorld(instancePath: string): Promise<string | undefined> {
-    const serverWorldPath = join(instancePath, 'world')
+    const serverWorldPath = join(instancePath, 'server', 'world')
     if (await missing(serverWorldPath)) {
       return undefined
     }
@@ -76,7 +76,7 @@ export class InstanceSavesService extends AbstractService implements IInstanceSa
       throw new InstanceSaveException({ type: 'instanceLinkSaveNotFound', name: saveName })
     }
 
-    const serverWorldPath = join(instancePath, 'world')
+    const serverWorldPath = join(instancePath, 'server', 'world')
 
     if (existsSync(serverWorldPath)) {
       const linkedTarget = await this.getLinkedSaveWorld(instancePath)

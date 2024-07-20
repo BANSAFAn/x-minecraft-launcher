@@ -1,5 +1,5 @@
 import type { ResolvedVersion, VersionParseError } from '@xmcl/core'
-import { Instance, LocalVersionHeader, RuntimeVersions, ServerVersionHeader, VersionServiceKey, getResolvedVersion } from '@xmcl/runtime-api'
+import { Instance, LocalVersionHeader, RuntimeVersions, ServerVersionHeader, VersionServiceKey, findMatchedVersion } from '@xmcl/runtime-api'
 import useSWRV from 'swrv'
 import { InjectionKey, Ref } from 'vue'
 import { useService } from './service'
@@ -22,52 +22,90 @@ export interface UnresolvedVersion {
   requirements: RuntimeVersions
 }
 
-export type InstanceResolveVersion = UnresolvedVersion | ResolvedVersion
+export type InstanceResolveVersion = UnresolvedVersion | (ResolvedVersion & UnresolvedVersion)
 
-export function isResolvedVersion(v?: InstanceResolveVersion): v is ResolvedVersion {
+export function isResolvedVersion(v?: InstanceResolveVersion): v is (ResolvedVersion & UnresolvedVersion) {
   return !!v && 'id' in v
 }
 
 export function useInstanceVersion(instance: Ref<Instance>, local: Ref<LocalVersionHeader[]>, servers: Ref<ServerVersionHeader[]>) {
-  const { resolveLocalVersion } = useService(VersionServiceKey)
   const versionHeader = computed(() => {
-    let result: LocalVersionHeader | undefined
-    if (instance.value.path) {
-      result = getResolvedVersion(local.value,
-        instance.value.version,
-        instance.value.runtime.minecraft,
-        instance.value.runtime.forge,
-        instance.value.runtime.neoForged,
-        instance.value.runtime.fabricLoader,
-        instance.value.runtime.optifine,
-        instance.value.runtime.quiltLoader,
-        instance.value.runtime.labyMod)
+    if (!instance.value.path) {
+      return undefined
     }
-    return result
+    return findMatchedVersion(local.value,
+      instance.value.version,
+      instance.value.runtime.minecraft,
+      instance.value.runtime.forge,
+      instance.value.runtime.neoForged,
+      instance.value.runtime.fabricLoader,
+      instance.value.runtime.optifine,
+      instance.value.runtime.quiltLoader,
+      instance.value.runtime.labyMod)
   })
+
+  const serverVersionHeader = computed(() => {
+    const runtime = instance.value.runtime
+    return getServerHeader(runtime)
+  })
+
+  const { resolveLocalVersion } = useService(VersionServiceKey)
+
+  async function getResolvedVersion(versionHeader: LocalVersionHeader | undefined, version?: string) {
+    let id: string | undefined
+    if (!versionHeader) {
+      if (!version) {
+        return undefined
+      } else {
+        id = version
+      }
+    } else {
+      id = versionHeader.id
+    }
+    try {
+      const resolvedVersion = await resolveLocalVersion(id)
+      return resolvedVersion
+    } catch (e) {
+      const err = e as VersionParseError
+      if (err.name === 'MissingVersionJson') {
+        return undefined
+      }
+      throw e
+    }
+  }
 
   const { isValidating, mutate, data: resolvedVersion, error } = useSWRV(() => instance.value.path && `/instance/${instance.value.path}/version`, async () => {
     console.log('update instance version')
     if (!instance.value.path) {
       return undefined
     }
-    if (!versionHeader.value?.path) {
-      return { requirements: { ...instance.value.runtime } }
-    }
-    try {
-      const resolvedVersion = await resolveLocalVersion(versionHeader.value.id)
-      return resolvedVersion
-    } catch (e) {
-      const err = e as VersionParseError
-      if (err.name === 'MissingVersionJson') {
-        return { requirements: { ...instance.value.runtime } }
-      }
-      throw e
-    }
+    const version = await getResolvedVersion(versionHeader.value, instance.value.version)
+    return { ...version, requirements: instance.value.runtime } || { requirements: instance.value.runtime }
   }, { revalidateOnFocus: false, errorRetryCount: 0, shouldRetryOnError: false })
 
-  const serverVersionHeader = computed(() => {
-    const runtime = instance.value.runtime
+  watch([versionHeader, local], () => {
+    mutate()
+  }, { deep: true })
+
+  const serverVersionId = computed(() => serverVersionHeader.value?.id)
+  const versionId = computed(() => versionHeader.value?.id)
+
+  function getVersionHeader(runtime: RuntimeVersions) {
+    if (!instance.value.path) {
+      return undefined
+    }
+    return findMatchedVersion(local.value,
+      instance.value.version,
+      runtime.minecraft,
+      runtime.forge,
+      runtime.neoForged,
+      runtime.fabricLoader,
+      runtime.optifine,
+      runtime.quiltLoader,
+      runtime.labyMod)
+  }
+
+  function getServerHeader(runtime: RuntimeVersions) {
     const onlyMinecraft = Object.entries(runtime).filter(([k, v]) => k !== 'minecraft' && !!v).length === 0
     console.log(servers.value)
     for (const s of servers.value) {
@@ -99,23 +137,19 @@ export function useInstanceVersion(instance: Ref<Instance>, local: Ref<LocalVers
       }
     }
     return undefined
-  })
-
-  const serverVersionId = computed(() => serverVersionHeader.value?.id)
-  const versionId = computed(() => versionHeader.value?.id)
-
-  watch([versionHeader, local], () => {
-    mutate()
-  }, { deep: true })
+  }
 
   return {
     ...useInstanceVersionBase(instance),
-    error,
+    getVersionHeader,
+    getServerHeader,
+    getResolvedVersion,
     versionId,
     serverVersionId,
     versionHeader,
     serverVersionHeader,
-    resolvedVersion,
+    error,
     isValidating,
+    resolvedVersion,
   }
 }

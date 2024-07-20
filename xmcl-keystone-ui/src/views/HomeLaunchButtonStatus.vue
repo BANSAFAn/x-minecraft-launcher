@@ -9,7 +9,6 @@
   >
     <template #activator="{ attrs }">
       <HomeLaunchButtonStatusItem
-        v-if="menuItems[0]"
         v-bind="attrs"
         :active="active || showMenu"
         :item="menuItems[0]"
