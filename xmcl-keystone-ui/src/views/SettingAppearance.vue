@@ -7,6 +7,12 @@
       :description="t('setting.layoutDescription')"
       :items="layouts"
     />
+    <SettingItemSelect
+      :select.sync="sideBarPosition"
+      :title="t('setting.sideBarPosition')"
+      :description="t('setting.sideBarPositionDescription')"
+      :items="sideBarPositions"
+    />
     <SettingItemCheckbox
       v-if="env?.os === 'linux'"
       v-model="linuxTitlebar"
@@ -490,7 +496,7 @@ import SettingAppearanceColor from './SettingAppearanceColor.vue'
 
 const { showOpenDialog, showSaveDialog } = windowController
 const { t } = useI18n()
-const { blurSidebar, blurAppBar, isDark, fontSize, blurCard, backgroundColorOverlay, backgroundImage, setBackgroundImage, blur, particleMode, backgroundType, backgroundImageFit, volume, clearBackgroundImage, exportTheme, importTheme } = injection(kTheme)
+const { blurSidebar, blurAppBar, isDark, fontSize, blurCard, backgroundColorOverlay, backgroundImage, setBackgroundImage, blur, particleMode, backgroundType, backgroundImageFit, volume, clearBackgroundImage, exportTheme, importTheme, sideBarPosition } = injection(kTheme)
 const { sideBarColor, appBarColor, primaryColor, warningColor, errorColor, cardColor, backgroundColor, resetToDefault, currentTheme, font, setFont, resetFont, backgroundMusic, removeMusic } = injection(kTheme)
 const { state } = injection(kSettingsState)
 const env = injection(kEnvironment)
@@ -543,6 +549,12 @@ const particleModes = computed(() => Object.entries({
 const backgroundImageFits = computed(() => [
   { value: 'cover', text: t('setting.backgroundImageFit.cover') },
   { value: 'contain', text: t('setting.backgroundImageFit.contain') },
+])
+const sideBarPositions = computed(() => [
+  { value: 'left', text: t('setting.sideBarPositions.left') },
+  { value: 'right', text: t('setting.sideBarPositions.right') },
+  { value: 'top', text: t('setting.sideBarPositions.top') },
+  { value: 'bottom', text: t('setting.sideBarPositions.bottom') },
 ])
 const backgroundTypes = computed(() => [
   { value: BackgroundType.NONE, text: t('setting.backgroundTypes.none') },

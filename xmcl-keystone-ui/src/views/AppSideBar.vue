@@ -6,6 +6,7 @@
     :color="sideBarColor"
     class="sidebar moveable z-10 rounded-[0.75rem]"
     :style="{ 'backdrop-filter': `blur(${blurSidebar}px)` }"
+    :position="sideBarPosition"
   >
     <v-list
       nav
@@ -116,7 +117,7 @@ import AppSideBarContentNext from './AppSideBarContentNext.vue'
 import { vSharedTooltip } from '@/directives/sharedTooltip'
 import { kTheme } from '@/composables/theme'
 
-const { blurSidebar } = injection(kTheme)
+const { blurSidebar, sideBarPosition } = injection(kTheme)
 const { state } = injection(kSettingsState)
 
 const { t } = useI18n()

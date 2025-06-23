@@ -1367,6 +1367,13 @@ setting:
   blurMainBody: Blur Main Body
   blurMainBodyDescription: Should the launcher right pane be blurred
   blurSidebar: Blur sidebar
+  sideBarPosition: Sidebar Position
+  sideBarPositionDescription: Choose the position of the sidebar
+  sideBarPositions:
+    left: Left
+    right: Right
+    top: Top
+    bottom: Bottom
   browseRoot: Browse
   checkUpdate: Check Update
   colorTheme:

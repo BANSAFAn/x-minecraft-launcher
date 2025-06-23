@@ -71,6 +71,7 @@ export interface UIThemeDataV1 {
   font?: MediaData
   fontSize?: number
   particleMode?: ParticleMode
+  sideBarPosition?: 'left' | 'right' | 'top' | 'bottom'
 }
 
 export function getDefaultTheme(): UIThemeDataV1 {
@@ -109,6 +110,7 @@ export function getDefaultTheme(): UIThemeDataV1 {
     backgroundType: BackgroundType.NONE,
     font: undefined,
     fontSize: 16,
+    sideBarPosition: 'left',
     blur: {
       background: 3,
       card: 20,
@@ -616,6 +618,14 @@ export function useTheme(framework: Framework, { addMedia, removeMedia, exportTh
   const backgroundImageOverride = ref('')
   const backgroundImageOverrideOpacity = ref(1)
 
+  const sideBarPosition = computed({
+    get() { return currentTheme.value.sideBarPosition ?? 'left' },
+    set(v: 'left' | 'right' | 'top' | 'bottom') {
+      currentTheme.value.sideBarPosition = v
+      writeTheme(currentTheme.value.name, currentTheme.value)
+    },
+  })
+
   return {
     themes,
     isDark,
@@ -658,5 +668,6 @@ export function useTheme(framework: Framework, { addMedia, removeMedia, exportTh
     addMusic,
     setBackgroundImage,
     clearBackgroundImage,
+    sideBarPosition,
   }
 }
