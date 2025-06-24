@@ -11,7 +11,11 @@
       'v-navigation-drawer--right': sideBarPosition === 'right',
       'v-navigation-drawer--left': sideBarPosition === 'left'
     }"
-    :style="{ 'backdrop-filter': `blur(${blurSidebar}px)` }"
+    :style="{ 
+      'backdrop-filter': `blur(${blurSidebar}px)`,
+      'right': sideBarPosition === 'right' ? '0' : 'auto',
+      'left': sideBarPosition === 'right' ? 'auto' : '0'
+    }"
     :right="sideBarPosition === 'right'"
     :bottom="sideBarPosition === 'bottom'"
   >
@@ -205,6 +209,11 @@ function goMultiplayer() {
   z-index: 10;
 }
 
+.sidebar.v-navigation-drawer--right {
+  right: 0 !important;
+  left: auto !important;
+}
+
 .v-navigation-drawer--left {
   top: 0;
   left: 0;
@@ -222,6 +231,16 @@ function goMultiplayer() {
   min-width: 80px;
   max-width: 80px;
   width: 80px;
+  position: fixed !important;
+  transform: translateX(0) !important;
+  z-index: 100 !important;
+}
+
+/* Переопределение стилей Vuetify для правого сайдбара */
+.v-navigation-drawer.v-navigation-drawer--right {
+  right: 0 !important;
+  left: auto !important;
+  transform: translateX(0) !important;
 }
 
 .v-navigation-drawer--top {
@@ -267,6 +286,21 @@ function goMultiplayer() {
 }
 </style>
 <style>
+
+/* Глобальные стили для переопределения Vuetify */
+:global(.v-application .v-navigation-drawer.v-navigation-drawer--right) {
+  right: 0 !important;
+  left: auto !important;
+  transform: translateX(0) !important;
+  position: fixed !important;
+  z-index: 100 !important;
+}
+/* Локальные стили для переопределения Vuetify */
+.v-application .v-navigation-drawer.v-navigation-drawer--right {
+  right: 0 !important;
+  left: auto !important;
+  transform: translateX(0) !important;
+}
 
 .dark .sidebar .theme--dark.v-icon {
   color: var(--icon-color);
