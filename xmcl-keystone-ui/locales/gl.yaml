@@ -511,9 +511,16 @@ setting:
     legacy: Só a versión legada
   showNewsHeader: Mostrar Mostra de noticias
   streamerMode: Modo de transmisión
-  streamerModeDescription: >-
+  streamerModeDescription: >
     Isto ocultará a túa información privada como o correo electrónico no
     launcher.
+  sideBarPosition: Posición da barra lateral
+  sideBarPositionDescription: Escolle a posición da barra lateral
+  sideBarPositions:
+    left: Esquerda
+    right: Dereita
+    top: Arriba
+    bottom: Abaixo
   themeFont: Fonte
   themeFontDescription: Cambia o tipo de letra do iniciador.
   themeResetFont: Restablecer fonte

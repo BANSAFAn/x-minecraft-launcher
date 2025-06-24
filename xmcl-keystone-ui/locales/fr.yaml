@@ -1489,6 +1489,13 @@ setting:
   showRoot: Afficher
   streamerMode: Mode diffusion
   streamerModeDescription: Cela masquera vos informations privées comme les e-mails dans le lanceur.
+  sideBarPosition: Position de la barre latérale
+  sideBarPositionDescription: Choisissez la position de la barre latérale
+  sideBarPositions:
+    left: Gauche
+    right: Droite
+    top: Haut
+    bottom: Bas
   theme:
     dark: Thème sombre
     light: Thème clair

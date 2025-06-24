@@ -5,8 +5,15 @@
     :mini-variant="true"
     :color="sideBarColor"
     class="sidebar moveable z-10 rounded-[0.75rem]"
+    :class="{
+      'v-navigation-drawer--top': sideBarPosition === 'top',
+      'v-navigation-drawer--bottom': sideBarPosition === 'bottom',
+      'v-navigation-drawer--right': sideBarPosition === 'right',
+      'v-navigation-drawer--left': sideBarPosition === 'left'
+    }"
     :style="{ 'backdrop-filter': `blur(${blurSidebar}px)` }"
-    :position="sideBarPosition"
+    :right="sideBarPosition === 'right'"
+    :bottom="sideBarPosition === 'bottom'"
   >
     <v-list
       nav
@@ -141,6 +148,121 @@ function goMultiplayer() {
   display: flex;
   flex-direction: column;
   /* @apply rounded-r-xl border-r-[hsla(0,0%,100%,.12)]; */
+  position: fixed;
+  z-index: 10;
+}
+
+.v-navigation-drawer--left {
+  top: 0;
+  left: 0;
+  height: 100%;
+  min-width: 80px;
+  max-width: 80px;
+  flex-direction: column;
+}
+
+.v-navigation-drawer--right {
+  top: 0;
+  right: 0;
+  height: 100%;
+  min-width: 80px;
+  max-width: 80px;
+  flex-direction: column;
+}
+
+.v-navigation-drawer--bottom {
+  bottom: 0;
+  left: 0;
+  max-height: 80px;
+  min-width: 100%;
+  width: 100%;
+  flex-direction: row;
+}
+
+.v-navigation-drawer--bottom .v-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.v-navigation-drawer--bottom .v-divider {
+  height: 24px;
+  width: 1px;
+  margin: 0 8px;
+}
+
+.v-navigation-drawer--top {
+  top: 0;
+  left: 0;
+  max-height: 80px;
+  min-width: 100%;
+  width: 100%;
+  flex-direction: row;
+}
+
+.sidebar {
+  position: fixed;
+  z-index: 10;
+}
+
+.v-navigation-drawer--left {
+  top: 0;
+  left: 0;
+  height: 100%;
+  min-width: 80px;
+  max-width: 80px;
+  width: 80px;
+}
+
+.v-navigation-drawer--right {
+  top: 0;
+  right: 0;
+  height: 100%;
+  min-width: 80px;
+  max-width: 80px;
+  width: 80px;
+}
+
+.v-navigation-drawer--top {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  min-height: 80px;
+  max-height: 80px;
+}
+
+.v-navigation-drawer--top .v-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.v-navigation-drawer--top .v-divider {
+  height: 24px;
+  width: 1px;
+  margin: 0 8px;
+}
+
+.v-navigation-drawer--bottom {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  min-height: 80px;
+  max-height: 80px;
+}
+
+.v-navigation-drawer--bottom .v-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.v-navigation-drawer--bottom .v-divider {
+  height: 24px;
+  width: 1px;
+  margin: 0 8px;
 }
 </style>
 <style>

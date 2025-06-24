@@ -1421,6 +1421,13 @@ setting:
   blurMainBody: Размытие основного окна
   blurMainBodyDescription: Должна ли правая панель пусковой установки быть размытой
   blurSidebar: Размытие боковой панели
+  sideBarPosition: Позиция боковой панели
+  sideBarPositionDescription: Выберите позицию боковой панели
+  sideBarPositions:
+    left: Слева
+    right: Справа
+    top: Сверху
+    bottom: Снизу
   browseRoot: Изменить
   checkUpdate: Проверить обновление
   colorTheme:
@@ -1497,9 +1504,16 @@ setting:
   showNewsHeader: Показать витрину новостей
   showRoot: Открыть папку
   streamerMode: Режим стримера
-  streamerModeDescription: >-
+  streamerModeDescription: >
     Эта опция скроет вашу личную информацию, такую как электронная почта, в
     лаунчере.
+  sideBarPosition: Положение боковой панели
+  sideBarPositionDescription: Выберите положение боковой панели
+  sideBarPositions:
+    left: Слева
+    right: Справа
+    top: Сверху
+    bottom: Снизу
   theme:
     dark: Тёмная тема
     light: Светлая тема

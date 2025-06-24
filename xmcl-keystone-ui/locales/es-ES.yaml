@@ -1176,9 +1176,16 @@ setting:
   showNewsHeader: Mostrar escaparate de noticias
   showRoot: Mostrar
   streamerMode: Modo de transmisión
-  streamerModeDescription: >-
+  streamerModeDescription: >
     Esto ocultará su información privada, como el correo electrónico, en el
     iniciador.
+  sideBarPosition: Posición de la barra lateral
+  sideBarPositionDescription: Elige la posición de la barra lateral
+  sideBarPositions:
+    left: Izquierda
+    right: Derecha
+    top: Arriba
+    bottom: Abajo
   theme:
     dark: Tema Oscuro
     light: Tema Claro

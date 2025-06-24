@@ -1585,9 +1585,16 @@ setting:
   showNewsHeader: Nachrichtenpräsentation einblenden
   showRoot: ВідображатиAnzeige
   streamerMode: Streaming-Modus
-  streamerModeDescription: >-
+  streamerModeDescription: >
     Dadurch werden Ihre privaten Informationen wie E-Mails im Launcher
     ausgeblendet.
+  sideBarPosition: Position der Seitenleiste
+  sideBarPositionDescription: Wählen Sie die Position der Seitenleiste
+  sideBarPositions:
+    left: Links
+    right: Rechts
+    top: Oben
+    bottom: Unten
   theme:
     dark: Dunkles Thema
     light: Thema Licht

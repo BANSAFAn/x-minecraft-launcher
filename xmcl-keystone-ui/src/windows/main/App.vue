@@ -7,9 +7,18 @@
     }">
     </div>
     <AppSystemBar />
-    <div class="relative flex h-full overflow-auto">
+    <div class="relative flex h-full overflow-auto" :class="{
+        'flex-col': sideBarPosition === 'top' || sideBarPosition === 'bottom',
+        'flex-row': sideBarPosition === 'left' || sideBarPosition === 'right'
+      }">
       <AppSideBar />
-      <main class="relative inset-y-0 right-0 flex max-h-full flex-col overflow-auto">
+      <main class="relative flex max-h-full flex-col overflow-auto"
+        :class="{
+          'sidebar-left': sideBarPosition === 'left',
+          'sidebar-right': sideBarPosition === 'right',
+          'sidebar-top': sideBarPosition === 'top',
+          'sidebar-bottom': sideBarPosition === 'bottom'
+        }">
         <transition name="fade-transition" mode="out-in">
           <router-view class="z-2" />
         </transition>
@@ -42,6 +51,30 @@
     <AppFeedbackDialog />
   </v-app>
 </template>
+
+<style scoped>
+.sidebar-left {
+  margin-left: 80px;
+  width: calc(100% - 80px);
+}
+
+.sidebar-right {
+  margin-right: 80px;
+  width: calc(100% - 80px);
+}
+
+.sidebar-top {
+  margin-top: 80px;
+  height: calc(100% - 80px);
+  width: 100%;
+}
+
+.sidebar-bottom {
+  margin-bottom: 80px;
+  height: calc(100% - 80px);
+  width: 100%;
+}
+</style>
 
 <script lang=ts setup>
 import '@/assets/common.css'
@@ -118,7 +151,7 @@ provide(kCompact, compact)
 const headerHeight = ref(0)
 provide('headerHeight', headerHeight)
 
-const { appBarColor } = injection(kTheme)
+const { appBarColor, sideBarPosition } = injection(kTheme)
 
 const tutor = injection(kTutorial)
 // Set theme and start tutorial

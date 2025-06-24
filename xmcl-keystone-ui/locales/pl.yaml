@@ -1454,9 +1454,16 @@ setting:
   showNewsHeader: Odkryj wizytówkę wiadomości
   showRoot: Pokaż
   streamerMode: Tryb przesyłania strumieniowego
-  streamerModeDescription: >-
+  streamerModeDescription: >
     Spowoduje to ukrycie prywatnych informacji, takich jak adres e-mail, w
     programie uruchamiającym.
+  sideBarPosition: Pozycja paska bocznego
+  sideBarPositionDescription: Wybierz pozycję paska bocznego
+  sideBarPositions:
+    left: Lewa
+    right: Prawa
+    top: Góra
+    bottom: Dół
   theme:
     dark: Ciemny motyw
     light: Motyw świetlny

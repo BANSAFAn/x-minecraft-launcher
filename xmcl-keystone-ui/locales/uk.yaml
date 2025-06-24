@@ -1477,6 +1477,13 @@ setting:
   showRoot: Показати
   streamerMode: Режим стрімера
   streamerModeDescription: Це приховає вашу приватну інформацію, таку як електронна пошта, в лаунчері.
+  sideBarPosition: Положення бічної панелі
+  sideBarPositionDescription: Виберіть положення бічної панелі
+  sideBarPositions:
+    left: Зліва
+    right: Справа
+    top: Зверху
+    bottom: Знизу
   theme:
     dark: Темна тема
     light: Світла тема

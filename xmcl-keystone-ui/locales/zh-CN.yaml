@@ -1362,6 +1362,13 @@ setting:
   showRoot: 浏览
   streamerMode: 屏幕共享屏蔽
   streamerModeDescription: 此功能可以保护您的隐私。打开后，您的邮箱地址等隐私信息将会被隐藏。
+  sideBarPosition: 侧边栏位置
+  sideBarPositionDescription: 选择侧边栏的位置
+  sideBarPositions:
+    left: 左侧
+    right: 右侧
+    top: 顶部
+    bottom: 底部
   theme:
     dark: 暗色主题
     light: 亮色主题
