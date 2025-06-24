@@ -1421,13 +1421,6 @@ setting:
   blurMainBody: Размытие основного окна
   blurMainBodyDescription: Должна ли правая панель пусковой установки быть размытой
   blurSidebar: Размытие боковой панели
-  sideBarPosition: Позиция боковой панели
-  sideBarPositionDescription: Выберите позицию боковой панели
-  sideBarPositions:
-    left: Слева
-    right: Справа
-    top: Сверху
-    bottom: Снизу
   browseRoot: Изменить
   checkUpdate: Проверить обновление
   colorTheme:
