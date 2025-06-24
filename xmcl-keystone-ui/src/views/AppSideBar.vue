@@ -216,7 +216,8 @@ function goMultiplayer() {
 
 .v-navigation-drawer--right {
   top: 0;
-  right: 0;
+  right: 0 !important;
+  left: auto !important;
   height: 100%;
   min-width: 80px;
   max-width: 80px;
