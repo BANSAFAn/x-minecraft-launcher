@@ -1460,10 +1460,8 @@ setting:
   sideBarPosition: Pozycja paska bocznego
   sideBarPositionDescription: Wybierz pozycję paska bocznego
   sideBarPositions:
-    left: Lewa
-    right: Prawa
-    top: Góra
-    bottom: Dół
+    left: Lewo
+    right: Prawo
   theme:
     dark: Ciemny motyw
     light: Motyw świetlny

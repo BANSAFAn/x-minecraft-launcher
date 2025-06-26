@@ -1482,8 +1482,6 @@ setting:
   sideBarPositions:
     left: Зліва
     right: Справа
-    top: Зверху
-    bottom: Знизу
   theme:
     dark: Темна тема
     light: Світла тема

@@ -1372,8 +1372,6 @@ setting:
   sideBarPositions:
     left: Left
     right: Right
-    top: Top
-    bottom: Bottom
   browseRoot: Browse
   checkUpdate: Check Update
   colorTheme:

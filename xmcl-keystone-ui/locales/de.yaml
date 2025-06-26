@@ -1593,8 +1593,6 @@ setting:
   sideBarPositions:
     left: Links
     right: Rechts
-    top: Oben
-    bottom: Unten
   theme:
     dark: Dunkles Thema
     light: Thema Licht

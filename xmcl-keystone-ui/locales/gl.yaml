@@ -519,8 +519,6 @@ setting:
   sideBarPositions:
     left: Esquerda
     right: Dereita
-    top: Arriba
-    bottom: Abaixo
   themeFont: Fonte
   themeFontDescription: Cambia o tipo de letra do iniciador.
   themeResetFont: Restablecer fonte

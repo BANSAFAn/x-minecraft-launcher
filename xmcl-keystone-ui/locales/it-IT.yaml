@@ -1473,6 +1473,11 @@ setting:
   themeShare: Condividi tema
   themeShareDescription: Puoi condividere il tema con i tuoi amici.
   update: Aggiorna
+  sideBarPosition: Posizione della barra laterale
+  sideBarPositionDescription: Posizione della barra laterale nel launcher
+  sideBarPositions:
+    left: Sinistra
+    right: Destra
   useBmclAPI: Usa BMCL API
   useBmclAPIDescription: >-
     Usa BMCLAPI per scaricare Minecraft quando ti trovi nella Cina continentale.

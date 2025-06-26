@@ -71,7 +71,7 @@ export interface UIThemeDataV1 {
   font?: MediaData
   fontSize?: number
   particleMode?: ParticleMode
-  sideBarPosition?: 'left' | 'right' | 'top' | 'bottom'
+  sideBarPosition?: 'left' | 'right'
 }
 
 export function getDefaultTheme(): UIThemeDataV1 {
@@ -620,7 +620,7 @@ export function useTheme(framework: Framework, { addMedia, removeMedia, exportTh
 
   const sideBarPosition = computed({
     get() { return currentTheme.value.sideBarPosition ?? 'left' },
-    set(v: 'left' | 'right' | 'top' | 'bottom') {
+    set(v: 'left' | 'right') {
       currentTheme.value.sideBarPosition = v
       writeTheme(currentTheme.value.name, currentTheme.value)
     },

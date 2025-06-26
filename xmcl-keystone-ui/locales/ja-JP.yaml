@@ -1344,6 +1344,11 @@ setting:
   themeSelectFont: フォントを選択
   themeShare: テーマを共有
   themeShareDescription: レーマをあなたのフレンドと共有できます。
+  sideBarPosition: サイドバーの位置
+  sideBarPositionDescription: サイドバーの位置を選択します
+  sideBarPositions:
+    left: 左
+    right: 右
   update: アップデート
   useBmclAPI: BMCL APIを使う
   useBmclAPIDescription: 中国本土にいる場合 BMCLAPI を用いてMinecraftをダウンロードします (中国本土に居ない場合機能しません)

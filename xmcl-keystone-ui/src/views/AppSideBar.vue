@@ -6,8 +6,6 @@
     :color="sideBarColor"
     class="sidebar moveable z-10 rounded-[0.75rem]"
     :class="{
-      'v-navigation-drawer--top': sideBarPosition === 'top',
-      'v-navigation-drawer--bottom': sideBarPosition === 'bottom',
       'v-navigation-drawer--right': sideBarPosition === 'right',
       'v-navigation-drawer--left': sideBarPosition === 'left'
     }"
@@ -17,7 +15,6 @@
       'left': sideBarPosition === 'right' ? 'auto' : '0'
     }"
     :right="sideBarPosition === 'right'"
-    :bottom="sideBarPosition === 'bottom'"
   >
     <v-list
       nav
@@ -243,47 +240,7 @@ function goMultiplayer() {
   transform: translateX(0) !important;
 }
 
-.v-navigation-drawer--top {
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 80px;
-  min-height: 80px;
-  max-height: 80px;
-}
 
-.v-navigation-drawer--top .v-list {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.v-navigation-drawer--top .v-divider {
-  height: 24px;
-  width: 1px;
-  margin: 0 8px;
-}
-
-.v-navigation-drawer--bottom {
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 80px;
-  min-height: 80px;
-  max-height: 80px;
-}
-
-.v-navigation-drawer--bottom .v-list {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.v-navigation-drawer--bottom .v-divider {
-  height: 24px;
-  width: 1px;
-  margin: 0 8px;
-}
 </style>
 <style>
 

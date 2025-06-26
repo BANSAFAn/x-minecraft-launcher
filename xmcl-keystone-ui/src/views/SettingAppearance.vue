@@ -553,8 +553,6 @@ const backgroundImageFits = computed(() => [
 const sideBarPositions = computed(() => [
   { value: 'left', text: t('setting.sideBarPositions.left') },
   { value: 'right', text: t('setting.sideBarPositions.right') },
-  { value: 'top', text: t('setting.sideBarPositions.top') },
-  { value: 'bottom', text: t('setting.sideBarPositions.bottom') },
 ])
 const backgroundTypes = computed(() => [
   { value: BackgroundType.NONE, text: t('setting.backgroundTypes.none') },

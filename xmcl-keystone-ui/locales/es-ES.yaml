@@ -1184,8 +1184,6 @@ setting:
   sideBarPositions:
     left: Izquierda
     right: Derecha
-    top: Arriba
-    bottom: Abajo
   theme:
     dark: Tema Oscuro
     light: Tema Claro

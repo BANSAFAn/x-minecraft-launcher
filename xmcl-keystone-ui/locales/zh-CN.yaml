@@ -1367,8 +1367,6 @@ setting:
   sideBarPositions:
     left: 左侧
     right: 右侧
-    top: 顶部
-    bottom: 底部
   theme:
     dark: 暗色主题
     light: 亮色主题

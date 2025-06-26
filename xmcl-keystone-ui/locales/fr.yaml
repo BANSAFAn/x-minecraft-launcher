@@ -1494,8 +1494,6 @@ setting:
   sideBarPositions:
     left: Gauche
     right: Droite
-    top: Haut
-    bottom: Bas
   theme:
     dark: Thème sombre
     light: Thème clair
