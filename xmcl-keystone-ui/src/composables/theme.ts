@@ -71,6 +71,11 @@ export interface UIThemeDataV1 {
   font?: MediaData
   fontSize?: number
   particleMode?: ParticleMode
+  textColor?: string
+  textGradient?: boolean
+  animatedGradient?: boolean
+  gradientFrom?: string
+  gradientTo?: string
 }
 
 export function getDefaultTheme(): UIThemeDataV1 {
@@ -591,27 +596,109 @@ export function useTheme(framework: Framework, { addMedia, removeMedia, exportTh
     id: 'font-style',
   })
 
-  useStyleTag(computed(() => `
-  :root {
-    --color-primary: ${primaryColor.value};
-    --color-accent: ${accentColor.value};
-    --color-info: ${infoColor.value};
-    --color-error: ${errorColor.value};
-    --color-success: ${successColor.value};
-    --color-warning: ${warningColor.value};
-    --color-border: ${isDark.value ? 'hsla(0, 0%, 100%, .12)' : 'hsla(0, 0%, 100%, .12)'};
-    --color-highlight-bg: ${isDark.value ? 'hsla(0, 0%, 100%, .12)' : 'hsla(0, 0%, 100%, .12)'};
-    --color-secondary-text: ${isDark.value ? 'rgba(156, 163, 175, 1)' : 'rgba(75, 85, 99, 1)'};
-    --color-sidebar-bg: ${sideBarColor.value};
-    --color-appbar-bg: ${appBarColor.value};
-    --color-card-bg: ${cardColor.value};
-    --blur-card: ${blurCard.value}px;
-  }
+  // Add computed properties for text color settings
+  const textColor = computed({
+  get: () => currentTheme.value.textColor ?? '',
+  set: (v: string) => {
+    currentTheme.value.textColor = v
+    writeTheme(currentTheme.value.name, currentTheme.value)
+  },
+  })
+  
+  const textGradient = computed({
+  get: () => currentTheme.value.textGradient ?? false,
+  set: (v: boolean) => {
+    currentTheme.value.textGradient = v
+    writeTheme(currentTheme.value.name, currentTheme.value)
+  },
+  })
+  
+  const animatedGradient = computed({
+  get: () => currentTheme.value.animatedGradient ?? false,
+  set: (v: boolean) => {
+    currentTheme.value.animatedGradient = v
+    writeTheme(currentTheme.value.name, currentTheme.value)
+  },
+  })
+  
+  const gradientFrom = computed({
+  get: () => currentTheme.value.gradientFrom ?? '#ff0000',
+  set: (v: string) => {
+    currentTheme.value.gradientFrom = v
+    writeTheme(currentTheme.value.name, currentTheme.value)
+  },
+  })
+  
+  const gradientTo = computed({
+  get: () => currentTheme.value.gradientTo ?? '#0000ff',
+  set: (v: string) => {
+    currentTheme.value.gradientTo = v
+    writeTheme(currentTheme.value.name, currentTheme.value)
+  },
+  })
 
-  .v-application {
-    background-color: ${backgroundColor.value};
-  }
-  `))
+  // Modify the useStyleTag section to include text color styles
+  useStyleTag(computed(() => {
+    let css = `
+    :root {
+      --color-primary: ${primaryColor.value};
+      --color-accent: ${accentColor.value};
+      --color-info: ${infoColor.value};
+      --color-error: ${errorColor.value};
+      --color-success: ${successColor.value};
+      --color-warning: ${warningColor.value};
+      --color-border: ${isDark.value ? 'hsla(0, 0%, 100%, .12)' : 'hsla(0, 0%, 100%, .12)'};
+      --color-highlight-bg: ${isDark.value ? 'hsla(0, 0%, 100%, .12)' : 'hsla(0, 0%, 100%, .12)'};
+      --color-secondary-text: ${isDark.value ? 'rgba(156, 163, 175, 1)' : 'rgba(75, 85, 99, 1)'};
+      --color-sidebar-bg: ${sideBarColor.value};
+      --color-appbar-bg: ${appBarColor.value};
+      --color-card-bg: ${cardColor.value};
+      --blur-card: ${blurCard.value}px;
+    }
+
+    .v-application {
+      background-color: ${backgroundColor.value};
+    }
+    `
+
+    // Add text color styles
+    if (textColor.value && !textGradient.value) {
+      css += `
+      .v-application {
+        color: ${textColor.value} !important;
+      }
+      `
+    }
+
+    // Add gradient text styles
+    if (textGradient.value) {
+      css += `
+      .v-application .v-application--wrap {
+        color: transparent !important;
+        background: linear-gradient(to right, ${gradientFrom.value || '#ff0000'}, ${gradientTo.value || '#0000ff'});
+        -webkit-background-clip: text;
+        background-clip: text;
+      }
+      `
+
+      // Add animated gradient if enabled
+      if (animatedGradient.value) {
+        css += `
+        .v-application .v-application--wrap {
+          background-size: 200% 200%;
+          animation: gradientAnimation 3s ease infinite;
+        }
+        @keyframes gradientAnimation {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        `
+      }
+    }
+
+    return css
+  }))
 
   const backgroundImageOverride = ref('')
   const backgroundImageOverrideOpacity = ref(1)
@@ -658,5 +745,20 @@ export function useTheme(framework: Framework, { addMedia, removeMedia, exportTh
     addMusic,
     setBackgroundImage,
     clearBackgroundImage,
+    
+    // Text color properties
+    textColor,
+    textGradient,
+    animatedGradient,
+    gradientFrom,
+    gradientTo,
   }
 }
+
+// In the CSS generation part, add:
+// if (currentTheme.value.textGradient) {
+//   css += `body { color: transparent; background: linear-gradient(to right, ${currentTheme.value.gradientFrom}, ${currentTheme.value.gradientTo}); -webkit-background-clip: text; background-clip: text; }`
+//   if (currentTheme.value.animatedGradient) {
+//     css += `body { animation: gradientAnimation 3s ease infinite; background-size: 200% 200%; } @keyframes gradientAnimation { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }`
+//   }
+// }

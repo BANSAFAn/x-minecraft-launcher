@@ -43,6 +43,7 @@ import { kSupportedAuthorityMetadata, useSupportedAuthority } from '@/composable
 import { vuetify } from '@/vuetify'
 import 'virtual:uno.css'
 import { provide } from 'vue'
+import { kSidebarPosition, useSidebarPosition } from '@/composables/uiLayout'
 
 export default defineComponent({
   setup(props, ctx) {
@@ -130,6 +131,7 @@ export default defineComponent({
     provide(kTutorial, useTutorialModel())
     provide(kModrinthTags, useModrinthTags())
     provide(kCurseforgeCategories, useCurseforgeCategories())
+    provide(kSidebarPosition, useSidebarPosition())
 
     return () => ctx.slots.default?.()
   },

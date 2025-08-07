@@ -1503,6 +1503,14 @@ setting:
     dark: Тёмная тема
     light: Светлая тема
     system: Использовать системную тему
+  sidebarPosition:
+    left: Слева
+    right: Справа
+  textColor: Цвет текста
+  textGradient: Градиент текста
+  animatedGradient: Анимированный градиент
+  gradientFrom: Цвет начала градиента
+  gradientTo: Цвет конца градиента
   themeExport: Экспортировать тему
   themeFont: Шрифт
   themeFontDescription: Изменить шрифт лаунчера.

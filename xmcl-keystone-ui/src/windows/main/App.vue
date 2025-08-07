@@ -7,9 +7,9 @@
     }">
     </div>
     <AppSystemBar />
-    <div class="relative flex h-full overflow-auto">
-      <AppSideBar />
-      <main class="relative inset-y-0 right-0 flex max-h-full flex-col overflow-auto">
+    <div class="relative flex h-full overflow-auto" :class="{ 'flex-row-reverse': sidebarPosition === 'right' }">
+      <AppSideBar :class="{ 'rounded-l-xl': sidebarPosition === 'right', 'rounded-r-xl': sidebarPosition === 'left' }" />
+      <main class="relative inset-y-0 right-0 flex max-h-full flex-col overflow-auto" :class="{ 'left-0': sidebarPosition === 'right' }">
         <transition name="fade-transition" mode="out-in">
           <router-view class="z-2" />
         </transition>
@@ -146,6 +146,8 @@ const { isDark } = injection(kTheme)
 const { notify } = useNotifier()
 useDefaultErrorHandler(notify)
 useAuthProfileImportNotification(notify)
+import { kSidebarPosition } from '@/composables/uiLayout'
+const sidebarPosition = injection(kSidebarPosition)
 </script>
 
 <style scoped>

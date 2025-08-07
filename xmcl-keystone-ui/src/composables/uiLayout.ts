@@ -14,3 +14,8 @@ export function useInFocusMode() {
 export const kInFocusMode: InjectionKey<Ref<boolean>> = Symbol('InFocusMode')
 
 export const kUILayout: InjectionKey<ReturnType<typeof useUILayout>> = Symbol('UILayout')
+
+export function useSidebarPosition() {
+  return useLocalStorageCacheStringValue('sidebar_position', 'left' as 'left' | 'right')
+}
+export const kSidebarPosition: InjectionKey<ReturnType<typeof useSidebarPosition>> = Symbol('SidebarPosition')
