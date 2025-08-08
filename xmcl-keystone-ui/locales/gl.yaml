@@ -518,6 +518,15 @@ setting:
   themeSelectFont: Seleccione Fonte
   themeShare: Compartir tema
   themeShareDescription: Podes compartir o tema co teu amigo.
+  sidebarPosition:
+    name: Posición da barra lateral
+    left: Esquerda
+    right: Dereita
+  textColor: Cor do texto
+  textGradient: Gradiente de texto
+  animatedGradient: Gradiente animado
+  gradientFrom: Gradiente de
+  gradientTo: Gradiente a
   update: Actualizar
 setup:
   appearance:

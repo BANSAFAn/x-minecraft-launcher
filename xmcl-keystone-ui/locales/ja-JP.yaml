@@ -1467,6 +1467,15 @@ theme:
   selectMusic: 音楽を選択
   selectVideo: 映像を選択
   title: X Minecraft Launcher
+  sidebarPosition:
+    name: サイドバーの位置
+    left: 左
+    right: 右
+  textColor: テキストの色
+  textGradient: テキストのグラデーション
+  animatedGradient: アニメーション付きグラデーション
+  gradientFrom: グラデーションの開始
+  gradientTo: グラデーションの終了
 title: X Minecraft Launcher
 transportType:
   host: ホスト候補

@@ -1599,6 +1599,15 @@ setting:
   themeSelectFont: Wählen Sie Schriftart aus
   themeShare: Thema teilen
   themeShareDescription: Sie können das Thema mit Ihrem Freund teilen.
+  sidebarPosition:
+    name: Seitenleistenposition
+    left: Links
+    right: Rechts
+  textColor: Textfarbe
+  textGradient: Textverlauf
+  animatedGradient: Animierter Verlauf
+  gradientFrom: Verlauf von
+  gradientTo: Verlauf bis
   update: Update
   useBmclAPI: Verwenden Sie die BMCL-API
   useBmclAPIDescription: >-

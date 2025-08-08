@@ -480,4 +480,13 @@ task:
   searchOnModrinth: '@:mod.searchOnModrinth'
 theme:
   title: X Minecraft Launcher
+  sidebarPosition:
+    name: Бүйірлік панельдің орны
+    left: Сол жақ
+    right: Оң жақ
+  textColor: Мәтін түсі
+  textGradient: Мәтін градиенті
+  animatedGradient: Анимациялық градиент
+  gradientFrom: Градиенттен
+  gradientTo: Градиентке
 title: X Minecraft Launcher

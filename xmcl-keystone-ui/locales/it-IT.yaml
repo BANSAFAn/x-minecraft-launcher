@@ -1619,6 +1619,15 @@ theme:
   selectMusic: Scegli Musica
   selectVideo: Scegli Video
   title: X Minecraft Launcher
+  sidebarPosition:
+    name: Posizione della barra laterale
+    left: Sinistra
+    right: Destra
+  textColor: Colore del testo
+  textGradient: Gradiente di testo
+  animatedGradient: Gradiente animato
+  gradientFrom: Gradiente da
+  gradientTo: Gradiente a
 title: X Minecraft Launcher
 transportType:
   host: Host Scelto

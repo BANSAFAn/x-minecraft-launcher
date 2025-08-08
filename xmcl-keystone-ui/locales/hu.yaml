@@ -1618,6 +1618,15 @@ theme:
   selectMusic: Válassza a Zene lehetőséget
   selectVideo: Válassza a Videó lehetőséget
   title: X Minecraft Launcher
+  sidebarPosition:
+    name: Oldalsáv pozíció
+    left: Bal
+    right: Jobb
+  textColor: Szöveg szín
+  textGradient: Szöveg gradiens
+  animatedGradient: Animált gradiens
+  gradientFrom: Gradiens kezdete
+  gradientTo: Gradiens vége
 title: X Minecraft Launcher
 transportType:
   host: Kiszolgáló jelölt

@@ -1636,6 +1636,15 @@ theme:
   selectMusic: Вибрати музику
   selectVideo: Вибрати відео
   title: X Minecraft Launcher
+  sidebarPosition:
+    name: Позиція бічної панелі
+    left: Ліворуч
+    right: Праворуч
+  textColor: Колір тексту
+  textGradient: Градієнт тексту
+  animatedGradient: Анімований градієнт
+  gradientFrom: Градієнт від
+  gradientTo: Градієнт до
 title: X Minecraft Launcher
 transportType:
   host: Кандидат хоста
