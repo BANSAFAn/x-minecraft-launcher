@@ -373,6 +373,58 @@
       />
     </v-list-item> -->
     <v-list-item>
+  <v-list-item-content>
+    <v-list-item-title>
+      {{
+        t('setting.textColor')
+      }}
+    </v-list-item-title>
+    <v-list-item-subtitle>
+      {{
+        t('setting.textColorDescription')
+      }}
+    </v-list-item-subtitle>
+  </v-list-item-content>
+  <v-list-item-action class="ml-[16px]">
+    <SettingAppearanceColor
+      v-model="textColor"
+      :text="t('setting.colorTheme.textColor')"
+    />
+  </v-list-item-action>
+</v-list-item>
+<SettingItemCheckbox
+  v-model="textGradient"
+  :title="t('setting.textGradient')"
+  :description="t('setting.textGradientDescription')"
+/>
+<v-list-item v-if="textGradient">
+  <v-list-item-content>
+    <v-list-item-title>
+      {{
+        t('setting.gradientColors')
+      }}
+    </v-list-item-title>
+  </v-list-item-content>
+  <v-list-item-action class="ml-[16px]">
+    <SettingAppearanceColor
+      v-model="gradientFrom"
+      :text="t('setting.colorTheme.gradientFrom')"
+    />
+  </v-list-item-action>
+  <v-list-item-action class="ml-[16px]">
+    <SettingAppearanceColor
+      v-model="gradientTo"
+      :text="t('setting.colorTheme.gradientTo')"
+    />
+  </v-list-item-action>
+</v-list-item>
+<SettingItemCheckbox
+  v-if="textGradient"
+  v-model="animatedGradient"
+  :title="t('setting.animatedGradient')"
+  :description="t('setting.animatedGradientDescription')"
+/>
+<v-list-item>
       <v-list-item-content>
         <v-list-item-title>
           {{
@@ -498,7 +550,7 @@ import SettingAppearanceColor from './SettingAppearanceColor.vue'
 const { showOpenDialog, showSaveDialog } = windowController
 const { t } = useI18n()
 const { blurSidebar, blurAppBar, isDark, fontSize, blurCard, backgroundColorOverlay, backgroundImage, setBackgroundImage, blur, particleMode, backgroundType, backgroundImageFit, volume, clearBackgroundImage, exportTheme, importTheme } = injection(kTheme)
-const { sideBarColor, appBarColor, primaryColor, warningColor, errorColor, cardColor, backgroundColor, resetToDefault, currentTheme, font, setFont, resetFont, backgroundMusic, removeMusic } = injection(kTheme)
+const { sideBarColor, appBarColor, primaryColor, warningColor, errorColor, cardColor, backgroundColor, resetToDefault, currentTheme, font, setFont, resetFont, backgroundMusic, removeMusic, textColor, textGradient, animatedGradient, gradientFrom, gradientTo } = injection(kTheme)
 const { state } = injection(kSettingsState)
 const env = injection(kEnvironment)
 const { sidebarPosition } = injection(kSidebarPosition)
@@ -686,67 +738,6 @@ function onRevertFont() {
 }
 </script>
 
-<!-- Добавляем настройку позиции панели -->
-const sidebarPositions = computed(() => [{
-  text: t('setting.sidebarPosition.left'),
-  value: 'left',
-}, {
-  text: t('setting.sidebarPosition.right'),
-  value: 'right',
-}])
-<!-- Добавляем настройки цвета текста перед настройками шрифта -->
-<v-list-item>
-  <v-list-item-content>
-    <v-list-item-title>
-      {{
-        t('setting.textColor')
-      }}
-    </v-list-item-title>
-    <v-list-item-subtitle>
-      {{
-        t('setting.textColorDescription')
-      }}
-    </v-list-item-subtitle>
-  </v-list-item-content>
-  <v-list-item-action class="ml-[16px]">
-    <SettingAppearanceColor
-      v-model="textColor"
-      :text="t('setting.colorTheme.textColor')"
-    />
-  </v-list-item-action>
-</v-list-item>
-<SettingItemCheckbox
-  v-model="textGradient"
-  :title="t('setting.textGradient')"
-  :description="t('setting.textGradientDescription')"
-/>
-<v-list-item v-if="textGradient">
-  <v-list-item-content>
-    <v-list-item-title>
-      {{
-        t('setting.gradientColors')
-      }}
-    </v-list-item-title>
-  </v-list-item-content>
-  <v-list-item-action class="ml-[16px]">
-    <SettingAppearanceColor
-      v-model="gradientFrom"
-      :text="t('setting.colorTheme.gradientFrom')"
-    />
-  </v-list-item-action>
-  <v-list-item-action class="ml-[16px]">
-    <SettingAppearanceColor
-      v-model="gradientTo"
-      :text="t('setting.colorTheme.gradientTo')"
-    />
-  </v-list-item-action>
-</v-list-item>
-<SettingItemCheckbox
-  v-if="textGradient"
-  v-model="animatedGradient"
-  :title="t('setting.animatedGradient')"
-  :description="t('setting.animatedGradientDescription')"
-/>
 
 </v-list-item>
       <v-list-item-content>
