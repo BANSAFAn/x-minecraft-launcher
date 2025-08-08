@@ -414,54 +414,7 @@
           >
             1px
           </v-btn>
-          <v-btn
-            solo
-            class="h-unset!"
-          >
-            0.1px
-          </v-btn>
-        </v-btn-toggle>
-        <v-btn
-          icon
-          @click="onFontSizeDecrease"
-        >
-          <v-icon>
-            text_decrease
-          </v-icon>
-        </v-btn>
-        <v-text-field
-          :value="`${Math.round(fontSize * 10) / 10}px`"
-          readonly
-          class="max-w-20"
-          solo
-          outlined
-          dense
-          hide-details
-        />
-        <v-btn
-          icon
-          @click="onFontSizeIncrease"
-        >
-          <v-icon>
-            text_increase
-          </v-icon>
-        </v-btn>
-      </div>
 
-      <v-btn
-        outlined
-        text
-        style="margin-right: 10px"
-        @click="onSelectFont"
-      >
-        {{ t("setting.themeSelectFont") }}
-      </v-btn>
-      <v-btn
-        outlined
-        text
-        style="margin-right: 10px"
-        @click="onRevertFont"
-      >
         {{ t("setting.themeResetFont") }}
       </v-btn>
     </v-list-item>
