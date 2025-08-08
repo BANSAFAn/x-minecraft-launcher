@@ -318,16 +318,8 @@
     </v-list-item>
     <!-- <v-list-item>
       <v-list-item-content>
-        <v-list-item-title>
-          {{
-            t("setting.backgroundImageBlur")
-          }}
-        </v-list-item-title>
-        <v-list-item-subtitle>
-          {{
-            t("setting.backgroundImageBlurDescription")
-          }}
-        </v-list-item-subtitle>
+        <v-list-item-title>{{ t("setting.backgroundImageBlur") }}</v-list-item-title>
+        <v-list-item-subtitle>{{ t("setting.backgroundImageBlurDescription") }}</v-list-item-subtitle>
       </v-list-item-content>
       <v-slider
         v-model="blur"
@@ -340,11 +332,7 @@
     </v-list-item>
     <v-list-item>
       <v-list-item-content>
-        <v-list-item-title>
-          {{
-            t("setting.blurSidebar")
-          }}
-        </v-list-item-title>
+        <v-list-item-title>{{ t("setting.blurSidebar") }}</v-list-item-title>
       </v-list-item-content>
       <v-slider
         v-model="blurSidebar"
@@ -357,11 +345,7 @@
     </v-list-item>
     <v-list-item>
       <v-list-item-content>
-        <v-list-item-title>
-          {{
-            t("setting.blurAppBar")
-          }}
-        </v-list-item-title>
+        <v-list-item-title>{{ t("setting.blurAppBar") }}</v-list-item-title>
       </v-list-item-content>
       <v-slider
         v-model="blurAppBar"
@@ -374,16 +358,8 @@
     </v-list-item> -->
     <v-list-item>
   <v-list-item-content>
-    <v-list-item-title>
-      {{
-        t('setting.textColor')
-      }}
-    </v-list-item-title>
-    <v-list-item-subtitle>
-      {{
-        t('setting.textColorDescription')
-      }}
-    </v-list-item-subtitle>
+    <v-list-item-title>{{ t('setting.textColor') }}</v-list-item-title>
+    <v-list-item-subtitle>{{ t('setting.textColorDescription') }}</v-list-item-subtitle>
   </v-list-item-content>
   <v-list-item-action class="ml-[16px]">
     <SettingAppearanceColor
@@ -399,11 +375,7 @@
 />
 <v-list-item v-if="textGradient">
   <v-list-item-content>
-    <v-list-item-title>
-      {{
-        t('setting.gradientColors')
-      }}
-    </v-list-item-title>
+    <v-list-item-title>{{ t('setting.gradientColors') }}</v-list-item-title>
   </v-list-item-content>
   <v-list-item-action class="ml-[16px]">
     <SettingAppearanceColor
@@ -426,16 +398,8 @@
 />
 <v-list-item>
       <v-list-item-content>
-        <v-list-item-title>
-          {{
-            t('setting.themeFont')
-          }}
-        </v-list-item-title>
-        <v-list-item-subtitle>
-          {{
-            t('setting.themeFontDescription')
-          }}
-        </v-list-item-subtitle>
+        <v-list-item-title>{{ t('setting.themeFont') }}</v-list-item-title>
+        <v-list-item-subtitle>{{ t('setting.themeFontDescription') }}</v-list-item-subtitle>
       </v-list-item-content>
       <div class="flex flex-grow-0 gap-1 mr-2">
         <v-btn-toggle
@@ -503,16 +467,8 @@
     </v-list-item>
     <v-list-item>
       <v-list-item-content>
-        <v-list-item-title>
-          {{
-            t('setting.themeShare')
-          }}
-        </v-list-item-title>
-        <v-list-item-subtitle>
-          {{
-            t('setting.themeShareDescription')
-          }}
-        </v-list-item-subtitle>
+        <v-list-item-title>{{ t('setting.themeShare') }}</v-list-item-title>
+        <v-list-item-subtitle>{{ t('setting.themeShareDescription') }}</v-list-item-subtitle>
       </v-list-item-content>
       <v-btn
         outlined
@@ -738,89 +694,6 @@ function onRevertFont() {
 }
 </script>
 
-
-</v-list-item>
-      <v-list-item-content>
-        <v-list-item-title>
-          {{
-            t("setting.backgroundImageBlur")
-          }}
-        </v-list-item-title>
-        <v-list-item-subtitle>
-          {{
-            t("setting.backgroundImageBlurDescription")
-          }}
-        </v-list-item-subtitle>
-      </v-list-item-content>
-      <v-slider
-        v-model="blur"
-        :height="5"
-        :min="0"
-        :max="20"
-        :hint="t('setting.backgroundImageBlur')"
-        :always-dirty="true"
-      />
-    </v-list-item>
-    <v-list-item>
-      <v-list-item-content>
-        <v-list-item-title>
-          {{
-            t("setting.blurSidebar")
-          }}
-        </v-list-item-title>
-      </v-list-item-content>
-      <v-slider
-        v-model="blurSidebar"
-        :height="5"
-        :min="0"
-        :max="20"
-        :hint="t('setting.blurSidebar')"
-        :always-dirty="true"
-      />
-    </v-list-item>
-    <v-list-item>
-      <v-list-item-content>
-        <v-list-item-title>
-          {{
-            t("setting.blurAppBar")
-          }}
-        </v-list-item-title>
-      </v-list-item-content>
-      <v-slider
-        v-model="blurAppBar"
-        :height="5"
-        :min="0"
-        :max="20"
-        :hint="t('setting.blurAppBar')"
-        :always-dirty="true"
-      />
-    </v-list-item> -->
-    <v-list-item>
-      <v-list-item-content>
-        <v-list-item-title>
-          {{
-            t('setting.themeFont')
-          }}
-        </v-list-item-title>
-        <v-list-item-subtitle>
-          {{
-            t('setting.themeFontDescription')
-          }}
-        </v-list-item-subtitle>
-      </v-list-item-content>
-      <div class="flex flex-grow-0 gap-1 mr-2">
-        <v-btn-toggle
-          v-model="fontDelta"
-          mandatory
-          solo
-          dense
-        >
-          <v-btn
-            solo
-            class="h-unset!"
-          >
-            1px
-          </v-btn>
           <v-btn
             solo
             class="h-unset!"
