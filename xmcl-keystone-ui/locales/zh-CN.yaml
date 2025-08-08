@@ -1504,6 +1504,15 @@ theme:
   selectMusic: 选择音乐
   selectVideo: 选择视频
   title: X Minecraft Launcher
+  sidebarPosition:
+    name: 侧边栏位置
+    left: 左
+    right: 右
+  textColor: 文本颜色
+  textGradient: 文本渐变
+  animatedGradient: 动画渐变
+  gradientFrom: 渐变起始
+  gradientTo: 渐变结束
 title: X Minecraft Launcher
 transportType:
   host: 公网地址
