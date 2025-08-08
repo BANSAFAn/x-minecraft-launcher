@@ -1545,6 +1545,11 @@ setting:
     focus: Layout der Fokussierung
   layoutDescription: Layout des Launcher, der verschiedene Logiken der Benutzeroberfläche anzeigt
   layoutTitle: Layout
+  sidebarPosition:
+    description: Wählen Sie zwischen links oder rechts.
+    left: Links
+    right: Rechts
+    name: Seitenleistenposition
   linuxEnableDedicatedGPUOptimization: Zuweisung eines dedizierten Grafikprozessors
   linuxEnableDedicatedGPUOptimizationDescription: Diese Option weist dem Minecraft-Prozess einen eigenen Grafikprozessor zu.
   linuxTitlebar: Native Titelleiste
@@ -1599,7 +1604,14 @@ setting:
   themeSelectFont: Wählen Sie Schriftart aus
   themeShare: Thema teilen
   themeShareDescription: Sie können das Thema mit Ihrem Freund teilen.
-  sidebarPosition:
+  textColor: Textfarbe
+  textColorDescription: Ändern Sie die Textfarbe im Launcher.
+  textGradient: Textverlauf
+  textGradientDescription: Aktivieren Sie den Textverlauf im Launcher.
+  animatedGradient: Animierter Verlauf
+  animatedGradientDescription: Animieren Sie den Textverlauf.
+  gradientColor: Verlaufsfarbe
+  update: UpdatesidebarPosition:
     name: Seitenleistenposition
     left: Links
     right: Rechts

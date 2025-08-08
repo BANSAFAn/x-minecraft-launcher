@@ -1644,11 +1644,16 @@ theme:
   title: X Minecraft Launcher
   sidebarPosition:
     name: Position de la barre latérale
+    description: Choisir entre gauche ou droite
     left: Gauche
     right: Droite
   textColor: Couleur du texte
+  textColorDescription: Changer la couleur du texte du lanceur
   textGradient: Dégradé de texte
+  textGradientDescription: Appliquer un dégradé au texte
   animatedGradient: Dégradé animé
+  animatedGradientDescription: Animer le dégradé
+  gradientColor: Couleur du dégradé
   gradientFrom: Dégradé de
   gradientTo: Dégradé à
 title: X Minecraft Launcher

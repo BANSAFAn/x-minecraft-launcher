@@ -1192,11 +1192,16 @@ setting:
   themeShareDescription: Puedes compartir el tema con tu amigo.
   sidebarPosition:
     name: Posición de la barra lateral
+    description: Elegir entre izquierda o derecha
     left: Izquierda
     right: Derecha
   textColor: Color de texto
+  textColorDescription: Cambiar el color del texto del lanzador
   textGradient: Gradiente de texto
+  textGradientDescription: Aplicar un gradiente al texto
   animatedGradient: Gradiente animado
+  animatedGradientDescription: Animar el gradiente
+  gradientColor: Color del gradiente
   gradientFrom: Gradiente desde
   gradientTo: Gradiente hasta
   update: Actualizar

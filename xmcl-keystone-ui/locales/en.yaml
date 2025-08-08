@@ -1402,6 +1402,11 @@ setting:
     focus: Focus Layout
   layoutDescription: The layout of the launcher UI
   layoutTitle: Layout
+  sidebarPosition:
+    description: Choose between left or right.
+    left: Left
+    right: Right
+    name: Sidebar Position
   linuxEnableDedicatedGPUOptimization: Assignment of a dedicated graphics processor
   linuxEnableDedicatedGPUOptimizationDescription: This option assigns a dedicated GPU to the Minecraft process.
   linuxTitlebar: Native title bar
@@ -1451,6 +1456,13 @@ setting:
   themeSelectFont: Select Font
   themeShare: Share Theme
   themeShareDescription: You can share the theme with your friend.
+  textColor: Text Color
+  textColorDescription: Change the text color in the launcher.
+  textGradient: Text Gradient
+  textGradientDescription: Enable text gradient in the launcher.
+  animatedGradient: Animated Gradient
+  animatedGradientDescription: Animate the text gradient.
+  gradientColor: Gradient Color
   update: Update
   useBmclAPI: Use BMCL API
   useBmclAPIDescription: >-
