@@ -74,8 +74,7 @@ export interface UIThemeDataV1 {
   textColor?: string
   textGradient?: boolean
   animatedGradient?: boolean
-  gradientFrom?: string
-  gradientTo?: string
+  gradientColors?: string[]  // Replace gradientFrom and gradientTo
 }
 
 export function getDefaultTheme(): UIThemeDataV1 {
@@ -621,18 +620,10 @@ export function useTheme(framework: Framework, { addMedia, removeMedia, exportTh
   },
   })
   
-  const gradientFrom = computed({
-  get: () => currentTheme.value.gradientFrom ?? '#ff0000',
-  set: (v: string) => {
-    currentTheme.value.gradientFrom = v
-    writeTheme(currentTheme.value.name, currentTheme.value)
-  },
-  })
-  
-  const gradientTo = computed({
-  get: () => currentTheme.value.gradientTo ?? '#0000ff',
-  set: (v: string) => {
-    currentTheme.value.gradientTo = v
+  const gradientColors = computed({
+  get: () => currentTheme.value.gradientColors ?? ['#ff0000', '#0000ff'],
+  set: (v: string[]) => {
+    currentTheme.value.gradientColors = v
     writeTheme(currentTheme.value.name, currentTheme.value)
   },
   })
@@ -675,7 +666,7 @@ export function useTheme(framework: Framework, { addMedia, removeMedia, exportTh
       css += `
       .v-application .v-application--wrap {
         color: transparent !important;
-        background: linear-gradient(to right, ${gradientFrom.value || '#ff0000'}, ${gradientTo.value || '#0000ff'});
+        background: linear-gradient(to right, ${gradientColors.value.join(', ')});
         -webkit-background-clip: text;
         background-clip: text;
       }

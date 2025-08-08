@@ -1506,11 +1506,15 @@ setting:
   sidebarPosition:
     left: Слева
     right: Справа
+    name: Положение боковой панели
+    description: Выберите между левой и правой позицией.
   textColor: Цвет текста
+  textColorDescription: Измените цвет текста в лаунчере.
   textGradient: Градиент текста
+  textGradientDescription: Включить градиент для текста в лаунчере.
   animatedGradient: Анимированный градиент
-  gradientFrom: Цвет начала градиента
-  gradientTo: Цвет конца градиента
+  animatedGradientDescription: Анимировать градиент текста.
+  gradientColor: Цвет градиента
   themeExport: Экспортировать тему
   themeFont: Шрифт
   themeFontDescription: Изменить шрифт лаунчера.

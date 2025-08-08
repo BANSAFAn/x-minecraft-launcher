@@ -10,8 +10,8 @@
     <!-- Добавляем настройку позиции панели -->
     <SettingItemSelect
       :select.sync="sidebarPosition"
-      :title="t('setting.sidebarPosition')"
-      :description="t('setting.sidebarPositionDescription')"
+      :title="t('setting.sidebarPosition.name')"
+      :description="t('setting.sidebarPosition.description')"
       :items="sidebarPositions"
     />
     <SettingItemCheckbox
@@ -361,41 +361,65 @@
     <v-list-item-title>{{ t('setting.textColor') }}</v-list-item-title>
     <v-list-item-subtitle>{{ t('setting.textColorDescription') }}</v-list-item-subtitle>
   </v-list-item-content>
+  <!-- Add text color to Theme color and blur section, after cardColor for example -->
   <v-list-item-action class="ml-[16px]">
     <SettingAppearanceColor
       v-model="textColor"
-      :text="t('setting.colorTheme.textColor')"
+      :text="t('setting.textColor')"
     />
   </v-list-item-action>
+
 </v-list-item>
 <SettingItemCheckbox
   v-model="textGradient"
   :title="t('setting.textGradient')"
   :description="t('setting.textGradientDescription')"
 />
-<v-list-item v-if="textGradient">
-  <v-list-item-content>
-    <v-list-item-title>{{ t('setting.gradientColors') }}</v-list-item-title>
-  </v-list-item-content>
-  <v-list-item-action class="ml-[16px]">
+<template v-if="textGradient">
+  <v-btn icon @click="addGradientColor" :disabled="gradientColors.length >= 3">
+    <v-icon>mdi-plus</v-icon>
+  </v-btn>
+  <v-btn icon @click="removeGradientColor" :disabled="gradientColors.length <= 2">
+    <v-icon>mdi-minus</v-icon>
+  </v-btn>
+  <div v-for="(color, index) in gradientColors" :key="index">
     <SettingAppearanceColor
-      v-model="gradientFrom"
-      :text="t('setting.colorTheme.gradientFrom')"
+      v-model="gradientColors[index]"
+      :text="t('setting.gradientColor') + ' ' + (index + 1)"
     />
-  </v-list-item-action>
-  <v-list-item-action class="ml-[16px]">
-    <SettingAppearanceColor
-      v-model="gradientTo"
-      :text="t('setting.colorTheme.gradientTo')"
-    />
-  </v-list-item-action>
-</v-list-item>
+  </div>
+  <SettingItemCheckbox
+    v-model="animatedGradient"
+    :title="t('setting.animatedGradient')"
+    :description="t('setting.animatedGradientDescription')"
+  />
+</template>
+
+<!-- Update gradient section -->
 <SettingItemCheckbox
   v-if="textGradient"
   v-model="animatedGradient"
   :title="t('setting.animatedGradient')"
   :description="t('setting.animatedGradientDescription')"
 />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Add text color to Theme color and blur section, after cardColor for example -->
+
+
 <v-list-item>
       <v-list-item-content>
         <v-list-item-title>{{ t('setting.themeFont') }}</v-list-item-title>
@@ -414,75 +438,21 @@
           >
             1px
           </v-btn>
-
-        {{ t("setting.themeResetFont") }}
-      </v-btn>
+        </v-btn-toggle>
+        <v-btn
+          outlined
+          text
+          style="margin-right: 10px"
+          @click="onRevertFont"
+        >
+          {{ t("setting.themeResetFont") }}
+        </v-btn>
+      </div>
     </v-list-item>
-    <v-list-item>
-      <v-list-item-content>
-        <v-list-item-title>{{ t('setting.themeShare') }}</v-list-item-title>
-        <v-list-item-subtitle>{{ t('setting.themeShareDescription') }}</v-list-item-subtitle>
-      </v-list-item-content>
-      <v-btn
-        outlined
-        text
-        style="margin-right: 10px"
-        @click="onExportTheme"
-      >
-        {{ t("setting.themeExport") }}
-      </v-btn>
-      <v-btn
-        outlined
-        text
-        style="margin-right: 10px"
-        @click="onImportTheme"
-      >
-        {{ t("setting.themeImport") }}
-      </v-btn>
-    </v-list-item>
-  </div>
-</template>
-<script lang="ts" setup>
-import SettingHeader from '@/components/SettingHeader.vue'
-import SettingItemCheckbox from '@/components/SettingItemCheckbox.vue'
-import SettingItemSelect from '@/components/SettingItemSelect.vue'
-import { kEnvironment } from '@/composables/environment'
-import { useService } from '@/composables/service'
-import { kSettingsState } from '@/composables/setting'
-import { BackgroundType, kTheme } from '@/composables/theme'
-import { kUILayout, kSidebarPosition } from '@/composables/uiLayout'
-import { basename } from '@/util/basename'
-import { injection } from '@/util/inject'
-import { ThemeServiceKey } from '@xmcl/runtime-api'
-import SettingAppearanceColor from './SettingAppearanceColor.vue'
+    
 
-const { showOpenDialog, showSaveDialog } = windowController
-const { t } = useI18n()
-const { blurSidebar, blurAppBar, isDark, fontSize, blurCard, backgroundColorOverlay, backgroundImage, setBackgroundImage, blur, particleMode, backgroundType, backgroundImageFit, volume, clearBackgroundImage, exportTheme, importTheme } = injection(kTheme)
-const { sideBarColor, appBarColor, primaryColor, warningColor, errorColor, cardColor, backgroundColor, resetToDefault, currentTheme, font, setFont, resetFont, backgroundMusic, removeMusic, textColor, textGradient, animatedGradient, gradientFrom, gradientTo } = injection(kTheme)
-const { state } = injection(kSettingsState)
-const env = injection(kEnvironment)
-const { sidebarPosition } = injection(kSidebarPosition)
 
-const linuxTitlebar = computed({
-  get: () => state.value?.linuxTitlebar ?? false,
-  set: v => state.value?.linuxTitlebarSet(v),
-})
 
-const darkModel = computed({
-  get: () => isDark.value ? 'dark' : 'light',
-  set: v => {
-    if (v === 'dark') {
-      isDark.value = true
-    } else if (v === 'light') {
-      isDark.value = false
-    } else {
-      isDark.value = window.matchMedia('(prefers-color-scheme: dark)').matches
-    }
-  },
-})
-
-const layout = injection(kUILayout)
 
 const themes = computed(() => [{
   text: t('setting.theme.dark'),
@@ -501,15 +471,6 @@ const layouts = computed(() => [{
 }, {
   text: t('setting.layout.focus'),
   value: 'focus',
-}])
-
-// Добавляем опции для позиции панели
-const sidebarPositions = computed(() => [{
-  text: t('setting.sidebarPosition.left'),
-  value: 'left',
-}, {
-  text: t('setting.sidebarPosition.right'),
-  value: 'right',
 }])
 
 const particleModes = computed(() => Object.entries({
@@ -647,6 +608,57 @@ function onRevertFont() {
 }
 </script>
 
+
+
+<v-list-item>
+      <v-list-item-content>
+        <v-list-item-title>{{ t('setting.themeFont') }}</v-list-item-title>
+        <v-list-item-subtitle>{{ t('setting.themeFontDescription') }}</v-list-item-subtitle>
+      </v-list-item-content>
+      <div class="flex flex-grow-0 gap-1 mr-2">
+        <v-btn-toggle
+          v-model="fontDelta"
+          mandatory
+          solo
+          dense
+        >
+          <v-btn
+            solo
+            class="h-unset!"
+          >
+            1px
+          </v-btn>
+
+        {{ t("setting.themeResetFont") }}
+      </v-btn>
+    </v-list-item>
+    <v-list-item>
+      <v-list-item-content>
+        <v-list-item-title>{{ t('setting.themeShare') }}</v-list-item-title>
+        <v-list-item-subtitle>{{ t('setting.themeShareDescription') }}</v-list-item-subtitle>
+      </v-list-item-content>
+      <v-btn
+        outlined
+        text
+        style="margin-right: 10px"
+        @click="onExportTheme"
+      >
+        {{ t("setting.themeExport") }}
+      </v-btn>
+      <v-btn
+        outlined
+        text
+        style="margin-right: 10px"
+        @click="onImportTheme"
+      >
+        {{ t("setting.themeImport") }}
+      </v-btn>
+    </v-list-item>
+  </div>
+</template>
+<script lang="ts" setup>
+import SettingHeader from '@/components/SettingHeader.vue'
+import SettingItemCheckbox from '@/components/SettingItemCheckbox.vue'
 import SettingItemSelect from '@/components/SettingItemSelect.vue'
 import { kEnvironment } from '@/composables/environment'
 import { useService } from '@/composables/service'
@@ -838,3 +850,775 @@ function onRevertFont() {
   resetFont()
 }
 </script>
+
+<!-- Add text color to Theme color and blur section, after cardColor for example -->
+<v-list-item-action class="ml-[16px]">
+  <SettingAppearanceColor
+    v-model="textColor"
+    :text="t('setting.textColor')"
+  />
+</v-list-item-action>
+
+<v-list-item>
+      <v-list-item-content>
+        <v-list-item-title>{{ t('setting.themeFont') }}</v-list-item-title>
+        <v-list-item-subtitle>{{ t('setting.themeFontDescription') }}</v-list-item-subtitle>
+      </v-list-item-content>
+      <div class="flex flex-grow-0 gap-1 mr-2">
+        <v-btn-toggle
+          v-model="fontDelta"
+          mandatory
+          solo
+          dense
+        >
+          <v-btn
+            solo
+            class="h-unset!"
+          >
+            1px
+          </v-btn>
+
+        {{ t("setting.themeResetFont") }}
+      </v-btn>
+    </v-list-item>
+    <v-list-item>
+      <v-list-item-content>
+        <v-list-item-title>{{ t('setting.themeShare') }}</v-list-item-title>
+        <v-list-item-subtitle>{{ t('setting.themeShareDescription') }}</v-list-item-subtitle>
+      </v-list-item-content>
+      <v-btn
+        outlined
+        text
+        style="margin-right: 10px"
+        @click="onExportTheme"
+      >
+        {{ t("setting.themeExport") }}
+      </v-btn>
+      <v-btn
+        outlined
+        text
+        style="margin-right: 10px"
+        @click="onImportTheme"
+      >
+        {{ t("setting.themeImport") }}
+      </v-btn>
+    </v-list-item>
+  </div>
+</template>
+<script lang="ts" setup>
+import SettingHeader from '@/components/SettingHeader.vue'
+import SettingItemCheckbox from '@/components/SettingItemCheckbox.vue'
+import SettingItemSelect from '@/components/SettingItemSelect.vue'
+import { kEnvironment } from '@/composables/environment'
+import { useService } from '@/composables/service'
+import { kSettingsState } from '@/composables/setting'
+import { BackgroundType, kTheme } from '@/composables/theme'
+import { kUILayout, kSidebarPosition } from '@/composables/uiLayout'
+import { basename } from '@/util/basename'
+import { injection } from '@/util/inject'
+import { ThemeServiceKey } from '@xmcl/runtime-api'
+import SettingAppearanceColor from './SettingAppearanceColor.vue'
+
+const { showOpenDialog, showSaveDialog } = windowController
+const { t } = useI18n()
+const { blurSidebar, blurAppBar, isDark, fontSize, blurCard, backgroundColorOverlay, backgroundImage, setBackgroundImage, blur, particleMode, backgroundType, backgroundImageFit, volume, clearBackgroundImage, exportTheme, importTheme } = injection(kTheme)
+const { sideBarColor, appBarColor, primaryColor, warningColor, errorColor, cardColor, backgroundColor, resetToDefault, currentTheme, font, setFont, resetFont, backgroundMusic, removeMusic } = injection(kTheme)
+const { state } = injection(kSettingsState)
+const env = injection(kEnvironment)
+
+const linuxTitlebar = computed({
+  get: () => state.value?.linuxTitlebar ?? false,
+  set: v => state.value?.linuxTitlebarSet(v),
+})
+
+const darkModel = computed({
+  get: () => isDark.value ? 'dark' : 'light',
+  set: v => {
+    if (v === 'dark') {
+      isDark.value = true
+    } else if (v === 'light') {
+      isDark.value = false
+    } else {
+      isDark.value = window.matchMedia('(prefers-color-scheme: dark)').matches
+    }
+  },
+})
+
+const layout = injection(kUILayout)
+
+const themes = computed(() => [{
+  text: t('setting.theme.dark'),
+  value: 'dark',
+}, {
+  text: t('setting.theme.light'),
+  value: 'light',
+}, {
+  text: t('setting.theme.system'),
+  value: 'system',
+}])
+
+const layouts = computed(() => [{
+  text: t('setting.layout.default'),
+  value: 'default',
+}, {
+  text: t('setting.layout.focus'),
+  value: 'focus',
+}])
+
+const particleModes = computed(() => Object.entries({
+  push: t('setting.particleMode.push'),
+  remove: t('setting.particleMode.remove'),
+  repulse: t('setting.particleMode.repulse'),
+  bubble: t('setting.particleMode.bubble'),
+}).map(([v, text]) => ({ value: v, text })))
+const backgroundImageFits = computed(() => [
+  { value: 'cover', text: t('setting.backgroundImageFit.cover') },
+  { value: 'contain', text: t('setting.backgroundImageFit.contain') },
+])
+const backgroundTypes = computed(() => [
+  { value: BackgroundType.NONE, text: t('setting.backgroundTypes.none') },
+  { value: BackgroundType.IMAGE, text: t('setting.backgroundTypes.image') },
+  { value: BackgroundType.PARTICLE, text: t('setting.backgroundTypes.particle') },
+  { value: BackgroundType.HALO, text: t('setting.backgroundTypes.halo') },
+  { value: BackgroundType.VIDEO, text: t('setting.backgroundTypes.video') },
+])
+function selectImage() {
+  showOpenDialog({
+    title: t('theme.selectImage'),
+    properties: ['openFile'],
+    filters: [{
+      name: 'image',
+      extensions: ['png', 'jpg', 'gif', 'webp'],
+    }],
+  }).then((v) => {
+    const imagePath = v.filePaths[0]
+    if (imagePath) {
+      setBackgroundImage(imagePath)
+    }
+  })
+}
+function selectVideo() {
+  showOpenDialog({
+    title: t('theme.selectVideo'),
+    properties: ['openFile'],
+    filters: [{
+      name: 'video',
+      extensions: ['mp4', 'webm'],
+    }],
+  }).then((v) => {
+    if (v.filePaths[0]) {
+      setBackgroundImage(v.filePaths[0])
+    }
+  })
+}
+
+const { addMusic } = injection(kTheme)
+function selectMusic() {
+  showOpenDialog({
+    title: t('theme.selectMusic'),
+    properties: ['openFile'],
+    filters: [{
+      name: 'audio',
+      extensions: ['mp3', 'ogg', 'wav'],
+    }],
+  }).then(async (v) => {
+    if (v.filePaths[0]) {
+      await addMusic(v.filePaths[0])
+    }
+  })
+}
+
+const { showMediaItemInFolder } = useService(ThemeServiceKey)
+function viewMusic(m: string) {
+  showMediaItemInFolder(m)
+}
+
+function clearVideo() {
+  clearBackgroundImage()
+}
+function clearImage() {
+  clearBackgroundImage()
+}
+
+function onExportTheme() {
+  showSaveDialog({
+    title: t('setting.themeExport'),
+    defaultPath: currentTheme.value.name,
+    filters: [{
+      name: 'xtheme',
+      extensions: ['xtheme'],
+    }],
+  }).then((v) => {
+    if (v.filePath) {
+      exportTheme(v.filePath)
+    }
+  })
+}
+
+function onImportTheme() {
+  showOpenDialog({
+    title: t('setting.themeImport'),
+    properties: ['openFile'],
+    filters: [{
+      name: 'xtheme',
+      extensions: ['xtheme'],
+    }],
+  }).then((v) => {
+    if (v.filePaths[0]) {
+      importTheme(v.filePaths[0])
+    }
+  })
+}
+
+const fontDelta = ref(0)
+function onFontSizeIncrease() {
+  const delta = fontDelta.value ? 0.1 : 1
+  fontSize.value += delta
+}
+function onFontSizeDecrease() {
+  const delta = fontDelta.value ? 0.1 : 1
+  fontSize.value -= delta
+}
+
+function onSelectFont() {
+  showOpenDialog({
+    title: t('setting.themeSelectFont'),
+    properties: ['openFile'],
+    filters: [{
+      name: 'font',
+      extensions: ['ttf', 'otf', 'woff', 'woff2'],
+    }],
+  }).then((v) => {
+    if (v.filePaths[0]) {
+      setFont(v.filePaths[0])
+    }
+  })
+}
+
+function onRevertFont() {
+  resetFont()
+}
+</script>
+
+<!-- Add text color to Theme color and blur section, after cardColor for example -->
+<v-list-item-action class="ml-[16px]">
+  <SettingAppearanceColor
+    v-model="textColor"
+    :text="t('setting.textColor')"
+  />
+</v-list-item-action>
+
+<v-list-item>
+      <v-list-item-content>
+        <v-list-item-title>{{ t('setting.themeFont') }}</v-list-item-title>
+        <v-list-item-subtitle>{{ t('setting.themeFontDescription') }}</v-list-item-subtitle>
+      </v-list-item-content>
+      <div class="flex flex-grow-0 gap-1 mr-2">
+        <v-btn-toggle
+          v-model="fontDelta"
+          mandatory
+          solo
+          dense
+        >
+          <v-btn
+            solo
+            class="h-unset!"
+          >
+            1px
+          </v-btn>
+
+        {{ t("setting.themeResetFont") }}
+      </v-btn>
+    </v-list-item>
+    <v-list-item>
+      <v-list-item-content>
+        <v-list-item-title>{{ t('setting.themeShare') }}</v-list-item-title>
+        <v-list-item-subtitle>{{ t('setting.themeShareDescription') }}</v-list-item-subtitle>
+      </v-list-item-content>
+      <v-btn
+        outlined
+        text
+        style="margin-right: 10px"
+        @click="onExportTheme"
+      >
+        {{ t("setting.themeExport") }}
+      </v-btn>
+      <v-btn
+        outlined
+        text
+        style="margin-right: 10px"
+        @click="onImportTheme"
+      >
+        {{ t("setting.themeImport") }}
+      </v-btn>
+    </v-list-item>
+  </div>
+</template>
+<script lang="ts" setup>
+import SettingHeader from '@/components/SettingHeader.vue'
+import SettingItemCheckbox from '@/components/SettingItemCheckbox.vue'
+import SettingItemSelect from '@/components/SettingItemSelect.vue'
+import { kEnvironment } from '@/composables/environment'
+import { useService } from '@/composables/service'
+import { kSettingsState } from '@/composables/setting'
+import { BackgroundType, kTheme } from '@/composables/theme'
+import { kUILayout, kSidebarPosition } from '@/composables/uiLayout'
+import { basename } from '@/util/basename'
+import { injection } from '@/util/inject'
+import { ThemeServiceKey } from '@xmcl/runtime-api'
+import SettingAppearanceColor from './SettingAppearanceColor.vue'
+
+const { showOpenDialog, showSaveDialog } = windowController
+const { t } = useI18n()
+const { blurSidebar, blurAppBar, isDark, fontSize, blurCard, backgroundColorOverlay, backgroundImage, setBackgroundImage, blur, particleMode, backgroundType, backgroundImageFit, volume, clearBackgroundImage, exportTheme, importTheme } = injection(kTheme)
+const { sideBarColor, appBarColor, primaryColor, warningColor, errorColor, cardColor, backgroundColor, resetToDefault, currentTheme, font, setFont, resetFont, backgroundMusic, removeMusic } = injection(kTheme)
+const { state } = injection(kSettingsState)
+const env = injection(kEnvironment)
+
+const linuxTitlebar = computed({
+  get: () => state.value?.linuxTitlebar ?? false,
+  set: v => state.value?.linuxTitlebarSet(v),
+})
+
+const darkModel = computed({
+  get: () => isDark.value ? 'dark' : 'light',
+  set: v => {
+    if (v === 'dark') {
+      isDark.value = true
+    } else if (v === 'light') {
+      isDark.value = false
+    } else {
+      isDark.value = window.matchMedia('(prefers-color-scheme: dark)').matches
+    }
+  },
+})
+
+const layout = injection(kUILayout)
+
+const themes = computed(() => [{
+  text: t('setting.theme.dark'),
+  value: 'dark',
+}, {
+  text: t('setting.theme.light'),
+  value: 'light',
+}, {
+  text: t('setting.theme.system'),
+  value: 'system',
+}])
+
+const layouts = computed(() => [{
+  text: t('setting.layout.default'),
+  value: 'default',
+}, {
+  text: t('setting.layout.focus'),
+  value: 'focus',
+}])
+
+const particleModes = computed(() => Object.entries({
+  push: t('setting.particleMode.push'),
+  remove: t('setting.particleMode.remove'),
+  repulse: t('setting.particleMode.repulse'),
+  bubble: t('setting.particleMode.bubble'),
+}).map(([v, text]) => ({ value: v, text })))
+const backgroundImageFits = computed(() => [
+  { value: 'cover', text: t('setting.backgroundImageFit.cover') },
+  { value: 'contain', text: t('setting.backgroundImageFit.contain') },
+])
+const backgroundTypes = computed(() => [
+  { value: BackgroundType.NONE, text: t('setting.backgroundTypes.none') },
+  { value: BackgroundType.IMAGE, text: t('setting.backgroundTypes.image') },
+  { value: BackgroundType.PARTICLE, text: t('setting.backgroundTypes.particle') },
+  { value: BackgroundType.HALO, text: t('setting.backgroundTypes.halo') },
+  { value: BackgroundType.VIDEO, text: t('setting.backgroundTypes.video') },
+])
+function selectImage() {
+  showOpenDialog({
+    title: t('theme.selectImage'),
+    properties: ['openFile'],
+    filters: [{
+      name: 'image',
+      extensions: ['png', 'jpg', 'gif', 'webp'],
+    }],
+  }).then((v) => {
+    const imagePath = v.filePaths[0]
+    if (imagePath) {
+      setBackgroundImage(imagePath)
+    }
+  })
+}
+function selectVideo() {
+  showOpenDialog({
+    title: t('theme.selectVideo'),
+    properties: ['openFile'],
+    filters: [{
+      name: 'video',
+      extensions: ['mp4', 'webm'],
+    }],
+  }).then((v) => {
+    if (v.filePaths[0]) {
+      setBackgroundImage(v.filePaths[0])
+    }
+  })
+}
+
+const { addMusic } = injection(kTheme)
+function selectMusic() {
+  showOpenDialog({
+    title: t('theme.selectMusic'),
+    properties: ['openFile'],
+    filters: [{
+      name: 'audio',
+      extensions: ['mp3', 'ogg', 'wav'],
+    }],
+  }).then(async (v) => {
+    if (v.filePaths[0]) {
+      await addMusic(v.filePaths[0])
+    }
+  })
+}
+
+const { showMediaItemInFolder } = useService(ThemeServiceKey)
+function viewMusic(m: string) {
+  showMediaItemInFolder(m)
+}
+
+function clearVideo() {
+  clearBackgroundImage()
+}
+function clearImage() {
+  clearBackgroundImage()
+}
+
+function onExportTheme() {
+  showSaveDialog({
+    title: t('setting.themeExport'),
+    defaultPath: currentTheme.value.name,
+    filters: [{
+      name: 'xtheme',
+      extensions: ['xtheme'],
+    }],
+  }).then((v) => {
+    if (v.filePath) {
+      exportTheme(v.filePath)
+    }
+  })
+}
+
+function onImportTheme() {
+  showOpenDialog({
+    title: t('setting.themeImport'),
+    properties: ['openFile'],
+    filters: [{
+      name: 'xtheme',
+      extensions: ['xtheme'],
+    }],
+  }).then((v) => {
+    if (v.filePaths[0]) {
+      importTheme(v.filePaths[0])
+    }
+  })
+}
+
+const fontDelta = ref(0)
+function onFontSizeIncrease() {
+  const delta = fontDelta.value ? 0.1 : 1
+  fontSize.value += delta
+}
+function onFontSizeDecrease() {
+  const delta = fontDelta.value ? 0.1 : 1
+  fontSize.value -= delta
+}
+
+function onSelectFont() {
+  showOpenDialog({
+    title: t('setting.themeSelectFont'),
+    properties: ['openFile'],
+    filters: [{
+      name: 'font',
+      extensions: ['ttf', 'otf', 'woff', 'woff2'],
+    }],
+  }).then((v) => {
+    if (v.filePaths[0]) {
+      setFont(v.filePaths[0])
+    }
+  })
+}
+
+function onRevertFont() {
+  resetFont()
+}
+</script>
+
+<!-- Add text color to Theme color and blur section, after cardColor for example -->
+<v-list-item-action class="ml-[16px]">
+  <SettingAppearanceColor
+    v-model="textColor"
+    :text="t('setting.textColor')"
+  />
+</v-list-item-action>
+
+<v-list-item>
+      <v-list-item-content>
+        <v-list-item-title>{{ t('setting.themeFont') }}</v-list-item-title>
+        <v-list-item-subtitle>{{ t('setting.themeFontDescription') }}</v-list-item-subtitle>
+      </v-list-item-content>
+      <div class="flex flex-grow-0 gap-1 mr-2">
+        <v-btn-toggle
+          v-model="fontDelta"
+          mandatory
+          solo
+          dense
+        >
+          <v-btn
+            solo
+            class="h-unset!"
+          >
+            1px
+          </v-btn>
+
+        {{ t("setting.themeResetFont") }}
+      </v-btn>
+    </v-list-item>
+    <v-list-item>
+      <v-list-item-content>
+        <v-list-item-title>{{ t('setting.themeShare') }}</v-list-item-title>
+        <v-list-item-subtitle>{{ t('setting.themeShareDescription') }}</v-list-item-subtitle>
+      </v-list-item-content>
+      <v-btn
+        outlined
+        text
+        style="margin-right: 10px"
+        @click="onExportTheme"
+      >
+        {{ t("setting.themeExport") }}
+      </v-btn>
+      <v-btn
+        outlined
+        text
+        style="margin-right: 10px"
+        @click="onImportTheme"
+      >
+        {{ t("setting.themeImport") }}
+      </v-btn>
+    </v-list-item>
+  </div>
+</template>
+<script lang="ts" setup>
+import SettingHeader from '@/components/SettingHeader.vue'
+import SettingItemCheckbox from '@/components/SettingItemCheckbox.vue'
+import SettingItemSelect from '@/components/SettingItemSelect.vue'
+import { kEnvironment } from '@/composables/environment'
+import { useService } from '@/composables/service'
+import { kSettingsState } from '@/composables/setting'
+import { BackgroundType, kTheme } from '@/composables/theme'
+import { kUILayout, kSidebarPosition } from '@/composables/uiLayout'
+import { basename } from '@/util/basename'
+import { injection } from '@/util/inject'
+import { ThemeServiceKey } from '@xmcl/runtime-api'
+import SettingAppearanceColor from './SettingAppearanceColor.vue'
+
+const { showOpenDialog, showSaveDialog } = windowController
+const { t } = useI18n()
+const { blurSidebar, blurAppBar, isDark, fontSize, blurCard, backgroundColorOverlay, backgroundImage, setBackgroundImage, blur, particleMode, backgroundType, backgroundImageFit, volume, clearBackgroundImage, exportTheme, importTheme } = injection(kTheme)
+const { sideBarColor, appBarColor, primaryColor, warningColor, errorColor, cardColor, backgroundColor, resetToDefault, currentTheme, font, setFont, resetFont, backgroundMusic, removeMusic } = injection(kTheme)
+const { state } = injection(kSettingsState)
+const env = injection(kEnvironment)
+
+const linuxTitlebar = computed({
+  get: () => state.value?.linuxTitlebar ?? false,
+  set: v => state.value?.linuxTitlebarSet(v),
+})
+
+const darkModel = computed({
+  get: () => isDark.value ? 'dark' : 'light',
+  set: v => {
+    if (v === 'dark') {
+      isDark.value = true
+    } else if (v === 'light') {
+      isDark.value = false
+    } else {
+      isDark.value = window.matchMedia('(prefers-color-scheme: dark)').matches
+    }
+  },
+})
+
+const layout = injection(kUILayout)
+
+const themes = computed(() => [{
+  text: t('setting.theme.dark'),
+  value: 'dark',
+}, {
+  text: t('setting.theme.light'),
+  value: 'light',
+}, {
+  text: t('setting.theme.system'),
+  value: 'system',
+}])
+
+const layouts = computed(() => [{
+  text: t('setting.layout.default'),
+  value: 'default',
+}, {
+  text: t('setting.layout.focus'),
+  value: 'focus',
+}])
+
+const particleModes = computed(() => Object.entries({
+  push: t('setting.particleMode.push'),
+  remove: t('setting.particleMode.remove'),
+  repulse: t('setting.particleMode.repulse'),
+  bubble: t('setting.particleMode.bubble'),
+}).map(([v, text]) => ({ value: v, text })))
+const backgroundImageFits = computed(() => [
+  { value: 'cover', text: t('setting.backgroundImageFit.cover') },
+  { value: 'contain', text: t('setting.backgroundImageFit.contain') },
+])
+const backgroundTypes = computed(() => [
+  { value: BackgroundType.NONE, text: t('setting.backgroundTypes.none') },
+  { value: BackgroundType.IMAGE, text: t('setting.backgroundTypes.image') },
+  { value: BackgroundType.PARTICLE, text: t('setting.backgroundTypes.particle') },
+  { value: BackgroundType.HALO, text: t('setting.backgroundTypes.halo') },
+  { value: BackgroundType.VIDEO, text: t('setting.backgroundTypes.video') },
+])
+function selectImage() {
+  showOpenDialog({
+    title: t('theme.selectImage'),
+    properties: ['openFile'],
+    filters: [{
+      name: 'image',
+      extensions: ['png', 'jpg', 'gif', 'webp'],
+    }],
+  }).then((v) => {
+    const imagePath = v.filePaths[0]
+    if (imagePath) {
+      setBackgroundImage(imagePath)
+    }
+  })
+}
+function selectVideo() {
+  showOpenDialog({
+    title: t('theme.selectVideo'),
+    properties: ['openFile'],
+    filters: [{
+      name: 'video',
+      extensions: ['mp4', 'webm'],
+    }],
+  }).then((v) => {
+    if (v.filePaths[0]) {
+      setBackgroundImage(v.filePaths[0])
+    }
+  })
+}
+
+const { addMusic } = injection(kTheme)
+function selectMusic() {
+  showOpenDialog({
+    title: t('theme.selectMusic'),
+    properties: ['openFile'],
+    filters: [{
+      name: 'audio',
+      extensions: ['mp3', 'ogg', 'wav'],
+    }],
+  }).then(async (v) => {
+    if (v.filePaths[0]) {
+      await addMusic(v.filePaths[0])
+    }
+  })
+}
+
+const { showMediaItemInFolder } = useService(ThemeServiceKey)
+function viewMusic(m: string) {
+  showMediaItemInFolder(m)
+}
+
+function clearVideo() {
+  clearBackgroundImage()
+}
+function clearImage() {
+  clearBackgroundImage()
+}
+
+function onExportTheme() {
+  showSaveDialog({
+    title: t('setting.themeExport'),
+    defaultPath: currentTheme.value.name,
+    filters: [{
+      name: 'xtheme',
+      extensions: ['xtheme'],
+    }],
+  }).then((v) => {
+    if (v.filePath) {
+      exportTheme(v.filePath)
+    }
+  })
+}
+
+function onImportTheme() {
+  showOpenDialog({
+    title: t('setting.themeImport'),
+    properties: ['openFile'],
+    filters: [{
+      name: 'xtheme',
+      extensions: ['xtheme'],
+    }],
+  }).then((v) => {
+    if (v.filePaths[0]) {
+      importTheme(v.filePaths[0])
+    }
+  })
+}
+
+const fontDelta = ref(0)
+function onFontSizeIncrease() {
+  const delta = fontDelta.value ? 0.1 : 1
+  fontSize.value += delta
+}
+function onFontSizeDecrease() {
+  const delta = fontDelta.value ? 0.1 : 1
+  fontSize.value -= delta
+}
+
+function onSelectFont() {
+  showOpenDialog({
+    title: t('setting.themeSelectFont'),
+    properties: ['openFile'],
+    filters: [{
+      name: 'font',
+      extensions: ['ttf', 'otf', 'woff', 'woff2'],
+    }],
+  }).then((v) => {
+    if (v.filePaths[0]) {
+      setFont(v.filePaths[0])
+    }
+  })
+}
+
+function onRevertFont() {
+  resetFont()
+}
+</script>
+
+<!-- Add text color to Theme color and blur section, after cardColor for example -->
+<v-list-item-action class="ml-[16px]">
+  <SettingAppearanceColor
+    v-model="textColor"
+    :text="t('setting.textColor')"
+  />
+</v-list-item-action>
+
+<v-list-item>
+      <v-list-item-content>
+        <v-list-item-title>{{ t('setting.themeFont') }}</v-list-item-title>
+        <v-list-item-subtitle>{{ t('setting.themeFontDescription') }}</v-list-item-subtitle>
+      </v-list-item-content>
+      <div class="flex flex-grow-0 gap-1 mr-2">
+        <v-btn-toggle
+          v-model="fontDelta"
+          mandatory
+          solo
+          dense
+        >
+          <v-btn
+            solo
+            class="h-unset!"
+          >
