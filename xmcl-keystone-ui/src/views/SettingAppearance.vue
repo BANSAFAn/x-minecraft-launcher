@@ -361,14 +361,12 @@
     <v-list-item-title>{{ t('setting.textColor') }}</v-list-item-title>
     <v-list-item-subtitle>{{ t('setting.textColorDescription') }}</v-list-item-subtitle>
   </v-list-item-content>
-  <!-- Add text color to Theme color and blur section, after cardColor for example -->
   <v-list-item-action class="ml-[16px]">
     <SettingAppearanceColor
       v-model="textColor"
       :text="t('setting.textColor')"
     />
   </v-list-item-action>
-
 </v-list-item>
 <SettingItemCheckbox
   v-model="textGradient"
@@ -395,13 +393,6 @@
   />
 </template>
 
-<!-- Update gradient section -->
-<SettingItemCheckbox
-  v-if="textGradient"
-  v-model="animatedGradient"
-  :title="t('setting.animatedGradient')"
-  :description="t('setting.animatedGradientDescription')"
-/>
 
 
 
@@ -417,7 +408,8 @@
 
 
 
-<!-- Add text color to Theme color and blur section, after cardColor for example -->
+
+
 
 
 <v-list-item>
@@ -628,9 +620,16 @@ function onRevertFont() {
           >
             1px
           </v-btn>
-
-        {{ t("setting.themeResetFont") }}
-      </v-btn>
+        </v-btn-toggle>
+        <v-btn
+          outlined
+          text
+          style="margin-right: 10px"
+          @click="onRevertFont"
+        >
+          {{ t("setting.themeResetFont") }}
+        </v-btn>
+      </div>
     </v-list-item>
     <v-list-item>
       <v-list-item-content>
