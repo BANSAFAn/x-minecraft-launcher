@@ -1638,11 +1638,16 @@ theme:
   title: X Minecraft Launcher
   sidebarPosition:
     name: Позиція бічної панелі
+    description: Виберіть між лівою або правою позицією бічної панелі
     left: Ліворуч
     right: Праворуч
   textColor: Колір тексту
+  textColorDescription: Змініть колір тексту в лаунчері
   textGradient: Градієнт тексту
+  textGradientDescription: Застосувати градієнт до тексту
   animatedGradient: Анімований градієнт
+  animatedGradientDescription: Анімувати градієнт тексту
+  gradientColor: Колір градієнта
   gradientFrom: Градієнт від
   gradientTo: Градієнт до
 title: X Minecraft Launcher

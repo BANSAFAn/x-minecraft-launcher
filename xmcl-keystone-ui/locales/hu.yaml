@@ -1619,14 +1619,19 @@ theme:
   selectVideo: Válassza a Videó lehetőséget
   title: X Minecraft Launcher
   sidebarPosition:
-    name: Oldalsáv pozíció
-    left: Bal
-    right: Jobb
+      description: Válassza ki az oldalsáv pozícióját balra vagy jobbra.
+      left: Bal
+      right: Jobb
+      name: Oldalsáv pozíció
   textColor: Szöveg szín
+    textColorDescription: Módosítsa a szöveg színét az indítóban.
   textGradient: Szöveg gradiens
+    textGradientDescription: Gradiens alkalmazása a szövegre.
   animatedGradient: Animált gradiens
+    animatedGradientDescription: A gradiens animálása.
   gradientFrom: Gradiens kezdete
   gradientTo: Gradiens vége
+    gradientColor: Gradiens szín
 title: X Minecraft Launcher
 transportType:
   host: Kiszolgáló jelölt

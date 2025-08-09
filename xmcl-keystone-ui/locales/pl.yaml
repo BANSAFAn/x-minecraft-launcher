@@ -1612,13 +1612,18 @@ theme:
   title: X Minecraft Launcher
   sidebarPosition:
     name: Pozycja paska bocznego
+    description: Wybierz pomiędzy lewą lub prawą pozycją paska bocznego.
     left: Lewo
     right: Prawo
   textColor: Kolor tekstu
+  textColorDescription: Zmień kolor tekstu w launcherze.
   textGradient: Gradient tekstu
+  textGradientDescription: Dodaj efekt gradientu do tekstu.
   animatedGradient: Animowany gradient
+  animatedGradientDescription: Animuj gradient.
   gradientFrom: Gradient od
   gradientTo: Gradient do
+  gradientColor: Kolor gradientu
 title: X Minecraft Launcher
 transportType:
   host: Kandydat na gospodarza

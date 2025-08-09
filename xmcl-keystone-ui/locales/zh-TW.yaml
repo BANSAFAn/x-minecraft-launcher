@@ -1502,6 +1502,20 @@ theme:
   selectMusic: 選擇音樂
   selectVideo: 選擇影片
   title: X Minecraft Launcher
+  sidebarPosition:
+    name: 側邊欄位置
+    description: 側邊欄的位置。
+    left: 左
+    right: 右
+  textColor: 文字顏色
+  textColorDescription: 使用者介面中文字的顏色。
+  textGradient: 文字漸層
+  textGradientDescription: 為文字套用漸層效果。
+  animatedGradient: 動畫漸層
+  animatedGradientDescription: 使漸層效果動畫化。
+  gradientColor: 漸層顏色
+  gradientFrom: 漸層起始
+  gradientTo: 漸層結束
 title: X Minecraft Launcher
 transportType:
   host: 公網位址

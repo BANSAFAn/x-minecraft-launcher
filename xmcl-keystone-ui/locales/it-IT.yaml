@@ -1620,14 +1620,19 @@ theme:
   selectVideo: Scegli Video
   title: X Minecraft Launcher
   sidebarPosition:
-    name: Posizione della barra laterale
+    description: Scegli la posizione della barra laterale a sinistra o a destra.
     left: Sinistra
     right: Destra
+    name: Posizione della barra laterale
   textColor: Colore del testo
+  textColorDescription: Cambia il colore del testo nel launcher.
   textGradient: Gradiente di testo
+  textGradientDescription: Applica il gradiente al testo.
   animatedGradient: Gradiente animato
+  animatedGradientDescription: Anima il gradiente.
   gradientFrom: Gradiente da
   gradientTo: Gradiente a
+  gradientColor: Colore del gradiente
 title: X Minecraft Launcher
 transportType:
   host: Host Scelto

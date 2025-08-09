@@ -1506,11 +1506,16 @@ theme:
   title: X Minecraft Launcher
   sidebarPosition:
     name: 侧边栏位置
+    description: 侧边栏的位置。
     left: 左
     right: 右
   textColor: 文本颜色
+  textColorDescription: 用户界面中文本的颜色。
   textGradient: 文本渐变
+  textGradientDescription: 为文本应用渐变效果。
   animatedGradient: 动画渐变
+  animatedGradientDescription: 使渐变效果动画化。
+  gradientColor: 渐变颜色
   gradientFrom: 渐变起始
   gradientTo: 渐变结束
 title: X Minecraft Launcher

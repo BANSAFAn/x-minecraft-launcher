@@ -1492,6 +1492,20 @@ task:
   pause: PAUSE
   searchOnModrinth: '@:mod.searchOnModrinth'
 theme:
+  sidebarPosition:
+    name: SIDEBAR POSISHUN
+    description: CHOOZ BETWEN LEFT OR RIGHT
+    left: LEFT
+    right: RIGHT
+  textColor: TEXT COLOR
+  textColorDescription: CHANGE TEH TEXT COLOR IN LAUNCHR
+  textGradient: TEXT GRADIENT
+  textGradientDescription: ADD GRADIENT 2 TEXT
+  animatedGradient: ANIMATD GRADIENT
+  animatedGradientDescription: ANIMATE TEH GRADIENT
+  gradientFrom: GRADIENT FRUM
+  gradientTo: GRADIENT TO
+  gradientColor: GRADIENT COLOR
   selectImage: SELECT IMAGE
   selectMusic: SELECT MUSIC
   selectVideo: SELECT VIDEO

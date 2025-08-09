@@ -1468,14 +1468,19 @@ theme:
   selectVideo: 映像を選択
   title: X Minecraft Launcher
   sidebarPosition:
-    name: サイドバーの位置
+    description: サイドバーの位置を左または右に選択します。
     left: 左
     right: 右
+    name: サイドバーの位置
   textColor: テキストの色
+  textColorDescription: ランチャー内のテキストの色を変更します。
   textGradient: テキストのグラデーション
+  textGradientDescription: テキストにグラデーションを適用します。
   animatedGradient: アニメーション付きグラデーション
+  animatedGradientDescription: グラデーションをアニメーション化します。
   gradientFrom: グラデーションの開始
   gradientTo: グラデーションの終了
+  gradientColor: グラデーションの色
 title: X Minecraft Launcher
 transportType:
   host: ホスト候補
