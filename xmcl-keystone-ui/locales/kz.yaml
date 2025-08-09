@@ -484,12 +484,12 @@ theme:
     name: Бүйірлік панельдің орны
     description: Бүйірлік панельдің орнын таңдаңыз (сол немесе оң).
   textColor: Мәтін түсі
-    textColorDescription: Лаунчердегі мәтіннің түсін өзгертіңіз.
+  textColorDescription: Лаунчердегі мәтіннің түсін өзгертіңіз.
   textGradient: Мәтін градиенті
-    textGradientDescription: Мәтінге градиент әсерін қосу.
+  textGradientDescription: Мәтінге градиент әсерін қосу.
   animatedGradient: Анимациялық градиент
-    animatedGradientDescription: Градиентті анимациялау.
+  animatedGradientDescription: Градиентті анимациялау.
   gradientFrom: Градиенттен
   gradientTo: Градиентке
-    gradientColor: Градиент түсі
+  gradientColor: Градиент түсі
 title: X Minecraft Launcher
