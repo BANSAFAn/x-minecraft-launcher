@@ -1611,17 +1611,6 @@ setting:
   animatedGradient: Animierter Verlauf
   animatedGradientDescription: Animieren Sie den Textverlauf.
   gradientColor: Verlaufsfarbe
-  sidebarPosition:
-    name: Seitenleistenposition
-    description: Wählen Sie zwischen links oder rechts.
-    left: Links
-    right: Rechts
-  textColor: Textfarbe
-  textColorDescription: Ändern Sie die Textfarbe im Launcher.
-  textGradient: Textverlauf
-  textGradientDescription: Aktivieren Sie den Textverlauf im Launcher.
-  animatedGradient: Animierter Verlauf
-  animatedGradientDescription: Animieren Sie den Textverlauf.
   update: Update
   useBmclAPI: Verwenden Sie die BMCL-API
   useBmclAPIDescription: >-
