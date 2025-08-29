@@ -35,3 +35,20 @@ app.$mount('#app')
 window.addEventListener('message', (e) => {
   windowController.focus()
 })
+
+if (process.env.NODE_ENV === 'development') {
+  window.serviceChannels = {
+    open: (key) => ({
+      call: () => Promise.resolve(),
+      sync: () => Promise.resolve({ state: {} }),
+      on: () => {},
+    }),
+  };
+  window.taskMonitor = {
+    subscribe: () => Promise.resolve([]),
+    on: () => {},
+    pause: () => Promise.resolve(),
+    resume: () => Promise.resolve(),
+    cancel: () => Promise.resolve(),
+  };
+}
