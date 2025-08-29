@@ -446,6 +446,9 @@
 
 
 
+</div>
+</template>
+<script lang="ts" setup>
 const themes = computed(() => [{
   text: t('setting.theme.dark'),
   value: 'dark',
