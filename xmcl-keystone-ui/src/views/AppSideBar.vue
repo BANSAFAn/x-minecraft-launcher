@@ -4,7 +4,8 @@
     permanent
     :mini-variant="true"
     :color="sideBarColor"
-    class="sidebar moveable z-10 rounded-[0.75rem]"
+    class="sidebar moveable z-10"
+    :class="{ 'rounded-r-[0.75rem]': sidebarPosition === 'left', 'rounded-l-[0.75rem]': sidebarPosition === 'right' }"
     :style="{ 'backdrop-filter': `blur(${blurSidebar}px)` }"
     :right="sidebarPosition === 'right'"
   >
