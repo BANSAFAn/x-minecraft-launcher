@@ -607,13 +607,7 @@ function onRevertFont() {
 }
 </script>
 
-<!-- Add text color to Theme color and blur section, after cardColor for example -->
-<v-list-item-action class="ml-[16px]">
-  <SettingAppearanceColor
-    v-model="textColor"
-    :text="t('setting.textColor')"
-  />
-</v-list-item-action>
+
 
 <v-list-item>
       <v-list-item-content>
