@@ -609,76 +609,7 @@ function onRevertFont() {
 
 
 
-<v-list-item>
-      <v-list-item-content>
-        <v-list-item-title>{{ t('setting.themeFont') }}</v-list-item-title>
-        <v-list-item-subtitle>{{ t('setting.themeFontDescription') }}</v-list-item-subtitle>
-      </v-list-item-content>
-      <div class="flex flex-grow-0 gap-1 mr-2">
-        <v-btn-toggle
-          v-model="fontDelta"
-          mandatory
-          solo
-          dense
-        >
-          <v-btn
-            solo
-            class="h-unset!"
-          >
-            1px
-          </v-btn>
-
-        {{ t("setting.themeResetFont") }}
-      </v-btn>
-    </v-list-item>
-    <v-list-item>
-      <v-list-item-content>
-        <v-list-item-title>{{ t('setting.themeShare') }}</v-list-item-title>
-        <v-list-item-subtitle>{{ t('setting.themeShareDescription') }}</v-list-item-subtitle>
-      </v-list-item-content>
-      <v-btn
-        outlined
-        text
-        style="margin-right: 10px"
-        @click="onExportTheme"
-      >
-        {{ t("setting.themeExport") }}
-      </v-btn>
-      <v-btn
-        outlined
-        text
-        style="margin-right: 10px"
-        @click="onImportTheme"
-      >
-        {{ t("setting.themeImport") }}
-      </v-btn>
-    </v-list-item>
-  </div>
-</template>
-<script lang="ts" setup>
-import SettingHeader from '@/components/SettingHeader.vue'
-import SettingItemCheckbox from '@/components/SettingItemCheckbox.vue'
-import SettingItemSelect from '@/components/SettingItemSelect.vue'
-import { kEnvironment } from '@/composables/environment'
-import { useService } from '@/composables/service'
-import { kSettingsState } from '@/composables/setting'
-import { BackgroundType, kTheme } from '@/composables/theme'
-import { kUILayout, kSidebarPosition } from '@/composables/uiLayout'
-import { basename } from '@/util/basename'
-import { injection } from '@/util/inject'
-import { ThemeServiceKey } from '@xmcl/runtime-api'
-import SettingAppearanceColor from './SettingAppearanceColor.vue'
-
-const { showOpenDialog, showSaveDialog } = windowController
-const { t } = useI18n()
-const { blurSidebar, blurAppBar, isDark, fontSize, blurCard, backgroundColorOverlay, backgroundImage, setBackgroundImage, blur, particleMode, backgroundType, backgroundImageFit, volume, clearBackgroundImage, exportTheme, importTheme } = injection(kTheme)
-const { sideBarColor, appBarColor, primaryColor, warningColor, errorColor, cardColor, backgroundColor, resetToDefault, currentTheme, font, setFont, resetFont, backgroundMusic, removeMusic } = injection(kTheme)
-const { state } = injection(kSettingsState)
-const env = injection(kEnvironment)
-
-const linuxTitlebar = computed({
-  get: () => state.value?.linuxTitlebar ?? false,
-  set: v => state.value?.linuxTitlebarSet(v),
+TitlebarSet(v),
 })
 
 const darkModel = computed({
@@ -851,13 +782,7 @@ function onRevertFont() {
 }
 </script>
 
-<!-- Add text color to Theme color and blur section, after cardColor for example -->
-<v-list-item-action class="ml-[16px]">
-  <SettingAppearanceColor
-    v-model="textColor"
-    :text="t('setting.textColor')"
-  />
-</v-list-item-action>
+
 
 <v-list-item>
       <v-list-item-content>
