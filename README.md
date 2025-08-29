@@ -46,35 +46,15 @@ brew tap voxelum/xmcl
 brew install --cask --no-quarantine voxelum/xmcl
 ```
 
-<p align="center">
-  <a href="docs/README.uk.md" title="Ukrainian" style="display: inline-block; margin: 0 8px; border-radius: 50%; overflow: hidden; width: 32px; height: 20px; transition: transform 0.2s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.1); text-decoration: none;">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/1280px-Flag_of_Ukraine.svg.png" alt="Ukrainian" width="32" height="20" style="display: block;">
-  </a>
-  <a href="docs/README.ru.md" title="Russian" style="display: inline-block; margin: 0 8px; border-radius: 50%; overflow: hidden; width: 32px; height: 20px; transition: transform 0.2s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.1); text-decoration: none;">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Flag_of_Russia.svg/1280px-Flag_of_Russia.svg.png" alt="Russian" width="32" height="20" style="display: block;">
-  </a>
-  <a href="docs/README.de.md" title="German" style="display: inline-block; margin: 0 8px; border-radius: 50%; overflow: hidden; width: 32px; height: 20px; transition: transform 0.2s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.1); text-decoration: none;">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flag_of_Germany.svg/2560px-Flag_of_Germany.svg.png" alt="German" width="32" height="20" style="display: block;">
-  </a>
-  <a href="docs/README.zh.md" title="Chinese" style="display: inline-block; margin: 0 8px; border-radius: 50%; overflow: hidden; width: 32px; height: 20px; transition: transform 0.2s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.1); text-decoration: none;">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Flag_of_the_People%27s_Republic_of_China.svg" alt="Chinese" width="32" height="20" style="display: block;">
-  </a>
-  <a href="docs/README.jp.md" title="Japanese" style="display: inline-block; margin: 0 8px; border-radius: 50%; overflow: hidden; width: 32px; height: 20px; transition: transform 0.2s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.1); text-decoration: none;">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Japan.svg/2560px-Flag_of_Japan.svg.png" alt="Japanese" width="32" height="20" style="display: block;">
-  </a>
-  <a href="docs/README.pl.md" title="Polish" style="display: inline-block; margin: 0 8px; border-radius: 50%; overflow: hidden; width: 32px; height: 20px; transition: transform 0.2s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.1); text-decoration: none;">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Flag_of_Poland.svg" alt="Polish" width="32" height="20" style="display: block;">
-  </a>
-  <a href="docs/README.kz.md" title="Kazakh" style="display: inline-block; margin: 0 8px; border-radius: 50%; overflow: hidden; width: 32px; height: 20px; transition: transform 0.2s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.1); text-decoration: none;">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Flag_of_Kazakhstan.svg" alt="Kazakh" width="32" height="20" style="display: block;">
-  </a>
-  <a href="docs/README.ar.md" title="Arabic" style="display: inline-block; margin: 0 8px; border-radius: 50%; overflow: hidden; width: 32px; height: 20px; transition: transform 0.2s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.1); text-decoration: none;">
-    <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fkolizej.at.ua%2F_pu%2F3%2F76583687.png&f=1&nofb=1&ipt=c6c2d418c48381f3f77a90574f99672f12cd72fe0ee90e89ade34438149f21aa" alt="Arabic" width="32" height="20" style="display: block;">
-  </a>
-  <a href="docs/README.fr.md" title="French" style="display: inline-block; margin: 0 8px; border-radius: 50%; overflow: hidden; width: 32px; height: 20px; transition: transform 0.2s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.1); text-decoration: none;">
-    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwikiway.com%2Fupload%2Fiblock%2F01e%2F800px-Flag_of_France_svg.png&f=1&nofb=1&ipt=ae6be806c98ab47e579b51d1441309f588a41b9bc741c7aec15031f51aef0890" alt="French" width="32" height="20" style="display: block;">
-  </a>
-</p>
+<kbd>[<img title="Ukraine" alt="Ukraine" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/1280px-Flag_of_Ukraine.svg.png" width="22">](docs/README.uk.md)</kbd>
+<kbd>[<img title="Russia" alt="Russia" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Flag_of_Russia.svg/1280px-Flag_of_Russia.svg.png" width="22">](docs/README.ru.md)</kbd>
+<kbd>[<img title="Germany" alt="Germany" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flag_of_Germany.svg/2560px-Flag_of_Germany.svg.png" width="22">](docs/README.de.md)</kbd>
+<kbd>[<img title="China" alt="China" src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Flag_of_the_People%27s_Republic_of_China.svg" width="22">](docs/README.zh.md)</kbd>
+<kbd>[<img title="Japan" alt="Japan" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Japan.svg/2560px-Flag_of_Japan.svg.png" width="22">](docs/README.jp.md)</kbd>
+<kbd>[<img title="Poland" alt="Poland" src="https://upload.wikimedia.org/wikipedia/commons/1/12/Flag_of_Poland.svg" width="22">](docs/README.pl.md)</kbd>
+<kbd>[<img title="Kazakhstan" alt="Kazakhstan" src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Flag_of_Kazakhstan.svg" width="26">](docs/README.kz.md)</kbd>
+<kbd>[<img title="Arabic" alt="Arabic" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fkolizej.at.ua%2F_pu%2F3%2F76583687.png&f=1&nofb=1&ipt=c6c2d418c48381f3f77a90574f99672f12cd72fe0ee90e89ade34438149f21aa" width="26">](docs/README.kz.md)</kbd>
+<kbd>[<img title="France" alt="France" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwikiway.com%2Fupload%2Fiblock%2F01e%2F800px-Flag_of_France_svg.png&f=1&nofb=1&ipt=ae6be806c98ab47e579b51d1441309f588a41b9bc741c7aec15031f51aef0890" width="26">](docs/README.kz.md)</kbd>
 
 
 
