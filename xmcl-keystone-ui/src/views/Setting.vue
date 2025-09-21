@@ -7,6 +7,7 @@
   >
     <div class="px-4">
       <SettingGeneral />
+      <SettingGemini />
       <SettingAppearance />
     </div>
     <div class="px-4">
@@ -33,6 +34,7 @@ import SettingAbout from './SettingAbout.vue'
 import { usePresence } from '@/composables/presence'
 import { kUpdateSettings, useUpdateSettings } from '@/composables/setting'
 import SettingNetwork from './SettingNetwork.vue'
+import SettingGemini from './SettingGemini.vue'
 
 const { t } = useI18n()
 usePresence(computed(() => t('presence.setting')))
