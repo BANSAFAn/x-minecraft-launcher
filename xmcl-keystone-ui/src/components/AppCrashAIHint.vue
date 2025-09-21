@@ -88,9 +88,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue';
-import { useI18n } from 'vue-i18n';
-import { useService } from '@/composables';
+import { ref } from 'vue';\nimport { useService } from '@/composables';\nimport { kSettingsState } from '@/composables/setting';\nimport { injection } from '@/util/inject';
 import { kSettingsState } from '@/composables/setting';
 import { injection } from '@/util/inject';
 
@@ -119,39 +117,7 @@ const loading = ref(false);
 
 const { state } = injection(kSettingsState);
 
-async function askAI() {
-  if (!question.value) return;
-  loading.value = true;
-  answer.value = '';
-  try {
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyCJfsjwYm3iByOSN08mURmB1gekNMZVQKU`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        contents: [{
-          parts: [{
-            text: `${props.getPrompt()}
-            
-My question is: ${question.value}`,
-          }],
-        }],
-      }),
-    });
-    if (response.ok) {
-      const result = await response.json();
-      answer.value = result.candidates[0].content.parts[0].text;
-    } else {
-      answer.value = `Error: ${response.statusText}`;
-    }
-  } catch (e) {
-    answer.value = `Error: ${(e as Error).message}`;
-  } finally {
-    loading.value = false;
-  }
-}
-</script>
+async function askAI() {\n  if (!question.value) return;\n  if (!state.geminiApiKey) {\n    answer.value = t('askAICrash.noApiKey');\n    return;\n  }\n  loading.value = true;\n  answer.value = '';\n  try {\n    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${state.geminiApiKey}`, {\n      method: 'POST',\n      headers: {\n        'Content-Type': 'application/json',\n      },\n      body: JSON.stringify({\n        contents: [{\n          parts: [{\n            text: `${props.getPrompt()}\\n\\nMy question is: ${question.value}`,\n          }],\n        }],\n      }),\n    });\n    if (response.ok) {\n      const result = await response.json();\n      answer.value = result.candidates[0].content.parts[0].text;\n    } else {\n      answer.value = `Error: ${response.statusText}`;\n    }\n  } catch (e) {\n    answer.value = `Error: ${e.message}`;\n  } finally {\n    loading.value = false;\n  }\n}\n</script>
 <style scoped>
 .ai-section {
   display: flex;

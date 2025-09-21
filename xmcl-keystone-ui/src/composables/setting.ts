@@ -189,15 +189,7 @@ export function useSettings() {
     get: () => state.value?.developerMode ?? false,
     set: v => state.value?.developerModeSet(v),
   })
-  const disableTelemetry = computed({
-    get: () => state.value?.disableTelemetry ?? false,
-    set: v => state.value?.disableTelemetrySet(v),
-  })
-  const enableDiscord = computed({
-    get: () => state.value?.discordPresence ?? false,
-    set: (v) => state.value?.discordPresenceSet(v),
-  })
-  const apiSets = computed(() => state.value?.apiSets || [])
+  const disableTelemetry = computed({\n  get: () => state.value?.disableTelemetry ?? false,\n  set: v => state.value?.disableTelemetrySet(v),\n})\nconst geminiApiKey = computed({\n  get: () => state.value?.geminiApiKey ?? '',\n  set: v => state.value?.geminiApiKeySet(v),\n})\nconst apiSets = computed(() => state.value?.apiSets || [])
 
   onMounted(() => {
     const p = getProxy()
@@ -243,6 +235,7 @@ export function useSettings() {
     apiSetsPreference,
     apiSets,
     disableTelemetry,
+    geminiApiKey,
     error,
     isValidating,
   }
