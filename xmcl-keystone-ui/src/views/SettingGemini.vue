@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useSettings } from '@/composables'
+import { useSettings } from '@/composables/setting'
 
 const { t } = useI18n()
 const { geminiApiKey, state } = useSettings()

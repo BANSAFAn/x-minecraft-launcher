@@ -189,7 +189,15 @@ export function useSettings() {
     get: () => state.value?.developerMode ?? false,
     set: v => state.value?.developerModeSet(v),
   })
-  const disableTelemetry = computed({\n  get: () => state.value?.disableTelemetry ?? false,\n  set: v => state.value?.disableTelemetrySet(v),\n})\nconst geminiApiKey = computed({\n  get: () => state.value?.geminiApiKey ?? '',\n  set: v => state.value?.geminiApiKeySet(v),\n})\nconst apiSets = computed(() => state.value?.apiSets || [])
+  const disableTelemetry = computed({
+    get: () => state.value?.disableTelemetry ?? false,
+    set: v => state.value?.disableTelemetrySet(v),
+  })
+  const geminiApiKey = computed({
+    get: () => state.value?.geminiApiKey ?? '',
+    set: v => state.value?.geminiApiKeySet(v),
+  })
+  const apiSets = computed(() => state.value?.apiSets || [])
 
   onMounted(() => {
     const p = getProxy()
