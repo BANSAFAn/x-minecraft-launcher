@@ -11,7 +11,7 @@ import { ZipManager, kTaskExecutor, type TaskFn } from '~/infra'
 import { InstanceService } from '~/instance'
 import { InstanceInstallService } from '~/instanceIO'
 import { kMarketProvider } from '~/market'
-import { kResourceWorker, type ResourceWorker } from '~/resource'
+import { kResourceManager, kResourceWorker, type ResourceWorker } from '~/resource'
 import { AbstractService, ExposeServiceKey, ServiceStateManager } from '~/service'
 import { VersionService } from '~/version'
 import { requireObject } from '../util/object'
@@ -66,7 +66,7 @@ export class ModpackService extends AbstractService implements IModpackService {
   private handlers: Record<string, ModpackHandler> = {}
 
   constructor(@Inject(LauncherAppKey) app: LauncherApp,
-    @Inject(ResourceManager) private resourceManager: ResourceManager,
+    @Inject(kResourceManager) private resourceManager: ResourceManager,
     @Inject(InstanceService) private instanceService: InstanceService,
     @Inject(kTaskExecutor) private submit: TaskFn,
     @Inject(kResourceWorker) private worker: ResourceWorker,
@@ -196,15 +196,18 @@ export class ModpackService extends AbstractService implements IModpackService {
       curseforgeConfig = getCurseforgeModpackFromInstance(instance)
       curseforgeConfig.author = author ?? curseforgeConfig.author
       curseforgeConfig.name = name ?? curseforgeConfig.name
+      curseforgeConfig.version = version ?? curseforgeConfig.version
     }
 
     if (emitModrinth) {
       modrinthManifest = getModrinthModpackFromInstance(instance)
+      modrinthManifest.versionId = version ?? modrinthManifest.versionId
     }
 
-    const curseforgeZip = emitCurseforge ? new ZipTask(join(destinationDirectory, `${name}-${version}.zip`)) : undefined
-    const modrinthZip = emitModrinth ? new ZipTask(join(destinationDirectory, `${name}-${version}.mrpack`)) : undefined
-    const offlineZip = emitOffline ? new ZipTask(join(destinationDirectory, `${name}-${version}-offline.zip`)) : undefined
+    const parentDir = destinationDirectory || this.app.host.getPath('downloads')
+    const curseforgeZip = emitCurseforge ? new ZipTask(join(parentDir, `${name}-${version}.zip`)) : undefined
+    const modrinthZip = emitModrinth ? new ZipTask(join(parentDir, `${name}-${version}.mrpack`)) : undefined
+    const offlineZip = emitOffline ? new ZipTask(join(parentDir, `${name}-${version}-offline.zip`)) : undefined
 
     curseforgeZip?.addEmptyDirectory('overrides')
     modrinthZip?.addEmptyDirectory('overrides')
@@ -275,7 +278,8 @@ export class ModpackService extends AbstractService implements IModpackService {
             curseforgeConfig?.files?.push({ projectID: fileLike.curseforge.projectId, fileID: fileLike.curseforge.fileId, required: true })
           }
           if (fileLike.modrinth) {
-            modrinthManifest?.files.push({ path: file.path, hashes: fileLike.hashes, downloads: fileLike.downloads || [], fileSize: fileLike.size })
+            const fileSize = fileLike.size || (await stat(filePath).catch(() => ({ size: 0 }))).size
+            modrinthManifest?.files.push({ path: file.path, hashes: fileLike.hashes, downloads: fileLike.downloads || [], fileSize })
             // modrinth not allowed to include curseforge source by regulation
             const urls = fileLike.downloads || []
             const availableDownloads = urls.filter(u => isAllowInModrinthModpack(u, options.strictModeInModrinth))
