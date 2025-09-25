@@ -27,7 +27,7 @@
     <img src="https://discord.com/api/guilds/405213567118213121/widget.png?style=banner2" alt="Discord Server">
   </a>
 
-
+  </br>
   <a href="https://kook.top/gqjSHh">
     <img src="https://img.shields.io/endpoint?url=https://api.xmcl.app/kook-badge" alt="Kook">
   </a>
