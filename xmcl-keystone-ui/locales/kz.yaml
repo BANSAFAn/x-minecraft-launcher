@@ -1,133 +1,127 @@
 AppAddInstanceDialog:
-  choiceTitle: Бірнеше іске қосу профильдері анықталды. Импорттау үшін біреуін таңдаңыз.
+  choiceTitle: Бірнеше жөнелту профилі анықталды. Импорттау үшін біреуін таңдаңыз.
   configTitle: Конфигурация
-  createTitle: Ойын құру
-  downloadedNotification: Модпакет {name} жүктеп алынды. Жасағыңыз келе ме
-  serverTitle: Сервер мекенжайыңызды енгізіңіз
+  createTitle: Ойын жасау
+  downloadedNotification: '{name} модпакеті жүктелді. Оны үшін инстанция жасағыңыз келеді ме?'
+  serverTitle: Сервер мекенжайын енгізіңіз
 AppShareInstanceDialog:
   alterDownloadDescription: >-
-    Ағымдағы дананы шатастырғыңыз келмесе. Сіз сондай-ақ құрдасыңыздан жаңа
-    дананы жасай аласыз
-  baseInfo: Негізгі параметр
-  cancelShare: Бөлісуден бас тарту
+    Егер сіз қазіргі инстанцияны бұзғыңыз келмесе, сіз сонымен қатар құрылымыңыздан жаңа
+    инстанция жасай аласыз. Инстанция жасау үшін төмендегі түймені басыңыз.
+  baseInfo: Негізгі параметрлер
+  cancelShare: Бөлісуді болдырмау
   description: >-
-    Профильді бөліскеннен кейін басқа орын бұл файлдарды компьютеріңіз арқылы
+    Профильді бөліскен соң, басқа орындар ол файлдарды сіздің дербес компьютеріңізден
     жүктей алады.
   downloadDescription: >-
-    Құрдасыңыз сізге берген файлдарды растаңыз. Жүктеп алғыңыз келетін файлды
-    таңдаңыз. Ол ағымдағы данаға орналастырылады {name}.
-  downloadNotifyTitle: '{user} данасын жүктеп алу'
-  downloadTitle: Басқа әріптестерден файлдарды жүктеп алыңыз
-  downloadToLocal: Ағымдағы данаға жүктеп алыңыз
-  filesToDownload: Жүктеп алу үшін файлдарды таңдаңыз
-  filesToShare: Бөлісетін файлдарды таңдаңыз
-  instanceShare: '{user} сізге ағымдағы дананы бөлісті'
+    Құрылымыңызға ұсынған файлдарды растаңыз. Жүктеуді қалайтын файлды таңдаңыз. Бұл қазіргі инстанцияға орналастырылады {name}.
+  downloadNotifyTitle: '{user} дегенден инстанцияны жүктеу'
+  downloadTitle: Басқа қатысушылардан файлдарды жүктеу
+  downloadToLocal: Қазіргі инстанцияға жүктеу
+  filesToDownload: Жүктеуге файлдарды таңдаңыз
+  filesToShare: Бөлісу үшін файлдарды таңдаңыз
+  instanceShare: '{user} қазіргі инстанцияны сізбен бөлісті'
   share: Бөлісу
-  shareNotifyTitle: Дана бөлісу
-  shareTitle: Ойын файлдарын басқа ойыншымен бөлісіңіз
+  shareNotifyTitle: Инстанцияны бөлісу
+  shareTitle: Ойын файлдарын басқа ойыншыға бөлісу
+BaseSetting: {}
 BaseSettingGeneral:
   title: Жалпы
 FeedTheBeast:
-  search: Поиск в FTB
+  search: FTB ішінде іздеу
+FeedTheBeastCard: {}
 FeedTheBeastProject:
-  changelog: Список изменений
-  details: Детали
-  install: '{version} орнату'
+  changelog: Өзгерістер журналы
+  details: Егжей-тегжейлер
+  install: '{version} нұсқасын орнату'
   overview: Шолу
   versions: Нұсқалар
 HomeJavaIssueDialog:
-  incompatibleJava: Үйлесімсіз Java
-  incompatibleJavaHint: Ағымдағы Java таңдалған Minecraft бағдарламасымен үйлесімсіз болуы мүмкін!
+  incompatibleJava: Құйрықсыз Java
+  incompatibleJavaHint: Қазіргі Java таңдалған Minecraft үшін құйрықсыз болуы мүмкін!
   missingJava: Java жоқ
-  missingJavaHint: >-
-    Іске қосу құралы компьютеріңіздегі ешбір Java файлын анықтай алмайды. Сен
-    істе аласың:
+  missingJavaHint: 'Жөнелткіш сіздің компьютеріңізде ешбір java таба алмады. Сіз мынаны істей аласыз:'
   needDownloadHint: >-
-    Компьютеріңізде дұрыс Java нұсқасын табу мүмкін емес. Жаңасын жүктеп алуды
-    ұсыныңыз.
+    Сіздің компьютеріңізде дұрыс Java нұсқасын таба алмадық. Жаңа нұсқаны жүктеп алу ұсынылады.
   optionAutoDownload:
-    message: Launcher сізге Mojang көзінен Java жүктеп алып, орнатады.
-    name: Автоматты түрде жүктеп алу
+    message: Жөнелткіш сіз үшін Mojang-ның дереккөзінен Java жүктеп алады және орнатады.
+    name: Автоматты түрде жүктеу
+  optionManualDownload: {}
   optionSelectJava:
     message: >-
-      Мүмкін іске қосқыш Java-ны таппайды. Іске қосу құралының қайда екенін айта
-      аласыз.
-    name: Компьютерде Java таңдаңыз
+      Мүмкін, жөнелткіш сіздің Java-ңызды таппады. Сіз жөнелткішке оның қайда екенін айта аласыз.
+    name: Сіздің компьютеріңізден Java таңдау
   optionSwitch:
-    disabled: Қазір дерекқорда Java {version} жоқ!
-    message: Компьютеріңізде бұрыннан бар Java {version} пайдаланыңыз
-    name: '{version} нұсқасына ауысу'
-  recommendedVersionHint: '{version} {range} ауқымымен Java пайдалануды ұсынады'
-  selectMatchedHint: >-
-    Тиісті жергілікті Java нұсқалары табылды. Сіз бұл жергілікті Java файлдарын
-    таңдай аласыз.
+    disabled: Қазір базада Java {version} табылмады!
+    message: Сіздің дербес компьютеріңіздегі бар Java {version} қолдану
+    name: '{version} дегенге ауысу'
+  recommendedVersionHint: '{version} Java-ның {range} диапазонын қолдануға ұсынылады.'
+  selectMatchedHint: Дұрыс жергілікті Java нұсқалары табылды. Осы жергілікті Java-ларды таңдай аласыз.
   selectSecondaryHint: >-
-    Кейбір жергілікті Java нұсқалары табылды, бірақ олар критерийлерге сәйкес
-    келмеуі мүмкін. Оларды іске қосу үшін әлі де пайдалана аласыз, бірақ бұл
-    мәселе әлі де пайда болады.
+    Кейбір жергілікті Java нұсқалары табылды, бірақ олар критерийге сәйкес келмеуі мүмкін.
+    Оларды жөнелту үшін қолдана аласыз, бірақ бұл мәселе әлі де пайда болады.
 HomeLaunchMultiInstanceDialog:
-  confirm: Иә, іске қосу
-  description: Сіз Minecraft-тың бірнеше данасын іске қосып жатырсыз. Сіз сенімдісіз бе?
-  title: Бірнеше даналар
+  confirm: Иә, жөнелту
+  description: Сіз Minecraft-тың бірнеше инстанциясын жөнелтіп жатырсыз. Сіз сенімдісіз бе?
+  title: Бірнеше инстанциялар
+HomeSyncButton: {}
 HomeSyncDialog:
-  pull: Тарт
-  push: Басыңыз
+  pull: Тарту
+  push: Итеру
 HomeSyncDialogPull:
-  failText: Жаңартуды алу мүмкін болмады. {url}
+  failText: Жаңартуды алу сәтсіз аяқталды. {url}
   refresh: Жаңарту
   update: Жаңарту
 HomeSyncDialogPush:
   authError: >-
-    Нашар пайдаланушы аутентификациясы. Сервер файлдарын жүктеп салу құқығыңыз
-    бар екеніне көз жеткізіңіз!
+    Пайдаланушының аутентификациясы жаман. Серверге файлдарды жүктеу құқығыңыз бар екеніне көз жеткізіңіз!
   refresh: Жаңарту
   unknownError: Белгісіз сервер қатесі. Қайталап көріңіз.
-  upload: Жүктеп салу данасы
+  upload: Инстанцияны жүктеу
 SettingMigrationDialog:
   selectRootDirectory: Түбірлік каталогты таңдаңыз
-add: қосу
+add: Қосу
 ago:
   day: '{duration} күн бұрын | {duration} күн бұрын'
   hour: '{duration} сағат бұрын | {duration} сағат бұрын'
   minute: '{duration} минут бұрын | {duration} минут бұрын'
   second: '{duration} секунд бұрын | {duration} секунд бұрын'
 askAICrash:
-  copyPrompt: Copy the prompt to ask AI
+  copyPrompt: Өтінішті көшіріп, ЖИ-ға сұрау
   description: >-
-    Let AI help you to understand the game crash! Follow the instructions below
-    to ask AI about this game crash!
-  selectPlatform: Open an AI platform and paste the prompt you just copied.
-authProfileAddedNotification: Авторлық профиль {name} қосылды
+    Ойынның құлауын түсінуге ЖИ көмектессін! ЖИ-ға осы ойын құлауы туралы сұрау үшін төмендегі нұсқауларды орындаңыз!
+  selectPlatform: ЖИ платформасын ашып, жаңа көшірген өтінішті орналастырыңыз.
+authProfileAddedNotification: '{name} аутентификация профилі қосылды'
 author: Автор
 back: Артқа
 baseSetting:
-  title: Негізгі параметрлер
+  title: Инстанция параметрлері
 browse: Шолу
 browseApp:
-  createShortcut: Таңбаша жасау
-  default: Әдепкі
+  createShortcut: Жарлық жасау
+  default: ӘДЕПКІ
   delete: Жою
-  launch: Іске қосыңыз және әдепкі етіп орнатыңыз
-browseApps: Іске қосу құралының пайдаланушы интерфейсін қараңыз
+  launch: Жөнелту және ӘДЕПКІ ретінде орнату
+browseApps: Жөнелткіш интерфейсін қарау
 cancel: Болдырмау
 checkUpdate:
-  name: Чекті жаңарту
+  name: Жаңартуды тексеру
 color: Түс
 confirm: Бастау
 copyClipboard:
-  success: Буферге көшіру
+  success: Алмасу буферіне көшірілді
 create: Жасау
 curseforge:
   authors: Авторлар
   category: Санат
   createdDate: Жасалған күні
-  downloadOnly: Жүктеп алу
+  downloadOnly: Жүктеу
   file:
     gameVersion: Ойын нұсқасы
     modLoader: Мод жүктеуші
   install: Орнату
-  installTo: '{path} жолына орнату'
-  installToStorage: Жадқа орнату
+  installTo: '{path} жеріне орнату'
+  installToStorage: Сақтауға орнату
   lastUpdate: Соңғы жаңарту күні
   project:
     description: Сипаттама
@@ -136,218 +130,199 @@ curseforge:
   recentFiles: Соңғы файлдар
   releasedDate: Шығарылған күні
   search: Іздеу
-  totalDownloads: Барлығы жүктеп алынғандар
+  totalDownloads: Жүктеулер саны
+curseforgeCard: {}
 curseforgeCategory:
   API and Library: API және кітапханалар
   Addons: Қосымшалар
-  Adventure: Шытырман оқиға
-  Adventure and RPG: Шытырман оқиға және RPG
-  Animated: Анимация
-  Armor, Tools, and Weapons: Құрыш, құрал-саймандар және қару-жарақ
-  Armor， Tools， and Weapons: Құрыш, құрал-саймандар және қару-жарақ
-  Combat / PvP: Жарыс/PVP
-  Cosmetic: Сыртқы түрі/декор
-  Creation: Шығармашылық режим
-  Data Packs: Деректер пакеті
-  Education: Білім
-  Exploration: Барлау
-  Extra Large: Өте үлкен
-  FTB Official Pack: Ресми FTB пакеті
+  Adventure: Саяхат
+  Adventure and RPG: Саяхат және RPG
+  Animated: Анимациялық
+  Armor, Tools, and Weapons: Кірпіш, құралдар және қару-жарақ
+  Armor， Tools， and Weapons: Кірпіш, құралдар және қару-жарақ
+  Combat / PvP: Сайыстар/PVP
+  Cosmetic: Сыртқы түрі/декорация
+  Creation: Шығармашылық режимі
+  Data Packs: Деректер жиынтығы
+  Education: Білім беру
+  Exploration: Тану
+  Extra Large: Үлкен өлшем
+  FTB Official Pack: Ресми FTB дестесі
   Fabric: Fabric
-  FancyMenu: FancyMenu
+  FancyMenu: Әсем меню
   Font Packs: Қаріптер
   Food: Тамақ
   Game Map: Ойын карталары
-  Hardcore: Хардкор
+  Hardcore: Қатал режим
   MCreator: MCreator
-  Magic: Сиқыр
-  Map Based: Карта негізінде
+  Magic: Магия
+  Map Based: Карталық негізінде
   Map and Information: Карталар және ақпарат
-  Medieval: Ортағасырлық
-  Mini Game: Шағын ойындар
+  Medieval: Орта ғасырлар
+  Mini Game: Мини-ойындар
   Miscellaneous: Әртүрлі
-  Mod Support: Модельді қолдау
-  Modded World: Әлемдерге арналған мод
-  Modern: Қазіргі заманғы
-  Multiplayer: Көп ойыншы
+  Mod Support: Мод қолдауы
+  Modded World: Әлемге арналған мод
+  Modern: Заманауи
+  Multiplayer: Көп ойыншылы
   Parkour: Паркур
-  Photo Realistic: Фото шынайы
-  Puzzle: Пазлдар
-  QoL: QoL
-  Quests: Квесттер
+  Photo Realistic: Нақты суретке түсіру
+  Puzzle: Жұмбақтар
+  QoL: Өмір сапасы
+  Quests: Тапсырмалар
   Redstone: Қызыл тас
   Sci-Fi: Ғылыми фантастика
   Server Utility: Сервер құралы
   Skyblock: SkyBlock
-  Small / Light: Азғана
-  Steampunk: Steampunk
+  Small / Light: Біраз
+  Steampunk: Стимпанк
   Storage: Сақтау
-  Survival: Аман қалу
+  Survival: Тіршілік сүру
   Tech: Технология
   Technology: Технология
   Traditional: Дәстүрлі
   Twitch Integration: Twitch интеграциясы
-  Utility & QoL: Utility және Qol
-  Vanilla+: Ванила+
-  World Gen: Әлемдік генератор
+  Utility & QoL: Қолданыс және өмір сапасы
+  Vanilla+: Vanilla+
+  World Gen: Әлем генераторы
 dataMigration:
-  apply: Параметрлерді қолдану
-  directoryCriteriaHint: Жаңа каталог орнының бос каталог екеніне көз жеткізіңіз!
-  migrationDestinationIsFile: Тасымалдау орны - бұл файл! Бос каталогты таңдаңыз!
+  apply: Параметрді қолдану
+  directoryCriteriaHint: Жаңа каталог орналасуыңыз бос каталог екеніне көз жеткізіңіз!
+  migrationDestinationIsFile: Көшіру нүктесі файл! Бос каталог таңдаңыз!
   migrationDestinationIsNotEmptyDirectory: >-
-    Тасымалдау орны бос каталог емес! Бос каталогты таңдағаныңызға көз
-    жеткізіңіз!
+    Көшіру нүктесі бос каталог емес! Бос каталог таңдағаныңызға көз жеткізіңіз!
   migrationNoPermission: >-
-    Ескі каталогтың атын жаңа каталогқа өзгертуге рұқсат жоқ! Іске қосу
-    құралының екі жерге де қол жеткізе алатынына көз жеткізіңіз!
-  placeholder: Каталогты таңдау үшін осы жерді басыңыз
+    Ескі каталогты жаңа каталогқа атауын ауыстыру үшін рұқсат жоқ! Жөнелткіштің екеуіне де қатынау құқығы бар екеніне көз жеткізіңіз!
+  placeholder: Каталог таңдау үшін осы жерді басыңыз
   setRootCause: >-
-    Осы процесте Іске қосу құралын жапсаңыз, деректеріңізді (карталар, ресурстар
-    бумалары, модтар) жоғалтасыз!
-  setRootDescription: >-
-    Бұл осы іске қосу құралының және minecraft-тың түбірлік деректер қалтасын
-    өзгертеді.
-  setRootTitle: Жаңа сақтау орнына орнатыңыз
+    Сіз осы процесс кезінде жөнелткішті жапсаңыз, деректеріңізді (Карталар, Ресурс дестелері, Модтар) жоғалтасыз!
+  setRootDescription: Бұл жөнелткіш пен minecraft үшін түбірлік деректер қалтасын өзгертеді.
+  setRootTitle: Жаңа сақтау орнына орнату
   unknownError: Белгісіз қате! Қайталап көріңіз немесе әзірлеушіге хабарласыңыз!
-  waitReload: >-
-    Деректерді тасымалдау. Іске қосу құралын жаппаңыз, әйтпесе деректеріңізді
-    жоғалтасыз.
+  waitReload: Деректерді көшіру. Жөнелткішті жаппаңыз, әйтпесе деректеріңізді жоғалтасыз.
 delete:
   name: '{name} жою'
-  'no': жоқ
-  'yes': иә
+  'no': 'Жоқ'
+  'yes': Жою
 dependencies:
-  embedded: ендірілген
-  incompatible: үйлеспейтін
+  embedded: Енгізілген
+  incompatible: Құйрықсыз
   name: Тәуелділіктер
-  optional: міндетті емес
-  required: қажет
-description: сипаттамасы
-detail: деталь
+  optional: Қосымша
+  required: Қажетті
+description: Сипаттама
+detail: Егжей-тегжей
 diagnosis:
   badInstall:
-    message: Осы нұсқаны қайта орнатуға тырысу үшін басыңыз.
-    name: '{version} қате орнату'
+    message: Бұл нұсқаны қайта орнату үшін басыңыз.
+    name: '{version} нұсқасындағы жаман орнату'
   corruptedAssets:
-    message: Launcher сіз үшін активтерді орнатады
+    message: Жөнелткіш сіз үшін активтерді орнатады
     name: 'Бүлінген актив: {name} | Бүлінген актив {name} | {count} актив бүлінген'
   corruptedAssetsIndex:
-    message: Launcher сіз үшін активтер индексін жүктеп алады
-    name: '{version} бүлінген активтер индексі файлы.'
+    message: Жөнелткіш сіз үшін активтер индексін жүктейді
+    name: '{version} нұсқасының бүлінген активтер индекс файлы.'
   corruptedLibraries:
-    message: Launcher сізге кітапханаларды орнатады
-    name: >-
-      Бүлінген кітапхана: {name} | Бүлінген кітапхана: {name} | {count}
-      кітапхана бүлінген
+    message: Жөнелткіш сіз үшін кітапханаларды орнатады
+    name: 'Бүлінген кітапхана: {name} | Бүлінген кітапхана: {name} | {count} кітапхана бүлінген'
   corruptedVersionJar:
-    message: Осы нұсқаны орнату үшін басыңыз
-    name: Minecraft %{version} нұсқасының бүлінген банкасы.
+    message: Бұл нұсқаны орнату үшін басыңыз
+    name: Minecraft %{version} үшін бүлінген нұсқа jar файлы.
   corruptedVersionJson:
-    message: Осы нұсқаны орнату үшін басыңыз
-    name: Бүлінген нұсқасы %{version} json.
+    message: Бұл нұсқаны орнату үшін басыңыз
+    name: Бүлінген %{version} нұсқа json файлы.
   incompatibleJava:
-    message: Сіз Launcher қолданбасынан оны жүктеп алуды сұрай аласыз.
-    name: '{javaVersion} java нұсқасы {version} үшін жарамсыз!'
+    message: Сіз жөнелткіштен оны сіз үшін жүктеп алуға өтініш бере аласыз.
+    name: '{javaVersion} Java нұсқасы {version} үшін құйрықсыз!'
   instanceFiles:
-    description: Орнату данасы {counts} файлды қамтиды.
-    title: Аяқталмаған дананы орнату
+    description: Инстанция орнатуы {counts} файлдан тұрады.
+    title: Аяқталмаған инстанция орнатуы
   invalidJava:
-    message: Іске қосу үшін басқа java пайдалану үшін басыңыз.
-    name: Жарамсыз java орны.
+    message: Басқа java қолданып жөнелту үшін басыңыз.
+    name: Жарамсыз java орналасуы.
   missingAssets:
-    message: Launcher сіз үшін активтерді орнатады
-    name: >-
-      Жетіспейтін актив: {name} | Жетіспейтін актив: {name} | %{count} актив
-      жоқ.
+    message: Жөнелткіш сіз үшін активтерді орнатады
+    name: 'Жоқ актив: {name} | Жоқ актив: {name} | %{count} актив жоқ.'
   missingAssetsIndex:
-    message: Launcher сіз үшін активтер индексін жүктеп алады
-    name: '{version} активтерінің индекс файлы жоқ.'
+    message: Жөнелткіш сіз үшін активтер индексін жүктейді
+    name: '{version} нұсқасының жоқ активтер индекс файлы.'
+  missingAuthlibInjector: {}
   missingJava:
     message: Бұл мәселені шешу үшін басыңыз
-    name: Minecraft іске қосу үшін Java табылмады!
+    name: Minecraft жөнелту үшін Java таба алмадық!
   missingLibraries:
-    message: Launcher сізге кітапханаларды орнатады
-    name: >-
-      {name} кітапханасы жоқ {name} кітапханасы жоқ Жоқ {count} кітапханалар |
-      {count} кітапхана жоқ
+    message: Жөнелткіш сіз үшін кітапханаларды орнатады
+    name: '{name} кітапханасы жоқ | {name} кітапханасы жоқ | {count} кітапхана жоқ | {count} кітапхана жоқ'
   missingVersion:
-    message: Осы нұсқаны орнату үшін басыңыз
+    message: Бұл нұсқаны орнату үшін басыңыз
     name: '{version} нұсқасы орнатылмаған!'
   missingVersionJar:
-    message: Осы нұсқаны орнату үшін басыңыз
-    name: Minecraft %{version} нұсқасының банкасы жоқ
+    message: Бұл нұсқаны орнату үшін басыңыз
+    name: Minecraft %{version} үшін нұсқа jar файлы жоқ
   unzipFileNotFound:
-    description: Cannot find {file}
-    title: Modpack file not found
+    description: '{file} таба алмадық'
+    title: Модпакет файлы табылмады
 disable: Өшіру
 disk:
-  available: Қол жетімді
+  available: Қолжетімді
   used: Қолданылған
-download: Жүктеп алу
-downloadCount: '{count} жүктеп алу'
-downloadUpdate: Жаңартуды жүктеп алыңыз
+download: Жүктеу
+downloadCount: '{count} жүктеу'
+downloadUpdate: Жаңартуды жүктеу
 duration:
   day: '{duration} күн | {duration} күн'
   hour: '{duration} сағат | {duration} сағат'
   minute: '{duration} минут | {duration} минут'
   name: '{name} жою'
-  'no': Жоқ
+  'no': 'Жоқ'
   second: '{duration} секунд | {duration} секунд'
-  'yes': Жою
-edit: өңдеу
+  'yes': Иә, әуелі.
+edit: Өңдеу
 enable: Қосу
 env:
   select:
-    all: Барлығын таңдаңыз
-    fit: Сәйкес келетіндерін таңдаңыз
-    none: Таңдаудан бас тарту
+    all: Барлығын таңдау
+    fit: Сәйкес келетінін таңдау
+    none: Ештеңе таңдамау
 error:
   name: Қате | Қателер
 errors:
   BadForgeInstallerJarError: >-
-    Forge орнатушы jar файлын талдау мүмкін емес. Мүмкін forge жаңа орнатушы
-    файл пішімі бар шығар? Бұл мәселе шешілмесе, әзірлеушілерге хабарласыңыз.
-  BadInstanceType: 'Жарамсыз данасы: {type}'
-  BodyTimeoutError: HTTP негізгі күту уақыты
-  ChecksumNotMatchError: Бақылау сомасы сәйкес келмеді! Күтілетін {expect}. Нақты {actual}.
-  ConnectTimeoutError: Серверге қосылу күту уақыты.
+    forge орнатушы jar файлын талдау мүмкін емес. Мүмкін, forge жаңа орнатушы файл пішімін қолданады ма? Бұл мәселе әлі де болып тұрса, әзірлеушілерге хабарласыңыз.
+  BadInstanceType: 'Жарамды инстанция емес: {type}'
+  BodyTimeoutError: HTTP түсін таймаут
+  ChecksumNotMatchError: Бақылау қосынды сәйкес келмейді! Күтілген {expect}. Нақты {actual}.
+  ConnectTimeoutError: Серверге байланыс таймаут
   DNSNotFoundError: DNS іздеу қатесі
   DatabaseNotOpened: >-
-    Деректер базасы ашылмаған! Іске қосу құралы дұрыс жұмыс істемейді! Іске қосу
-    құралы қол жеткізе алатын деректер каталогын таңдаңыз. Параметр бетінде
-    деректер түбірін қалпына келтіруге болады.
+    Дерекқор ашылмаған! Жөнелткіш дұрыс жұмыс істемейді! Жөнелткіш қатынауы мүмкін болатын дерек каталогын таңдаңыз. Параметрлер бетінде дерек түбірін қайта орнатуға тырысатын боласыз.
   DiskIsFull: >-
-    Your disk is full! Cannot write anything to disk! All features might not be
-    functional!
-  DownloadAggregateError: Файлды жүктеп алу мүмкін болмады.
+    Дискіңіз толып кетті! Дискіге ештеңе жазу мүмкін емес! Барлық функциялар жұмыс істемеуі мүмкін!
+  DownloadAggregateError: Файл жүктеу сәтсіз аяқталды.
   DownloadFileSystemError: >-
-    Жүктеп алу файлының жолына кіру кезінде қате. Іске қосу құралының оған
-    жазуға рұқсаты бар екеніне көз жеткізіңіз.
-  HeadersTimeoutError: HTTP тақырыбының күту уақыты
-  NotFoundError: 404 Табылмады
-  SocketError: Сервер розеткасының қатесі
+    Жүктелетін файл жолына қатынау кезінде қате. Жөнелткіштің оған жазу құқығы бар екеніне көз жеткізіңіз.
+  HeadersTimeoutError: HTTP тақырып таймаут
+  NotFoundError: 404 табылмады
+  SocketError: Сервер сокет қатесі
 eula:
   body: >-
-    Құсбелгіні қою арқылы сіз Minecraft {eula} ойынымен келіскеніңізді
-    көрсетесіз.
+    Құсбелгі түймесін басу арқылы сіз Minecraft-тың {eula} шарттарына келісім беріп отырсыз.
 exception:
   http: >-
-    {url} мекенжайына HTTP сұрауы орындалмады. Күй коды {statusCode}. {code}.
-    Қайталап көріңіз немесе желіңізді тексеріңіз. Бұл қате жойылмаса,
-    әзірлеушілер тобына есеп жіберіңіз.
-existed: Болды
+    '{url} дегенге HTTP сұраныс сәтсіз аяқталды. Күй коды {statusCode}. {code}. Қайталап көріңіз немесе желіңізді тексеріңіз. Егер бұл қате әлі де болып тұрса, әзірлеуші командасына есеп жіберіңіз.
+existed: Бар
 exportModpackTarget:
   curseforge: Curseforge файлы
   github: Github файлы
   modrinth: Modrinth файлы
-  override: Қайта анықтау (Raw) файл
+  override: Қайта жазу (Қарапайым) файлы
 extensions:
-  mrpack: Modrinth Модпак
+  mrpack: Modrinth модпакеті
   zip: Zip файлы
 fabricVersion:
   disable: Fabric өшіру
-  empty: Minecraft үшін мата нұсқасы жоқ {version}
-  showSnapshot: Суреттерді көрсету
+  empty: Minecraft {version} үшін Fabric нұсқасы жоқ
+  showSnapshot: Сnapshot көрсету
   stable: Тұрақты
   unstable: Тұрақсыз
 feedback:
@@ -355,141 +330,1326 @@ feedback:
   description: Мен қате таптым немесе ұсыныс жасағым келеді
   discord: Discord
   discordDescription: Discord арнасына қосылыңыз
-  discordJoin: Қосылыңыз
-  generateReport: Есепті жасау
-  generateSaveAs: Есепті келесіге сақтаңыз
+  discordJoin: Қосылу
+  generateReport: Есеп жасау
+  generateSaveAs: Есепті сақтау орны
   github: Github мәселесі
-  githubDescription: Өз ойыңызды айту үшін Github мәселесін ашыңыз
+  githubDescription: Ой-пікіріңізді айту үшін Github мәселесін ашыңыз
   githubOpenIssue: Github
   hint: >-
-    Есепті жасау және әзірлеушілер тобына хабарласу үшін түймені басыңыз. Есепте
-    операциялық жүйе түрі, нұсқасы, пайдаланушы аты (OS жүйесінде) және т.б.
-    қоса, құрылғыңыз туралы ақпарат болады.
+    Есеп жасау үшін түймені басыңыз және әзірлеуші командасына хабарласыңыз. Есепте операциялық жүйе түрі, нұсқасы, пайдаланушы аты (сіздің жүйеңізде) және т.б. сияқты құрылғы ақпараты болады.
   kook: Kook
-  kookDescription: >-
-    Kook - Қытай материгінің пайдаланушылары үшін келіспеушіліктерге арналған
-    балама қолданба
+  kookDescription: Kook - Қытайлықтар үшін альтернативті дискорд қолданбасы
   name: Кері байланыс
   qq: QQ тобы
   qqDescription: >-
-    QQ тобына кері байланыс енгізіңіз және авторлармен тікелей сөйлесіңіз. Топ
-    нөмірі: {number}
-  qqEnterGroup: Қосылыңыз
+    Кері байланыс QQ тобына кіріп, авторлармен тікелей сөйлесіңіз. Топ нөмірі:
+    {number}
+  qqEnterGroup: Қосылу
 fileDetail:
   fileSize: Файл өлшемі
-  hash: Hash
+  filesize: Файл өлшемі
+  hash: Хэш
 filter: Сүзгі
-filterLocalOnly: Only show installed
+filterLocalOnly: Тек орнатылғанды ғана көрсету
 finish: Аяқтау
 forgeConfig:
   hint: >-
-    Біз оның конфигурация файлын анықтай алуымыз үшін кем дегенде осы модпен
-    ойынды бір рет іске қосыңыз!
+    Қайта бір рет осы модпен ойынды жөнелтіңіз, сонда оның конфиг файлын анықтай аламыз!
 forgeVersion:
-  common: Жалпы
-  disable: Forge қолданбасын өшіріңіз
-  empty: Forge-де Minecraft {version} үшін шығарылым жоқ.
+  common: Қарапайым
+  disable: Forge өшіру
+  empty: Minecraft {version} үшін Forge ешқандай шығарылымы жоқ
   latest: Соңғы
   name: Forge
-  recommended: Ұсынылады
-  showBuggy: Баггиді көрсету
-  showRecommendedAndLatestOnly: Ұсынылған және тек соңғы нұсқа
+  recommended: Ұсынылатын
+  showBuggy: Қате көрсету
+  showRecommendedAndLatestOnly: Тек ұсынылатын және соңғы
   version: Forge нұсқасы
+gameSetting: {}
+gameType:
+  adventure: Саяхат режимі
+  creative: Шығармашылық режимі
+  spectator: Көрермен режимі
+  survival: Тіршілік сүру режимі
+help: Көмек
+home: Үй
+importModpack:
+  failed: '{modpack} импорттау сәтсіз аяқталды'
+  name: Модпакет импорттау
+  success: '{modpack} импорттау сәтті аяқталды'
+importResource: Ресурс импорттау
+install: Орнату
+installAssets:
+  asset: '{count} актив орнату'
+  assetIndex: Активтер индекс файлын тексеру
+  name: Актив файлдарын орнату
+installAuthlibInjector: authlib-injector орнату
+installCurseforgeFile: Curseforge файлын орнату
+installFabric:
+  name: Fabric орнату
+installForge:
+  downloadInstaller: Орнатушы жүктеу
+  library: '{lib} кітапханасын орнату'
+  name: Forge орнату
+  postProcessing: Кейінгі өңдеу
+installInstance:
+  file: '{file} инстанция файлын жаңарту'
+  link: '{count} файлды көшіру немесе сілтеме жасау'
+  name: Инстанцияны жаңарту
+  resolve: Инстанция конфигін шешу
+  unzip: '{count} файлды архивтен шығару'
+installJre:
+  decompress: JRE файлдарын қалтаға ыдырату
+  download: Қысылған JRE файлын жүктеу
+  name: Java орындалу кітапханасын орнату
+installLabyMod:
+  asset: '{name} активін орнату'
+  json: '{version} JSON жасау'
+  name: LabyMod орнату
+installLibraries:
+  library: Кітапхананы орнату
+  name: Кітапханаларды орнату
+installModpack:
+  deploy: Жайғастыру
+  download:
+    file: Файл жүктеу
+    name: Жүктеу
+  name: Модпакет орнату
+  unpack: Модпакетті архивтен шығару
+installModrinthFile:
+  name: Modrinth орнату
+installOptifine:
+  download: Optifine Universal жүктеу
+  jar: Jar жасау
+  json: Json жасау
+  name: Optifine орнату
+installResource:
+  fail: '{file} орнату сәтсіз аяқталды'
+  success: '{file} ресурсын орнату сәтті аяқталды'
+installVersion:
+  jar: Нұсқа Jar файлын орнату
+  json: Нұсқа Json файлын орнату
+  name: Minecraft клиенті {version} орнату
 instance:
-  fullscreen: Fullscreen
-  height: Height
-  installModpack: Update instance from modpack
-  resolution: Window Resolution
-  resolutionPreset: Resolution Preset
-  vmVar: Environment Variables
-  vmVarHint: Click   button to add environemnt variables
-  width: Width
+  addServer: Сервер қосу
+  changeIcon: Таңбашаны өзгерту
+  current: Қазіргі инстанция
+  delete: Ойын жою
+  deleteFailed: Инстанцияны жою сәтсіз аяқталды
+  deleteFailedPermission: Басқа бағдарлама файлды алып жатыр
+  deleteHint: Инстанция деректері дискіден біржола өшіріледі. Сіз сенімдісіз бе?
+  duplicate: Ойын көшіріп алу
+  duplicatedName: Қайталанған атау
+  fileApi: Файл синхрондау сервері API url
+  fileApiHint: Инстанция файлдарын қашықтағы конфиг серверінен синхрондау үшін url.
+  fullscreen: Толық экран
+  gameVersion: Ойын нұсқасы
+  height: Биіктік
+  icon: Профиль таңбашасы
+  iconHint: Таңбаша файл немесе интернет сілтемесі болуы мүмкін.
+  iconUrl: Таңбаша Url
+  includeVersion: Нұсқаны қосу | Нұсқаларды қосу
+  installModpack: Инстанцияны модпакеттен жаңарту
+  lastPlayed: Соңғы ойнаған
+  launchArguments: Жөнелту аргументтерінің алдын ала қарау
+  launchServer: Локалды серверді жөнелту
+  linkFileDesc: >-
+    Бұл инстанция локалды {file} файлын глобалды {file} файлымен қайта жазады. Сіз сілтеме жасағыңыз келетініне сенімдісіз бе?
+  linkFileTitle: '{file} файлына сілтеме жасағыңыз келетініне сенімдісіз бе?'
+  mcOptions: Minecraft параметрлері
+  mcOptionsHint: Қосымша Minecraft жөнелту аргументтері
+  name: Профиль атауы
+  nameHint: Модпакет атауы
+  nameNoCyrillic: Атау кириллица таңбаларын қамтуы мүмкін емес
+  neverPlayed: Ешқашан ойнаған жоқ
+  openCrashReportFolder: Құлау есептері қалтасын ашу
+  openLogFolder: Журнал қалтасын ашу
+  playtime: Ойнау уақыты
+  preExecCommand: Алдын ала орындау командасы
+  preExecCommandHint: Minecraft жөнелту алдында орындалатын команда
+  prependCommand: Команданы алдына қосу
+  prependCommandHint: Бұл барлық жөнелту командаларының алдына бұл команданы қосады
+  requireName: Атау қажет
+  resolution: Ажыратымдылық
+  resolutionEnabled: Қолданушы ажыратымдылықты қосу
+  resolutionPreset: Ажыратымдылық алдын орнату
+  showInstance: Ойын қалтасын көрсету
+  useSharedOptions: Ортақ ойын параметрлерін қолдану
+  useSharedOptionsDesc: Бұл options.txt файлын инстанциялар арасында ортақ файлға сілтеме жасайды
+  useSharedServersList: Ортақ серверлер тізімін қолдану
+  useSharedServersListDesc: Бұл servers.dat файлын инстанциялар арасында ортақ файлға сілтеме жасайды
+  versionHint: Бұл ойынның Minecraft нұсқасы
+  vmOptions: JVM параметрлері
+  vmOptionsHint: JVM-ге берілетін қосымша аргументтер
+  vmVar: Орта айнымалылары
+  vmVarHint: Орта айнымалылар қосу үшін + түймесін басыңыз
+  width: Ені
+instanceAge:
+  older: Ескірек
+  threeDay: Үш күн ішінде
+  today: Бүгін
+instanceDiscover:
+  gameFolder: '{count} ойын қалтасын табу'
+  instanceFolder: '{count} инстанция табылды'
+instanceFileOperation:
+  add: Қосу
+  backup-add: Қайта жазу (Қор көшірме)
+  backup-remove: Жою (Қор көшірме)
+  keep: Ұстау
+  remove: Жою
 instanceInstallSkip:
-  ignore: Ignore
-  skip: Skip
-  title: Potential corrupted file source
+  ignore: Елемеу
+  skip: Өткіріп жіберу
+  title: Ықтимал бүлінген файл көзі
   warning: >-
-    Some files are downloaded multiple times with checksum unmatching. This may
-    be due to the fact that the original checksum is incorrect. Please check. If
-    you confirm the current files are valid, you can skip the validation check.
+    Кейбір файлдар бірнеше рет жүктеліп, бақылау қосынды сәйкес келмейді. Бұл бастапқы бақылау қосынды қате болғанынан болуы мүмкін. Тексеріңіз. Егер қазіргі файлдар жарамды екеніне сенімді болсаңыз, растау тексерісін өткіріп жібере аласыз.
+instanceSetting:
+  disableAuthlibInjector: authlib injector өшіру
+  disableAuthlibInjectorDescription: >-
+    Егер сіз үшінші жақтық дене киім жүйесін қолданып жатсаңыз. authlib injector ойында дене киімді көрсетуге көмектеседі.
+  disableElyByAuthlib: ely.by authlib ауыстырғышын өшіру
+  disableElyByAuthlibDescription: >-
+    Ely.by әр түрлі серверде дене киімді әмбебап көрсету үшін өзіндік authlib ауыстырғышы бар.
+  fastLaunch: Турбо жөнелту
+  fastLaunchHint: Пайдаланушы күйі мен бар болып тұрған шешілмеген мәселелерді елемеу
+  hideLauncher: Жөнелткеннен кейін жөнелткішті жасыру
+  icon: Сурет таңдау
+  showLog: Minecraft журналын көрсету
+  showLogHint: Бұл ойын басталғаннан кейін Minecraft журналын көрсететін терезе ашады
+instanceTemplate:
+  curseforge: Бұл Curseforge модпакеті
+  ftb: Бұл FTB модпакеті
+  importing: Үлгі импорттау
+  mcbbs: Бұл MCBBS модпакеті
+  modpack: Бұл қарапайым модпакет
+  modrinth: Бұл Modrinth модпакеті
+  preview: Модпакет алдын көру
+  title: Үлгі параметрі
 instanceUpdate:
-  summary: Add {add} files. Remove {remove} files. Keep {keep} files.
+  basic: Параметр жаңарту
+  files: Файл жаңартулары
+  loaderChanged: >-
+    Бұл инстанцияның мод жүктеушісі өзгертілді. Ескі мод жүктеуші {modloader}, жаңа мод жүктеуші {newModloader}.
+  summary: '{add} файл қосу. {remove} файл жою. {keep} файл ұстау.'
+  title: Инстанцияны жаңарту
+  update: Жаңартуды бастау
+instances:
+  add: Ойын жасау
+  addCurseForgeDescription: >-
+    Curseforge дерек қалтасынан импорттау. Curseforge түбірлік дерек қалтасын таңдауыңыз керек
+  addDescription: Түпкіден жаңа инстанция жасау
+  addMMCDescription: >-
+    Бар болып тұрған MultiMC инстанциясын импорттау. MultiMC-тен дерек қалтасын таңдауыңыз керек.
+  addManually: Қолмен жасау
+  addModrinthDescription: >-
+    Бар болып тұрған Modrinth инстанциясын импорттау. Modrinth түбірлік дерек қалтасын таңдауыңыз керек.
+  addServer: Серверден жасау
+  addServerDescription: Бұл ойынды тікелей серверге жөнелтетіндей жасайды.
+  addTemplate: Жүктелген модпакеттен жасау
+  addTemplateDescription: Жүктелген модпакеттен импорттау
+  addVanilla: Қарапайым Minecraft-тан жасау
+  addVanillaDescription: >-
+    Қарапайым .minecraft қалтасынан импорттау. Бұл бастапқы ойын профилін XMCL-ге көшіреді.
+  choose: Ойын таңдау
+  fix: Жөндеу
+  folderSetting: Қалта параметрлері
+  importFolder: Қалтадан импорттау
+  importFolderDescription: Minecraft-ты жөнелткішке импорттау
+  loadingFiles: Модпакет файлдарын жүктеу
+  refreshServers: Серверлерді жаңарту
+items:
+  count: '{count} нәрсе'
+  total: 'Барлығы {total}'
+java:
+  allocatedLong: Жүйенің әдепкі Java қолдану
+  allocatedShort: Автоматты түрде бөлінген
+  browse: Java орындалу файлын шолу
+  importFromFile: Файлдан Java импорттау
+  invalid: Жарамсыз Java орналасуы
+  location: Java орналасуы
+  maxMemory: Ең көп жад
+  memory: Java жады
+  memoryAuto: Автоматты
+  memoryManual: Қолмен
+  memoryUnassigned: Бөлінбеген
+  minMemory: Ең аз жад
+  modifyInstance: Java жолын өзгерту
+  noMemory: Жад қолдануды шектемеу
+  refresh: Жергілікті Java жаңарту
+  systemMemory: 'Жүйенің бос жады: {free} / {total}'
+labyMod:
+  disable: LabyMod өшіру
+  empty: LabyMod қазіргі Minecraft қолдамайды
 launch:
-  createShortcut: Create shortcut
+  cancel: Болдырмау
+  createShortcut: Жарлық жасау
+  kill: Тоқтату
+  killServer: Локалды серверді өшіру
+  launch: Жөнелту
+  launchAnyway: Бәрібір жөнелту
+launchBlocked:
+  ignore: Мәжбүрлі жөнелту
+  launchBadVersion:
+    description: '{version} нұсқа json файлы бүлінген. Бұл нұсқаны қайта орнату керек пе?'
+    title: Жаман нұсқа JSON
+  launchGeneralException:
+    description: Кейбір қателер жөнелту сәтсіз аяқталуына себеп болды.
+    title: Жөнелту сәтсіз аяқталды
+  launchInvalidJavaPath:
+    description: >-
+      Таңдалған java жоқ немесе жарамсыз. Жаңа нұсқасын таңдаңыз. <span
+      class="highlight"> {javaPath} </span>
+    title: Жарамсыз Java жолы
+  launchJavaNoPermission:
+    description: >-
+      Жөнелткіште <span
+      class="highlight"> {javaPath} </span> java орындау құқығы жоқ. Java файлының рұқсатын өзгертіңіз немесе жөнелткіштің рұқсатын көтеріңіз.
+    title: Жөнелту үшін рұқсат жоқ
+  launchNoProperJava:
+    description: >-
+      Ойынды жөнелту үшін дұрыс java таңдау мүмкін емес. ({javaPath} жарамсыз болып тұр ма?)
+    title: Дұрыс java табылмады
+  launchNoVersionInstalled:
+    description: '<span class="highlight">{version}</span> нұсқаны жөнелту үшін шешім таба алмадық.'
+    title: Нұсқа таңдалмады
+  launchSpawnProcessFailed:
+    description: >-
+      Java-ңызды тексеріңіз немесе жөнелткішке көбірек рұқсат беріп, қайталап көріңіз. Егер бұл әлі де жұмыс істемесе, әзірлеушілерге хабарласыңыз.
+    title: Ойын процесін бастау сәтсіз аяқталды
+  launchUserStatusRefreshFailed:
+    description: Қазіргі таңдалған пайдаланушы күйін жаңарту мүмкін емес.
+    title: Пайдаланушы күйін растау сәтсіз аяқталды
+  unexpectedText: >-
+    Бұл күтпеген жағдай. Мәселені жеңілдету үшін жөнелткішті қайта іске қоса аласыз.
+    Егер бұл мәселе әлі де болып тұрса, авторға хабарласыңыз.
+  userAcquireMicrosoftTokenFailed: >-
+    Microsoft токенін алу сәтсіз аяқталды. Қайталап көріңіз немесе Microsoft тіркелгіңізді тексеріңіз.
+  userCheckGameOwnershipFailed: Minecraft иелігін тексеру сәтсіз аяқталды. Қайталап көріңіз немесе желіңізді тексеріңіз.
+  userExchangeXboxTokenFailed: >-
+    Microsoft токенінен xbox токенін ауыстыру сәтсіз аяқталды. Қайталап көріңіз немесе желіңізді тексеріңіз.
+  userLoginMinecraftByXboxFailed: >-
+    Xbox токенімен Minecraft-қа кіру сәтсіз аяқталды. Қайталап көріңіз немесе желіңізді тексеріңіз.
+launchFailed:
+  crash: Ойын құлады!!
+  description: Құлау есебі жоқ. Бұл қате журналы мен соңғы журнал.
+  failedToLaunch: Жөнелту жөнелту сәтсіз аяқталды
+  latestLog: Соңғы журнал
+  title: Ойын қалыпсыз кодпен аяқталды
+launchPreExecuteCommandFailed:
+  description: >-
+    Алдын ала орындау командасы қатемен сәтсіз аяқталды: {error}. Команданы тексеріп, қайталап көріңіз.
+  title: Алдын ала орындау командасы сәтсіз аяқталды
+launchStatus:
+  assigningMemory: Жад бөлу
+  exit: Ойыннан шығу керек пе?
+  injectingAuthLib: Үшінші жақтық AuthLib орнату
+  launching: Жөнелту...
+  launchingSlow: Әлі де жөнелту... Графикалық қозғалтқышты бастау баяу болуы мүмкін...
+  refreshingUser: Пайдаланушы токенін жаңарту
+  spawningProcess: Процесс жасау
+launcherUpdate:
+  alreadyLatest: Жаңартылған
+  installAndQuit: Орнату үшін қайта қосу
+  noUpdateAvailable: Жаңарту жоқ
+  reinstall: Қайта орнату
+  updateToThisVersion: Жүктеу және орнату
+liteloader:
+  name: LiteLoader
+localVersion:
+  auto: Автоматты есептелген
+  delete: Жергілікті нұсқаны жою
+  deleteDescription: >-
+    Бұл операция жергілікті нұсқа json & jar файлдарын жояды. Қайта қолданғыңыз келсе, оны қайта жүктеуіңіз керек.
+  empty: Нұсқа орнатылмаған
+  hint: Нақты жергілікті нұсқаны тікелей жөнелту
+  refresh: Нұсқаларды жаңарту
+  reinstallDescription: >-
+    Егер сіз бұл нұсқаның орнатуында кейбір мәселелер бар деп ойласаңыз, оны қайта орнатып көруге болады.
+  reinstallTitle: '{version} қайта орнату'
+  title: Жергілікті нұсқа | Жергілікті нұсқалар
+logLevel:
+  error: Қате
+  info: Ақпарат
+  success: Сәтті
+  warning: Ескерту
+login:
+  dropHint: Қолмен кіру үшін сенімді коды бар сілтемені осы жерге тастаңыз
+  forgetPassword: Құпия сөзді ұмыттыңыз ба?
+  login: Кіру
+  manualLoginUrl: Браузер көрінбесе, түрлендіру үшін осы сілтемені басыңыз!
+  signup: Тіркелу
+  signupDescription: Біз үшін жаңа ма?
+  userRelogin: Пайдаланушы қатынау токенінің мерзімі аяқталды. Қайта кіріңіз!
 loginError:
+  acquireMicrosoftTokenFailed: >-
+    Microsoft токенін алу сәтсіз аяқталды. Бұл желі мәселесі болуы мүмкін. Қайталап көріңіз.
+  badNetworkOrServer: >-
+    Желі байланысыңызды тексеріңіз! Немесе аутентификация сервері жұмыс істемеуі мүмкін!
+  checkOwnershipFailed: Ойын иелігін тексеру сәтсіз аяқталды. Қайталап көріңіз.
+  connectionReset: Байланыс сервермен қайта орнатылғаннан кіру сәтсіз аяқталды
+  fetchMinecraftProfileFailed: 'Minecraft профилін алу сәтсіз аяқталды: {reason}'
+  illegalEmail: Электрондық пошта жарамды болуы керек
+  invalidCredentials: Жарамсыз тіркелгі деректері. Жарамсыз пайдаланушы аты немесе құпия сөз.
+  loginMinecraftByXboxFailed: >-
+    Xbox токенімен Minecraft токенін ауыстыру сәтсіз аяқталды. Сізде Xbox-та Minecraft бар екеніне көз жеткізіңіз немесе қайталап көріңіз.
   loginXboxAgeRestricted: >-
-    Fail to login Xbox due the the age issue. Please make sure the age is set
-    for your Microsoft account and the age is above 18.
+    Жас мәселесіне байланысты Xbox-қа кіру сәтсіз аяқталды. Microsoft тіркелгіңізге жас орнатылғанына және жасы 18 жастан асқанына көз жеткізіңіз.
+  loginXboxFailed: >-
+    Microsoft токенімен Xbox-қа кіру сәтсіз аяқталды. Microsoft тіркелгіңізге тәуелсіз Xbox тіркелгіңіз бар екеніне көз жеткізіңіз. Қайталап көріңіз.
   noProfileForNewUser: >-
-    No game profile found! If you are a new Minecraft user, please login at
-    least one time in Minecraft official launcher.
+    Ойын профилі табылмады! Егер сіз жаңа Minecraft пайдаланушысы болсаңыз, кем дегенде бір рет Minecraft ресми жөнелткішінде кіріңіз.
+  requestFailed: Кіру сәтсіз аяқталды, біз нақты себебін білмейміз. Қайталап көріңіз.
+  requireEmail: Электрондық пошта қажет
+  requirePassword: Құпия сөз қажет
+  requireUsername: Пайдаланушы аты қажет
+  timeout: Кіру таймаут. Қайталап көріңіз немесе желіңізді тексеріңіз.
+logsCrashes:
+  crashes: Құлау есептері
+  logs: Журналдар
+  placeholder: Файлдар табылмады
+  title: Журналдар немесе құлау есептері
+me:
+  games: Менің ойындарым
+  modpacks: Менің модпакеттерім
+  news: Жаңалықтар
+  recentPlay: Соңғы ойын
+  versions: Орнатылған нұсқалар
+minecraftVersion:
+  empty: Minecraft нұсқаларын жүктеу мүмкін емес
+  name: Minecraft нұсқасы
+  release: Шығарылым
+  showAlpha: Сnapshot көрсету
+  snapshot: Сnapshot
 mod:
-  applyGroupRules: Apply saved grouping rules
-  group: Group up
-  syncGroupRules: Save grouping rules
-  ungroup: Ungrouping
+  acceptVersion: '{version} қабылдау'
+  applyGroupRules: Сақталған топтау ережелерін қолдану
+  compatible: Құйрықты мод.
+  currentVersion: Қазіргі {current}
+  deletion: Модты жою
+  deletionHint: >-
+    Бұл модты & оның метадеректерін біржола жоғалтасыз. Модты жоюға сенімдісіз бе? | Бұл модтарды & олардың метадеректерін біржола жоғалтасыз. Сенімдісіз бе?
+  deletionRestHint: Және {rest} модтар көбірек...
+  denseView: Тығыз көрініс
+  dropHint: Модтың .jar/.litemod файлын импорттау үшін осы жерге тастаңыз.
+  duplicatedDetected: '{count} қайталанған модтар'
+  duplicatedDetectedDescription: >-
+    Бірдей мод идентификаторы бар, бірақ әр түрлі файлдары бар модтар табылды. Бұл Minecraft құлауына әкелуі мүмкін. Ұстағыңыз келетін файлды таңдаңыз.
+  enabled: '{count} мод қосылған'
+  filter: Модтар сүзгісі
+  group: Топтау
+  groupInstalled: Орнатылған модтарды топтау
+  hasUpdate: Модтың жаңа нұсқасы бар!
+  hideIncompatible: Құйрықсыз модтарды жасыру
+  incompatible: Құйрықсыз мод.
+  incompatibleHint: Мод үйлесімділік есебіңізді тексеріңіз
+  incompatibleHintDescription: >-
+    Кейбір мод тәуелділіктері жоқ болуы мүмкін. Немесе кейбір тәуелділік нұсқалары сәйкес келмейді.
+  manage: Басқару
+  maybeCompatible: Мүмкін құйрықты.
+  modloaderSelectHint: Бұл мод келесі мод жүктеушілерін қолдайды. Орнату үшін біреуін таңдаңыз.
+  modloaderSelectNotSupported: Minecraft {minecraft} үшін {modloader} табылмады
+  mods: '{count} мод'
+  name: Мод | Модтар
+  noModLoaderHint: Модтарды қолдану үшін мод жүктеушіні қосуды ұмытпаңыз!
+  openLink: Мод сілтемесін ашу {url}
+  search: Модтар іздеу
+  searchOnCurseforge: '{name} іздеу curseforge-да'
+  searchOnMcWiki: '{name} MC энциклопедиясында іздеу.'
+  searchOnModrinth: '{name} іздеу Modrinth-те'
+  showDirectory: Модтар каталогын көрсету
+  showFile: Мод жолын көрсету {file}
+  showInCurseforge: Модты curseforge-да көрсету
+  showInModrinth: '{name} Modrinth-те көрсету'
+  switchDefaultSource: Әдепкі мод көзі
+  syncGroupRules: Топтау ережелерін сақтау
+  toUpdate: '{count} жаңарту'
+  ungroup: Топтаудан шығару
 modFilter:
-  clear: Clear Filter
-  dependenciesInstallOnly: Only show missed dependencies mods
-  disabledOnly: Only show disabled mods
-  hasUpdateOnly: Only show has update mods
-  incompatibleOnly: Only show incompatible mods
-  unusedOnly: Only show unused libraries mods
+  clear: Сүзгін тазалау
+  dependenciesInstallOnly: Тек жоқ тәуелділік модтарын көрсету
+  disabledOnly: Тек өшірілген модтарды көрсету
+  hasUpdateOnly: Тек жаңартуы бар модтарды көрсету
+  incompatibleOnly: Тек құйрықсыз немесе жоқ тәуелділіктері бар модтарды көрсету
+  unusedOnly: Тек қолданылмайтын кітапхана модтарын көрсету
 modInstall:
-  display: Mods Display
-  removeUnusedLibraries: Remove unused libraries mods
+  archived: >-
+    '{name} архивтелді. {name} қайта жаңартылмайды, егер автор жобаны архивтен шығармаса.'
+  checkDependencies: Тәуелділіктерді тексеру
+  checkUpgrade: Модтар жаңартуын тексеру
+  checkedDependencies: Тәуелділіктер тексерілді
+  checkedUpgrade: Жаңарту тексерілді
+  currentVersion: Таңдалған нұсқа
+  dependencyHint: Басқа нұсқа {version} орнатылды
+  display: Модтар көрінісі
+  install: Орнату
+  installDependencies: Жоқ тәуелділіктерді орнату
+  installHint: '{dependencies} тәуелділіктері бар {file} файлы орнатылады'
+  installed: Орнатылды
+  noVersionSupported: Мод тек Minecraft {supported} қолдайды.
+  recommendation: '{modrinth} және {curseforge} ішінен {first} немесе {second} модтарын зерттеңіз!'
+  removeUnusedLibraries: Қолданылмайтын кітапхана модтарын жою
+  search: Іздеу нәтижесі
+  searchHint: Жобаны іздеу және таңдау
+  skipVersion: Әр түрлі Minecraft нұсқасы бар модтарды өткіріп жіберу
+  source: Мод көзі
+  switch: Нұсқаны ауыстыру
+  upgrade: Модтарды жаңарту
 modUpgradePolicy:
-  name: Upgrade Policy
+  curseforge: Curseforge бірінші
+  curseforgeOnly: Тек Curseforge
+  modrinth: Modrinth бірінші
+  modrinthOnly: Тек Modrinth
+  name: Жаңарту саясаты
+modified:
+  reset: Қалпына келтіру
+  save: Сақтау
+  unsaved: Сіздің өзгерісіңіз сақталмады!
 modpack:
-  exportDirectory: Export Directory
-  exportDirectoryDescription: The modpack will be exported to Downloads folder by default
+  author: Автор аты
+  authorHint: Бұл экспортталған модпакетке (Curseforge) қол қою үшін қолданылуы мүмкін
+  delete:
+    hint: Бұл {name} модпакетін оның метадеректерімен бірге жояды. Сіз сенімдісіз бе?
+    title: Модпакетті жою
+  description: Сипаттама
+  descriptionHint: >-
+    Сіздің модпакетіңізге арналған жалпы сипаттама. Curseforge модпакеті ретінде экспорттау үшін қолданылуы мүмкін
+  dropHint: Модпакетті импорттау үшін оны zip файлын жөнелткішке тастаңыз
+  emitCurseforge: Curseforge модпакетін экспорттау
+  emitMcbbs: MCBBS модпакетін экспорттау
+  emitModrinth: Modrinth модпакетін экспорттау
+  emitModrinthStrict: Қатаң Modrinth пішімі
+  emitModrinthStrictDescription: Modrinth құжатында тізімделген 4 доменінен келетін сілтемелер ғана рұқсат етіледі
+  export: Модпакет ретінде экспорттау
+  exportDirectory: Экспорт каталогы
+  exportDirectoryDescription: Модпакет әдепкі бойынша Жүктеулер қалтасына экспортталады
+  general: Жалпы ақпарат
+  includeAssets: Активтерді қосу
+  includeLibraries: Кітапханаларды қосу
+  includes: Қосылатын файлдар
+  modpackVersion: Модпакет нұсқасы
+  name: Модпакет | Модпакеттер
+  overrides: Қайта жазулар
+  showFile: '{file} файлын көрсету'
+  showInCurseforge: '{name} Curseforge-да көрсету'
+  showInFtb: '{name} FTB-да көрсету'
+  showInModrinth: '{name} Modrinth-те көрсету'
+  url: URL
+  urlHint: Сіздің модпакетіңіздің басты бетінің url адресі
 modpackImportConfirm:
   description: >-
-    Detect you drop a file into the launcher. Are you trying to import a
-    modpack?
-  title: Are you trying to import a modpack?
+    Сіз жөнелткішке файл тастағаныңызды анықтадық. Модпакет импорттауға тырысасыз ба?
+  title: Модпакет импорттауға тырысасыз ба?
 modrinth:
+  browseUrl: Браузерде ашу {url}
   categories:
+    128x: 128x
+    16x: 16x
+    256x: 256x
+    32x: 32x
+    48x: 48x
+    512x+: 512x+
+    64x: 64x
+    8x-: 8x-
+    adventure: Саяхат
+    atmosphere: Атмосфера
+    audio: Дыбыс
+    blocks: Блоктар
+    bloom: Жарқыл
+    bukkit: Bukkit
+    bungeecord: Bungeecord
+    canvas: Canvas
+    cartoon: Мультфильм
+    categories: Санаттар
+    challenging: Қиын
+    colored-lighting: Түсті жарық
+    combat: Соғыс
+    core-shaders: Негізгі шейдерлер
+    cursed: Шағын
+    datapack: Дерек жиынтығы
+    decoration: Декорация
+    economy: Экономика
+    entities: Нысандар
+    environment: Қоршаған орта
+    equipment: Жабдық
+    fabric: Fabric
+    fantasy: Фантастика
+    features: Ерекшеліктер
+    folia: Folia
+    foliage: Жапырақтар
+    fonts: Қаріптер
+    food: Тамақ
+    forge: Forge
+    game-mechanics: Ойын механикасы
+    gui: Gui
+    high: Жоғары
+    iris: Iris
+    items: Заттар
+    kitchen-sink: Кез келген
+    library: Кітапхана
+    lightweight: Жеңіл
+    liteloader: LiteLoader
+    locale: Тіл
+    low: Төмен
+    magic: Магия
+    management: Басқару
+    medium: Орта
+    minecraft: Minecraft
+    minigame: Мини-ойындар
+    misc: Әртүрлі
+    mobs: Мобтар
+    modded: Модтелген
+    models: Модельдер
+    modloader: Мод жүктеуші
+    multiplayer: Көп ойыншылы
+    name: Санаттар
     neoforge: NeoForge
-  createCollection: Create Collection
-  followedProjects: Followed Projects
+    optifine: Optifine
+    optimization: Оптимизациялар
+    paper: Paper
+    path-tracing: Жол іздеу
+    pbr: PBR
+    performance impact: Производительділік әсері
+    potato: Картоп
+    purpur: Purpur
+    quests: Тапсырмалар
+    quilt: Quilt
+    realistic: Реалистік
+    reflections: Шағылулар
+    resolutions: Ажыратымдылықтар
+    rift: Rift
+    screenshot: Скриншот
+    semi-realistic: Жартылай реалистік
+    shadows: Көлеңкелер
+    simplistic: Қарапайым
+    social: Әлеуметтік
+    spigot: Spigot
+    sponge: Sponge
+    storage: Сақтау
+    technology: Технология
+    themed: Тақырыптық
+    transportation: Көлік
+    tweaks: Реттеулер
+    utility: Қолданыс
+    vanilla: Vanilla
+    vanilla-like: Vanilla-сияқты
+    velocity: Velocity
+    waterfall: Waterfall
+    worldgen: Әлем генерациясы
+  clientSide: Клиент жағы
+  copyTitle: '{title} мәтінін алмасу буферіне көшіру'
+  createAt: Жасалған
+  createCollection: Жинақ жасау
+  description: Сипаттама
+  downloads: Жүктеулер
+  environments:
+    client: Клиент
+    default: Әдепкі
+    name: Орта
+    optional: Қосымша
+    required: Қажетті
+    server: Сервер
+    unsupported: Қолдауы жоқ
+  externalResources: Сыртқы ресурстар
+  featuredVersions: Танымал нұсқалар
+  followedProjects: Бақыланатын жобалар
+  followers: Бақылаушылар
+  gallery: Галерея
+  gameVersions:
+    name: Ойын нұсқалары
+  headers:
+    status: Статистика
+    support: Қолдау
+    version: Нұсқа
+  issueUrl: Мәселе
+  license: Лицензия
+  licenses:
+    name: Лицензиялар
   loginHint: >-
-    The operation requires modrinth to perform. The launcher will open a browser
-    window to login modrinth.
-  loginTitle: Login to Modrinth
-  projects: '{count} projects'
-search:
-  favorate: Collection
-server:
-  export: Export Server
-  exportNoFilesHint: >-
-    No server files found. You can run server on local once to generate some
-    files.
-  exportOption: Server Export Options
-  exportSSHAuthenticationFailed: >-
-    All authentication methods failed. Please check username/password or private
-    key.
-  exportSSHOptions: SSH Options
-  exportSSHPrivateKeyPath: SSH Private Key Path
-  exportSSHRemotePath: Remote Server Path
-  exportToFolder: Export To Folder
-  hostRequired: Please enter the server ip address
-  upload: Upload Server
-setting:
-  about: About
-  backdropBlur: Backdrop Blur
-setup:
-  error:
-    invalidChar: >-
-      Path contains invalid characters! It could cause Minecraft fail to start!
-      Plaese only use English characters and symbol!
-sortBy:
-  alphabetAsc: Sort by alphabet (ascending)
-  alphabetDesc: Sort by alphabet (descending)
-  timeAsc: Sort by modification time (ascending)
-  timeDesc: Sort by modification time (descending)
-task:
+    Бұл операция Modrinth жүргізу үшін қажет. Жөнелткіш браузер терезесін ашып, Modrinth-ке кіруге тырысады.
+  loginTitle: Modrinth-ке кіру
+  modLoaders:
+    name: Мод жүктеушілері
+  perPage: Бетке
+  projectId: Жоба идентификаторы
+  projectMembers: Жоба мүшелері
+  projectType:
+    mod: Мод
+    modpack: Модпакет
+    name: Жоба түрі
+    resourcePack: Ресурс дестесі
+    shader: Шейдер
+  projects: '{count} жоба'
+  quickSearch: '{title} іздеу'
+  searchText: Іздеу
+  serverSide: Сервер жағы
+  sort:
+    downloads: Жүктеу саны
+    follows: Бақылау саны
+    newest: Жақында жасалған
+    relevance: Өзектілік
+    title: Сұрыптау
+    updated: Жақында жаңартылған
+  sourceUrl: Көз
+  technicalInformation: Техникалық ақпарат
+  updateAt: Жаңартылған
+  versions: Нұсқалар
+  wikiUrl: Уики
+modrinthCard:
+  currentVersion: Қазіргі нұсқа
+  projectHint: >-
+    Бұл инстанция Modrinth модпакетінен жасалған <code class="rounded p-1"
+    style="background: rgba(123,123,123,0.2)">{title}</code> (жоба идентификаторы:
+          <code class="rounded p-1" style="background: rgba(123,123,123,0.2)">{id}</code>)
+multiplayer:
+  allowTurn: Ретейл серверін қосу
+  allowTurnHint: >-
+    Егер сіз достарыңызбен байланыса алмасаңыз, ретейл серверіне рұқсат беріңіз. Алайда, ретейл серверін қолдану байланысыңызды баяулатуы мүмкін. Төмен қарап қолданыңыз.
+  complete: Аяқталды
+  confirm: Растау
+  connections: Байланыстар
+  copied: Көшірілді!
+  copy: Көшіру
+  copyGroupToFriendHint: Достарыңыз топқа қосылу үшін осы идентификаторды ұсыныңыз
+  copyLocalHint: >
+    "Жергілікті SDP мәтінін көшіріп, оны нысанаға жіберіңіз, сонда нысана осы мәтінді қосылу байланысына енгізеді <span>Бір таңбаны <span style="color: red; font-weight: bold;">бір ғана қатысушы</span> үшін қолдануға болады! Бір таңбаны бірнеше қатысушыға жіберуге болмайды!</span> <br> <span class="hint-text"
+    style="font-style: italic;">Егер сізге бірнеше қатысушымен байланыс қажет болса, <span style="font-weight: bold; color: rgba(245, 158,
+    11)">бірнеше</span> байланыс жасауыңыз керек.</span>"
+  createLocalToken: Жергілікті таңба жасау
+  currentIpTitle: Анықталған қоғамдық IP
+  currentNatTitle: 'Қазіргі желі (NAT):'
+  difficultyLevelHint: Байланыс жасау қиындығы деңгейі
+  disconnect: Ажырату
+  disconnectDescription: '{user}({id}) пайдаланушымен ажыратылуға сенімдісіз бе?'
+  disconnected: ажыратылды
+  enterRemoteToken: Қашықтағы таңбаны енгізіңіз
+  enterRemoteTokenHint: >
+    Қатысушыңыз сіздің таңбаңызды енгізген соң, оның таңбасын төмендегі мәтін аумағына енгізуіңіз керек. Байланысу үшін растау түймесін басыңыз.
+  exposedPortDescription: Басқа қатысушыларға ашылған портыңыз
+  exposedPorts: Бағытталған порттар
+  gatheringIce: >
+    "ICE сервері желіңіз туралы жеткілікті ақпарат жинауын күтіңіз. Егер сабырсыз болсаңыз және жеткілікті ақпарат бар болса, ағымдағы SDP-ны басқа жаққа алдын ала беріп, Келесі түймесін баса аласыз <span class="v-chip v-chip--label v-size--small" style="text-font: bold"
+    >Жергілікті таңба</span> сіздің қатысушыңызға жіберіңіз, ол сіздің таңбаңызды <span
+    class="v-chip v-chip--label v-size--small" style="text-font: bold"> Қосылу байланысы </span> бөліміне енгізеді. <br> ICE сервері <span class="v-chip v-chip--label v-size--small"
+    style="text-font: bold">Жергілікті таңба</span> жасау үшін сіздің ақпаратыңызды жинауға уақыт қажет болуы мүмкін.<br> ICE күйі толық болғанша күтудің қажеті жоқ. Егер төмендегі таңба өзгеріссіз қалса, оны көшіріп, қатысушыңызға жібере аласыз."
+  groupId: Топ идентификаторы
+  illegalTokenDescription: Жарамсыз таңба, қатысушыңыздан келген таңбаның дұрыс екеніне көз жеткізіңіз
+  initiateConnection: Байланыс бастау
+  inviteLink: Шақыру сілтемесі
+  joinConnection: >-
+    Қатысушыңыз байланысты бастаған болса, сіз Қосылу байланысын орындауыңыз керек.
+  joinManual: Қосылу
+  joinOrCreateGroup: Топқа қосылу/Топ жасау
+  joinOrCreateGroupHint: Достарыңыздан топ идентификаторын алыңыз немесе топ жасаңыз
+  kernel: P2P ядросы
+  kernelDescription: >-
+    Нативті WebRTC немесе node-datachannel қолданыңыз. Егер сіздің p2p байланысыңыз кейде жөнелткіш терезесін құлатса, тек осыны ауыстырыңыз.
+  leaveGroup: Топтан шығу
+  localToken: Жергілікті таңба
+  manualConnect: Қолмен байланысу
+  name: LAN-да көп ойыншылы
+  networkInfo: Желі ақпараты
+  next: Келесі
+  otherExposedPortDescription: '{user} бағыттаған порты'
+  placeholder: Minecraft-та LAN-да ойнау үшін басқа пайдаланушылармен байланысыңыз!
+  previous: Алдыңғы
+  receiveHint: >
+    Басқа жақ сіздің таңбаңызды енгізген соң, байланыс автоматты түрде жасалады. Енді сіз диалогты жаба аласыз.
+  receiveRemoteTokenHint: Қатысушыңыздан келген таңбаны осы жерге енгізіңіз.
+  remoteToken: Қашықтағы таңба
+  routerInfo: Роутер ақпараты
+  sendTokenToRemote: Таңбаны қашықтағы жаққа жіберу
+  share: Инстанция конфигін бөлісу
+  sharing: Файлдар бөлісуде...
+  sharingNotificationBody: Сіз {name} бөлісті конфигінен инстанция жасай немесе жүктей аласыз.
+  sharingNotificationTitle: Бір қатысушы ойын конфигін бөлісуде
+  start: Бастау
+  startNewP2PConnection: Жаңа қатысушы байланысын жасау үшін Бастау түймесін басыңыз
+myStuff: Менің нәрселерім
+name: Атау
+natType:
+  blocked: Блокталған
+  fullCone: Толық конус
+  openInternet: Ашық интернет
+  restrictNat: NAT шектеу
+  restrictPortNat: Порт NAT шектеу
+  symmetricNat: Симметриялы NAT
+  symmetricUDPFirewall: Симметриялы UDP қорғау
+  unknown: Белгісіз
+neoForgedVersion:
+  disable: NeoForged өшіру
+  empty: NeoForged {version} қолдамайды
+  name: NeoForged
+news:
+  name: Жаңалықтар
+  readMore: Әрі қарай оқу
+next: Келесі
+'no': 'Жоқ'
+ok: OK
+optifineVersion:
+  disable: Optifine өшіру
+  empty: Optifine Minecraft {version} қолдамайды
+optional: Қосымша
+peerConnectionState:
+  closed: Жабық
+  connected: Байланысқан
+  connecting: Байланысуда
+  disconnected: Байланыспаған
+  failed: Сәтсіз
+  name: Байланыс күйі
+  new: Жаңа
+peerGroupState:
+  closed: Топта емес
+  closing: Жабылуда
+  connected: Топқа қосылды
+  connecting: Байланысуда
+peerIceGatheringState:
+  gathering: ICE серверін жинау
+peerSignalingState:
+  have-local-offer: Қатысушы сипаттамасын күтуде
+popular: Танымалдық
+presence:
+  curseforge: CurseForge-ты қарау
+  curseforgeProject: '{name} curseforge-да қарау'
+  instance: Инстанция {instance} ішінде күйінде
+  instanceSetting: 'Инстанция параметрін өңдеу: {instance}'
+  mod: '{instance} ішінде модтарды қарау'
+  modrinth: Modrinth-ті қарау
+  modrinthProject: '{name} Modrinth-те қарау'
+  resourcePack: '{instance} ішінде ресурс дестелерін қарау'
+  save: '{instance} ішінде сақтауларды қарау'
+  setting: Параметрлер бетін қарау
+  shaderPack: '{instance} ішінде шейдер дестелерін қарау'
+  version: Нұсқалар бетін қарау
+previous: Алдыңғы
+proxy:
+  host: Хост
+  port: Порт
+quiltVersion:
+  disable: Quilt өшіру
+  empty: Quilt Minecraft {version} қолдамайды
+refresh: Жаңарту
+refreshResource: Ресурстарды жаңарту
+remove: Жою
+resourcepack:
+  available: Қолжетімді
+  compatible: '{version} үшін {format} үйлесімді пішім'
+  defaultDescription: Minecraft-тың әдепкі көрінісі мен сезімі
+  delete:
+    content: >-
+      Бұл ресурс дестесін дискіден жояды, ал біз оны қайтара алмаймыз. Сіз осыны істеуге сенімдісіз бе?
+    title: Ресурс дестесін жою
+  dropHint: Ресурс дестесінің қалтасын/zip файлын импорттау үшін осы жерге тастаңыз.
+  enable: '{count} ресурс дестесі қосылған'
+  import: Ресурс дестесін импорттау
+  incompatible: >-
+    Үйлеспейтін ресурс дестесі пішімі({format}). {accept} сәйкес. Қазіргі {actual}.
+  independent: Инстанция өзіндік ресурс дестесі қалтасын қолданады
+  manage: Ресурс дестелерін басқару
+  name: Ресурс дестесі | Ресурс дестелері
+  searchHint: Ресурс дестелерін іздеу
+  searchOnCurseforge: '{name} curseforge-да іздеу'
   searchOnModrinth: '@:mod.searchOnModrinth'
+  selectSearchHint: Ресурс дестесін іздеу және таңдау
+  selected: Таңдалған ресурс дестелері
+  shared: Инстанция ортақ ресурс дестесі қалтасын қолданады
+  showDirectory: Ресурс дестесі каталогын көрсету
+  showFile: '{file} қалтасында ресурс дестесін көрсету'
+  showInCurseforge: '{name} curseforge-да көрсету
+save:
+  cheat: Алдау
+  copy:
+    cancel: Көшіруді болдырмау
+    confirm: Көшіруді бастау
+    description: Сақтауды жібергіңіз келетін мақсатты профиль(дер)ді таңдаңыз.
+    name: Сақтауды көшіру
+    title: Сақтауды басқа профильге көшіру
+  copyFrom:
+    cancel: Болдырмау
+    confirm: Көшіруді бастау
+    description: >-
+      Сақтауды басқа инстанциялардан немесе басқарылатын ресурстардан (curseforge) осы инстанцияға жайғастыра аласыз
+    from: '{src} қайдан'
+    fromProfile: Басқа инстанциялардан
+    fromResource: Басқарылатын ресурстардан
+    title: Басқарылатын көзден сақтауды импорттау
+  createNew: Жаңа әлем жасау
+  createdWorlds: Сізде {count} әлем бар
+  deleteHint: >-
+    Бұл операцияны қайтару мүмкін емес. Сіз сақтау деректерін біржола жоғалтасыз. Бұл сақтауды жоюға сенімдісіз бе?
+  deleteTitle: Сақтауды жою
+  detail: Көбірек ақпарат
+  dropHint: Сақтауды импорттау үшін zip файлын осы жерге тартыңыз
+  export: Сақтауды экспорттау
+  exportMessage: Сақтауды zip файлы ретінде экспорттау
+  exportTitle: Сақтауды экспорттау
+  gameMode: ойын режимі
+  import: Сақтауды импорттау
+  importMessage: Zip файлынан сақтауды импорттау
+  importTitle: Сақтауды импорттау
+  independent: Инстанция өзіндік сақтау қалтасын қолданады
+  levelName: Дәреже атауы
+  manage: Сақтауларды басқару
+  name: Сақтау | Сақтаулар
+  search: Сақтаулар іздеу
+  selected: Жергілікті сақтаулар
+  shared: Инстанция ортақ сақтау қалтасын қолданады
+  showDirectory: Сақтау каталогын көрсету
+  unselected: Ортақ сақтаулар
+  useCurrent: Қазіргі әлемді қолдану
+saves: {}
+screenshots:
+  empty: Сізде скриншоттар жоқ
+  goto: Қалта ашу
+  name: Скриншоттар
+  playRandom: Араластыру
+  playSequence: Ретпен ойнату
+search:
+  favorate: Жинақ
+  local: Орнатылған
+  market: Мод нарығы
+server:
+  acceptingMinecraftVersion: Minecraft нұсқасын қабылдау
+  creationHint: Сервер мекенжайын толтырып, серверді пингілеңіз
+  delete: {}
+  error: {}
+  expectedVersions: Қолдау көрсетілетін нұсқалар
+  export: Серверді экспорттау
+  exportNoFilesHint: >-
+    Сервер файлдары табылмады. Кейбір файлдарды жасау үшін серверді жергілікті ретінде бір рет жөнелте аласыз.
+  exportOption: Сервер экспорттау опциялары
+  exportSSHAuthenticationFailed: >-
+    Барлық аутентификация әдістері сәтсіз аяқталды. Пайдаланушы аты/құпия сөзді немесе жеке кілтті тексеріңіз.
+  exportSSHOptions: SSH опциялары
+  exportSSHPrivateKeyPath: SSH жеке кілт жолы
+  exportSSHRemotePath: Қашықтағы сервер жолы
+  exportToFolder: Қалтаға экспорттау
+  filterVersion: Сервер жауап беретін Minecraft нұсқасын сүзу
+  host: Хост
+  hostHint: Сервердің хосты (портпен бірге)
+  hostRequired: Сервер ip мекенжайын енгізіңіз
+  ipAddress: IP мекенжайы
+  maxPlayers: Ең көп ойыншы саны
+  motd: Сервер MOTD
+  name: Сервер | Серверлер
+  nogui: Сервер интерфейсі жоқ
+  onlineMode: Онлайн режимі
+  ping: Пинг
+  pings: Пингтер
+  players: Ойыншылар
+  port: Порт
+  recommendedMinecraftVersion: Minecraft нұсқасы
+  status: Сервер күйі
+  unknown: Белгісіз сервер
+  unknownDescription: Белгісіз сервер. Жаңартыңыз
+  upload: Серверді жүктеу
+  version: Сервер нұсқасын талап етеді
+  versionHint: Пингілеуге арналған Minecraft нұсқасы
+serverStatus:
+  nohost: §4Хост таба алмадық!
+  ping: Пинг...
+  refuse: §4Сервер ретінде қабылдамады!
+  timeout: §4Серверге байланыс таймаут!
+setting:
+  about: Біз туралы
+  allowPrerelease: Алдын ала шығарылымды жүктеу
+  allowPrereleaseDescription: Алдын ала шығарылым тұрақсыз болуы мүмкін
+  apiSets:
+    auto: Автоматты (Желі бойынша анықтау)
+    official: Ресми (Mojang)
+  appearance: Сыртқы түрі
+  appxUpdateHint: >-
+    Жөнелткіш орнатушыны жүктеп, орындайды. Егер орнатушы терезесі сәтсіз болса, қолмен орындаңыз.
+  autoDownload: Автоматты жүктеу
+  autoDownloadDescription: Қолжетімді болса, жаңартуды автоматты түрде жүктеу
+  autoInstallOnAppQuit: Автоорнату
+  autoInstallOnAppQuitDescription: Қолданбаны жабу кезінде жаңартуды автоорнату
+  backdropBlur: Фон шағылуы
+  backgroundColorAbove: Фон түсін қабат ретінде көрсету
+  backgroundColorAboveDescription: Бұл фон түсін фон суреті немесе бейнесінің үстінде көрсетеді.
+  transparentBackground: Мөлдір фон
+  transparentBackgroundDescription: Қолданба фонын мөлдір етіп жасау.
+  backgroundImage: Фон суреті
+  backgroundImageBlur: Сурет шағылуы
+  backgroundImageBlurDescription: Шағылу үшін жылжытыңыз, оңай
+  backgroundImageClear: тазалау
+  backgroundImageDescription: Фон ретінде сурет таңдаңыз немесе тазалаңыз
+  backgroundImageFit:
+    contain: Сыйдыру
+    cover: Қаптау
+    name: Сурет сыйғызу
+  backgroundImageSelect: таңдау
+  backgroundMusic: Тақырыптық фон музыкасы
+  backgroundType: Фон түрі
+  backgroundTypeDescription: Фонда арнайы эффект көрсету (Бұл өнімділікке әсер етуі мүмкін)
+  backgroundTypes:
+    halo: Ауа
+    image: Сурет
+    none: Ешнәрсе
+    particle: Бөлшек
+    video: бейне
+  backgroundVideo: Фон бейнесі
+  backgroundVideoDescription: бейне таңдаңыз немесе тазалаңыз
+  backgroundVideoSelect: таңдау
+  backgroundVideoVolume: дыбыс деңгейі
+  backgroundVideoVolumeDescription: дыбыс деңгейін реттеу үшін жылжытыңыз
+  blurAppBar: Қолданба панелін шағылу
+  blurMainBody: Негізгі денені шағылу
+  blurMainBodyDescription: Жөнелткіштің оң жақ панелі шағылысуы керек пе
+  blurSidebar: Бүйірлік панелін шағылу
+  browseRoot: Шолу
+  checkUpdate: Жаңартуды тексеру
+  colorTheme:
+    appBarColor: Қолданба панелі
+    backgroundColor: Фон түсі
+    cardColor: Карта түсі
+    description: Тақырыптағы түстерді өзгерту
+    errorColor: Қате түсі
+    name: Тақырып түсі және шағылу
+    primaryColor: Негізгі түс
+    secondaryColor: Екіншілік түс
+    sideBarColor: Бүйірлік панель
+    warningColor: Ескерту түсі
+  darkTheme: Тақырып
+  darkThemeDescription: Қараңғы немесе ашық тақырып арасында таңдаңыз
+  developerMode: Әзірлеуші режимі
+  developerModeDescription: Әзірлеуші режимі өзіңіздің модтарыңызды сынау үшін
+  disableTelemetry: Телеметрияны өшіру
+  disableTelemetryDescription: XMCL ойын жөнелту және пайдаланушы кіру оқиғаларын жинауға болады.
+  enableDedicatedGPUOptimization: Арнайы GPU тағайындау
+  enableDedicatedGPUOptimizationDescription: Бұл опция Minecraft процесіне арнайы GPU тағайындайды.
+  enableDiscord: Discord қатысуын қосу
+  enableDiscordDescription: Бұл Discord күйін жөнелткішке жаңартады
+  general: Жалпы
+  githubRelease: Github шығарылымы
+  globalSetting: Жаһандық инстанция параметрі
+  globalSettingHint: Инстанция бұл параметрлерді әдепкі бойынша қолданады.
+  hideNewsHeader: Жаңалықтар көрсетілімін жасыру
+  language: Тіл
+  languageDescription: Көрсетілетін тіл
+  latestVersion: Соңғы нұсқа
+  layout:
+    default: Әдепкі орналасу
+    focus: Фокус орналасуы
+  layoutDescription: Жөнелткіш интерфейсінің орналасуы
+  layoutTitle: Орналасу
+  linuxEnableDedicatedGPUOptimization: Арнайы графикалық процессор тағайындау
+  linuxEnableDedicatedGPUOptimizationDescription: Бұл опция Minecraft процесіне арнайы GPU тағайындайды.
+  linuxTitlebar: Нативті тақырып жолағы
+  linuxTitlebarDescription: Жөнелткіш үшін нативті linux тақырып жолағын қолдану
+  location: Сақтау орны
+  manualUpdateHint: >-
+    Нұсқа автоматты түрде жаңартылмайды. Жөнелткішті ресми веб-сайттан қайта жүктеп алыңыз!
+  maunalUpdateHint: >-
+    Нұсқа автоматты түрде жаңартылмайды. Жөнелткішті веб-сайттан қайта жүктеп алыңыз!
+  maxSockets: Хост үшін
+  maxSocketsDescription: >-
+    Хост үшін рұқсат етілген сокеттердің ең көп санын шектеңіз немесе жалпы. 0 дегеніміз шектеу жоқ.
+  maxSocketsTitle: Max HTTP сокеттері
+  migrateFromOther: Басқа жөнелткіштен импорттау
+  name: Жаһандық параметр | Жаһандық параметрлер
+  network: Желі параметрлері
+  officialWebsite: Ресми веб-сайт
+  particleMode:
+    bubble: Көпірек
+    name: Бөлшек режимі
+    push: Итеру
+    remove: Жою
+    repulse: Қайтару
+  particleModeDescription: Бөлшек басу мінез-құлығын таңдаңыз
+  replaceNative: Нативті кітапханаларды ауыстыру
+  replaceNativeDescription: Компьютеріңіздің архитектурасына сәйкес нативті кітапханаларды ауыстырыңыз.
+  replaceNatives:
+    all: Барлығы
+    legacy: Ескірек нұсқа үшін ғана
+  resetToDefault: Әдепкіге қайтару
+  showNewsHeader: Жаңалықтар көрсетілімін көрсету
+  showRoot: Көрсету
+  streamerMode: Ағын режимі
+  streamerModeDescription: Бұл жөнелткіште электрондық пошта сияқты жеке ақпаратыңызды жасырады.
+  theme:
+    dark: Қараңғы тақырып
+    light: Ашық тақырып
+    system: Жүйе тақырыбын қолдану
+  themeExport: Тақырыпты экспорттау
+  themeFont: Қаріп
+  themeFontDescription: Жөнелткіш қаріпін өзгерту.
+  themeImport: Тақырыпты импорттау
+  themeResetFont: Қаріпті қалпына келтіру
+  themeSelectFont: Қаріп таңдау
+  themeShare: Тақырыпты бөлісу
+  themeShareDescription: Тақырыпты достарыңызбен бөлісе аласыз.
+  update: Жаңарту
+  useBmclAPI: BMCL API қолдану
+  useBmclAPIDescription: >-
+    Қытайлықтарда болсаңыз, Minecraft жүктеп алу үшін BMCLAPI қолданыңыз. (Бұл Қытайлықтарда болмасаңыз, сізге әсер етпейді)
+  useProxy: HTTP прокси
+  useProxyDescription: HTTP сұраныс үшін прокси сервер мекенжайы
+  viewBackgroundMusic: Музыка қарау
+settingLabel:
+  global: Жаһандық
+  globalHint: Бұл параметр жаһандық параметрге сәйкес келеді
+  local: Жергілікті
+  localHint: Бұл параметр қазіргі инстанциямен өзгертілді
+setup:
+  account:
+    description: Ойын тіркелгіңізді кіріңіз. Егер сізде жоқ болса, қазір өткіріп жіберуге болады.
+    name: Ойын тіркелгісін қосу
+    skip: Қазір өткіріп жіберу
+  appearance:
+    name: '@:setting.appearance'
+  dataRoot:
+    description: >-
+      Дерек түбірі қарапайым .minecraft каталогы емес. XMCL дерек каталогы құрылымы vanilla-дан өзгеше болғандықтан, біз .minecraft каталогын дерек түбірі ретінде қолдануды ұсынбаймыз.
+    drives: Ұсынылатын орындар
+    name: Дерек каталогын орнату
+  defaultLayoutDescription: >-
+    Әдепкі орналасу ойын "инстанция" ұғымын жақсартуға тырысады. Ол Discord сияқты қолданбаларға ұқсайды. Ол Steam сияқты басқа ойын жөнелткіш қолданбаларынан да ынталандырылған.
+  defaultPath: Әдепкі жол
+  error:
+    badDataRoot: Жөнелткіш деректері үшін жарамсыз каталог! Басқа каталогты қайталап көріңіз!
+    exists: >-
+      Таңдалған каталог бос емес. Бұл жақсы, бірақ деректеріңізді сақтап қойғаныңызға көз жеткізіңіз.
+    invalidChar: >-
+      Жолда жарамсыз таңбалар бар! Бұл Minecraft іске қосылмай қалуы мүмкін! Тек ағылшын таңбаларын және таңбаларды қолданыңыз!
+    noPermission: >-
+      Жөнелткіште таңдалған каталогқа қатынау құқығы жоқ! Басқасын қайталап көріңіз.
+    nonDictionary: Таңдалған жол файл! Каталог таңдаңыз!
+  focusLayoutDescription: >-
+    Фокус орналасуы Minecraft жөнелткішінің ескірек орналасуы. Бұл бір немесе бірнеше инстанциямен жұмыс істеуге арналған.
+  game:
+    description: >-
+      Бар болып тұрған ресурстарды анықтау үшін бар болып тұрған ойын каталогын (.minecraft) таңдаңыз.
+      Сонда сіз модтарды, ресурс дестелерін және т.б. жылдам анықтай аласыз.
+    name: Бар болып тұрған ойынды импорттау
+  locale:
+    description: >-
+      Егер бізде болса, тілді таңдаңыз! Егер сіз тіліңізді көрмесеңіз және көмектескіңіз келсе, Github-қа кіріп аударуға сұраныс жібере аласыз!
+    language: Тіл
+    name: Тіл орнату
+  path: Қазіргі жол
+  title: 'X Minecraft жөнелткішіне қош келдіңіз. Бастау алдында сізден '
+shaderPack:
+  deletion: Шейдер дестесін жою
+  deletionHint: Бұл шейдер дестесі файлын {path} жою және қайтару мүмкін емес.
+  disabled: Өшірілген шейдер дестелері
+  dropHint: Шейдер дестесін импорттау
+  empty: Шейдер дестесі тағайындалмаған
+  enable: '{name} қолданып жатыр'
+  enabled: Қосылған шейдер дестелері
+  manage: Шейдер дестелерін басқару
+  name: Шейдер дестесі
+  noShaderMod: Шейдер моды орнатылмаған
+  noShaderModHint: Шейдерді шейдер модынсыз қолдана алмайсыз
+  noShaderModInstallHint: Шейдер дестесін жүктеу үшін келесі модтардың біреуін орнатуыңыз керек.
+  searchHint: Шейдер дестесін іздеу
+  selectSearchHint: Шейдер дестесін іздеу және таңдау
+  showDirectory: Шейдер дестесі каталогын көрсету
+  showFile: Бұл шейдер дестесін қалтада көрсету
+shared:
+  accept: Қабылдау
+  keepSelected: Таңдалғанды ұстау
+  skipForNow: Қазір өткіріп жіберу
+sortBy:
+  alphabetAsc: Әліпби бойынша (өсуі бойынша)
+  alphabetDesc: Әліпби бойынша (кемуі бойынша)
+  timeAsc: Өзгерту уақыты бойынша (өсуі бойынша)
+  timeDesc: Өзгерту уақыты бойынша (кемуі бойынша)
+store:
+  explore: Зерттеу
+  latestMinecraft: Соңғы Minecraft нұсқасы
+  name: Модпакет нарығы
+  popular: Танымал модпакеттер
+  recentUpdated: Жақында жаңартылған
+summery: Қорытынды
+tag:
+  create: Тег жасау
+  createSelected: Таңдалған үшін тег жасау
+  newTag: Жаңа тег
+task:
+  available: Қолжетімді
+  cancelled: Болдырылмады
+  clear: Аяқталған тапсырмаларды тазалау
+  compatible: '{format} пішімі {version} үшін үйлесімді'
+  connection:
+    connected: Байланысқан
+    free: Бос
+    pending: Күтілуде
+    queued: Кезекте
+    running: Байланыс орындалуда
+    size: жалпы сан
+  connections: Желі байланыстары
+  delete:
+    content: >-
+      Бұл текстуралық десте файлын дискіден жояды, ал біз оны қайтара алмаймыз.
+       Сіз оны қайтара аласыз ба?
+    title: Текстуралық дестені жою
+  dropHint: Импорттау үшін мұнда қалта/zip текстураларын тартыңыз.
+  empty: Орындалып жатқан тапсырмалар жоқ
+  enable: 'Текстуралық дестелер қосылған: {count}'
+  failed: Сәтсіз
+  import: Текстуралық десте импорттау
+  incompatible: >-
+    Үйлеспейтін текстуралық десте пішімі ({format}). {accept} сәйкес. Қазіргі {actual}.
+  manage: Текстуралық десте
+  manager: Тапсырма басқарушысы
+  nTaskRunning: '{count} тапсырма орындалуда'
+  name: Тапсырма | Тапсырмалар
+  pause: Кідірту
+  searchOnCurseforge: '{name} curseforge-да іздеу'
+  searchOnModrinth: '@:mod.searchOnModrinth'
+  selected: Танымал текстуралық дестелер
+  showFile: '{file} текстуралық дестесін қалтада ашу'
+  showInCurseforge: '{name} curseforge-да көрсету
 theme:
-  title: X Minecraft Launcher
-title: X Minecraft Launcher
+  selectImage: Сурет таңдау
+  selectMusic: Музыка таңдау
+  selectVideo: Бейне таңдау
+  title: X Minecraft жөнелткіші
+title: X Minecraft жөнелткіші
+transportType:
+  host: Хост үміткері
+  prflx: Қатысушы рефлекстік үміткері
+  relay: Ретейл үміткері
+  srflx: Сервер рефлекстік үміткері
+turnRegion:
+  fr: Франция
+  guangzhou: Қытай, Гуанчжоу
+  hk: Гонконг
+  liaoning: Қытай, Ляонин
+  po: Польша
+tutorial:
+  feedbackDescription: Егер сіз кез-келген мәселелерге тап болсаңыз, бұл түймені басып кері байланыс жіберіңіз!
+  hideNewsHeaderDescription: >-
+    Сіз сол жақта Жаңалықтар көрсетілімін көре аласыз. Бұл көрсетілімді жасыру үшін бұл түймені басыңыз.
+  instance:
+    iconDescription: Таңбашаны өзгерту үшін басыңыз.
+    iconTitle: Инстанция таңбашасы
+    javaDescription: Java нұсқасын таңдау немесе ауыстыру.
+    javaImportDescription: Жергіліктен Java импорттау.
+    javaImportTitle: Java импорттау
+    javaTitle: Java тізімі
+  instanceAddDescription: >-
+    Бар болып тұрған Minecraft инстанциясын импорттау немесе түпкіден немесе модпакеттен жаңа инстанция жасау үшін бұл түймені басыңыз.
+  instanceSelectDescription: Бұл түймені басу ойын таңдау және жаңалықтарды оқу бетіне өтуге мүмкіндік береді.
+  launchDescription: Ойынды орнату немесе жөнелту үшін бұл түймені басыңыз.
+  mod:
+    defaultSourceDescription: >-
+      Модтар туралы ақпарат көзін осы жерден таңдай аласыз. Бұл Modrinth және Curseforge-қа жарияланған модтар. Егер сіз бұл екі мазмұн қамтамаушы арасында ауыстырғыңыз келсе, осы жерден мәнін өзгерте аласыз.
+    defaultSourceTitle: Мод мазмұн көзін таңдау
+    detailDescription: >-
+      Сол жақта элемент таңдағанда, мод туралы егжей-тегжейлерді көресіз. Мазмұн Modrinth, Curseforge немесе модтың мазмұнынан алынуы мүмкін.
+    detailTitle: Мод егжей-тегжейі
+    listDescription: >-
+      Енгізім болмаса, орнатылған модтарды көрсетеміз. Енгізімде кілт сөз немесе санат таңдалса, ізделген модтарды көресіз.
+    listTitle: Орнатылған немесе ізделетін мод
+    searchDescription: >-
+      Бұл іздеу жолағымен Modrinth, Curseforge немесе жергілік кэшіңізден модтар іздей аласыз.
+    searchTitle: Модтар іздеу
+  multiplayer:
+    contentDescription: Сіз бен қатысушылар арасындағы байланыстар осы жерде тізіледі.
+    contentTitle: '@:multiplayer.connections'
+    groupDescription: >-
+      Сіз басқа ойыншылармен топ құра немесе топқа қосыла аласыз. Жөнелткіш сіз бен достарыңыз арасында P2P байланыстарын топқа сәйкес жасауға тырысады. Достарыңыз берген топ атауын енгізе аласыз. Немесе сіз өзіңіз таңдауыңызға болады.
+    groupTitle: Топқа қосылу
+    joinDescription: >-
+      Топ атауын енгізген соң, бұл түймені басып топқа қосыла немесе жасай аласыз. Егер топ атауы бос болса, жөнелткіш сіз үшін атау жасайды.
+    manualDescription: >-
+      Егер сіз немесе достарыңыз топқа қосыла алмасаңыз, қолмен қосылу арқылы таңбаны қолмен алмасуға тырыссаңыз болады. Егер ол да сәтсіз болса, бұл интернет мәселесі болуы мүмкін.
+  recentPlayDescription: >-
+    Жасалған ойындар осы жерде тізіледі. Орнатылған нұсқалар мен жүктелген модпакеттерді көру үшін көріністерді ауыстыра аласыз.
+  storePoupularModpackDescription: >-
+    Бұл бөлімде Curseforge және Modrinth ішінде ең танымал модпакеттерді көресіз.
+  storeSearchCategoryDescription: Санаттарды немесе сүзгілерді осы жерден ауыстыра аласыз.
+  storeSearchDescription: >-
+    Бұл мәтін өрісіне енгізу арқылы модпакеттерді іздей аласыз. Іздеу үшін Enter басыңыз.
+  storeSearchResultDescription: Барлық іздеу нәтижелерін осы жерде көресіз.
+  userAccountDescription: Бұл таңбашаны басып, Minecraft тіркелгіңізді қосыңыз немесе басқарыңыз.
+universalDrop:
+  enableModsAfterImport: Импорттан кейін модтарды қосу
+  start: Импорт басталды
+  title: Файл(дар)ды осы жерге тастау арқылы импорттау
+  unknownResource: Белгісіз
+update:
+  goOfficialWebDownload: Ресми веб-сайттан қайта жүктеу
+upstream:
+  downgrade: Төмендету
+  missingModpackMetadata: >-
+    Ескі модпакет метадеректері табылмады.
+    Сіз әлі де жаңарта аласыз, бірақ нәтиже қате болуы мүмкін. Инстанция файлдарыңызды сақтап қойыңыз.
+  onlyShowCurrentVersion: Тек қазіргі Minecraft нұсқасын көрсету
+  update: Жаңарту
+user:
+  accessToken: Қатынау токені
+  authMode: Аутентификация қызметі
+  authService: Авторлау қызметі
+  birth: Тіркелген туған күні
+  challenges: Келесі сұрақтарға жауап беріп, өзіңізді растаңыз
+  email: Электрондық пошта мекенжайы
+  forgetChallenges: Бұл сұрақтарды ұмыттым және оларды өзгерткім келеді
+  id: Пайдаланушы идентификаторы
+  info: Пайдаланушы ақпараты
+  insecureClient: Клиент қауіпсіз емес! Дене киім жүктеу үшін өзіңізді растаңыз!
+  name: Пайдаланушы аты
+  nameHint: Ойында көрсетілетін атау
+  profile: Профиль
+  refreshAccount: Тіркелгіні жаңарту
+  refreshSkin: Дене киімді жаңарту
+  submitChallenges: Жауаптарды жіберу
+  tokenExpired: Мерзімі аяқталды
+  tokenValidUntil: Токенің жарамдылығы дейін
+userAccount:
+  add: Тіркелгі қосу
+  removeDescription: Бұл тіркелгі үшін барлық ақпаратты жояды. Сіз сенімдісіз бе?
+  removeTitle: Тіркелгіні жою
+userCape:
+  changeTitle: Дене киіміңізді өзгерту
+  description: >-
+    Дене киімдер - әр түрлі оқиғалар, кампаниялар және басқа да жақсы жағдайлар арқылы ойыншылар қол жеткізе алатын арнайы марапаттар. Мұнда сіз қазіргі иелікте тұрған дене киімдерден таңдай аласыз:
+  noCape: Дене киім жоқ
+userService:
+  add: Көбірек қызметтер қосу
+  authLibInjector: auth-lib injector ұсынысын қадағалау
+  baseUrlHint: Сіздің теңшеу қызметіңіздің негізгі URL мекенжайы
+  title: Үшінші жақтық пайдаланушы қызметтері
+  validateHint: Пайдаланушы токенінің әлі де жарамды екенін тексеру үшін қолданылады
+userServices:
+  microsoft:
+    account: Microsoft тіркелгісі
+    deviceCode: Құрылғы коды
+    deviceCodeHint: Құрылғы коды кіру түймесін басқаннан кейін жасалады
+    fastLogin: Жылдам кіру
+    name: Microsoft
+    password: Құпия сөзді браузерде енгізіңіз
+    useDeviceCode: Құрылғы коды арқылы кіру
+  mojang:
+    account: Электрондық пошта мекенжайы
+    name: Mojang
+    password: Құпия сөз
+  offline:
+    account: Пайдаланушы аты
+    name: Автономиялы
+    password: Құпия сөз жоқ
+    uuid: Пайдаланушы UUID (Қосымша)
+userSkin:
+  import: Дене киім импорттау
+  importFile: Файлдан ашу
+  importLink: Сілтемеден ашу
+  placeUrlHere: Дене киім URL мекенжайын осы жерге орналастырыңыз
+  reset: Қалпына келтіру
+  save: Сақтау
+  saveTitle: Дене киімді дискіге сақтау
+  skinType: Дене киім түрі
+  upload: Дене киім жүктеу
+  urlNotEmpty: Дене киім URL мекенжайы бос болмауы керек
+  urlNotValid: Дене киім URL мекенжайы жарамсыз
+  useSlim: Жұқа модель қолдану
+version:
+  name: Нұсқа | Нұсқалар
+  notInstalled: Нұсқа орнатылмаған
+versionType:
+  alpha: Альфа
+  beta: Бета
+  name: Күйі
+  release: Шығарылым
+'yes': 'Иә'
