@@ -227,7 +227,7 @@ diagnosis:
   corruptedAssets:
     message: Launcher will install assets for you
     name: >-
-      Corrupted asset: {name} | Corrupted asset {name} | {count} assets
+      Corrupted asset: {name} | Corrupted asset {name} | {count} assets corrupted
       corrupted
   corruptedAssetsIndex:
     message: Launcher will download assets index for you
@@ -235,7 +235,7 @@ diagnosis:
   corruptedLibraries:
     message: Launcher will install libraries for you
     name: >-
-      Corrupted library: {name} | Corrupted library: {name} | {count} libraries
+      Corrupted library: {name} | Corrupted library: {name} | {count} libraries corrupted
       corrupted
   corruptedVersionJar:
     message: Click to install this version
