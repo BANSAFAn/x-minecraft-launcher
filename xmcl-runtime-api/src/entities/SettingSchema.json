@@ -197,7 +197,7 @@
             "description": "Enable transparent background for the launcher window",
             "default": false,
             "type": "boolean"
-        }\n},
+        },
         "required": [
             "allowPrerelease",
             "allowTurn",
