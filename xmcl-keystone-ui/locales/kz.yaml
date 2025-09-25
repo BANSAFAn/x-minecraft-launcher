@@ -1155,7 +1155,7 @@ resourcepack:
   shared: Инстанция ортақ ресурс дестесі қалтасын қолданады
   showDirectory: Ресурс дестесі каталогын көрсету
   showFile: '{file} қалтасында ресурс дестесін көрсету'
-  showInCurseforge: '{name} curseforge-да көрсету
+  showInCurseforge: '{name} curseforge-да көрсету'
 save:
   cheat: Алдау
   copy:
@@ -1500,7 +1500,7 @@ task:
   searchOnModrinth: '@:mod.searchOnModrinth'
   selected: Танымал текстуралық дестелер
   showFile: '{file} текстуралық дестесін қалтада ашу'
-  showInCurseforge: '{name} curseforge-да көрсету
+  showInCurseforge: '{name} curseforge-да көрсету'
 theme:
   selectImage: Сурет таңдау
   selectMusic: Музыка таңдау
