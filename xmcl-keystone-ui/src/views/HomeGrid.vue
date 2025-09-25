@@ -1,18 +1,19 @@
 <template>
   <GridLayout
     class="z-1"
-    :layout.sync="layout"
-    :responsive-layouts="layouts"
-    :is-draggable="true"
-    :cols="cols"
-    :col-num="12"
-    :row-height="32"
-    :is-resizable="true"
-    :responsive="true"
-    :vertical-compact="true"
-    :use-css-transforms="true"
-    @breakpoint-changed="onBreakpoint"
-  >
+    :layout=&quot;layout&quot;
+    :responsive-layouts=&quot;filteredLayouts&quot;
+    :is-draggable=&quot;true&quot;
+    :cols=&quot;cols&quot;
+    :col-num=&quot;12&quot;
+    :row-height=&quot;32&quot;
+    :is-resizable=&quot;true&quot;
+    :responsive=&quot;true&quot;
+    :vertical-compact=&quot;true&quot;
+    :use-css-transforms=&quot;true&quot;
+    @breakpoint-changed=&quot;onBreakpoint&quot;
+    @update:layout=&quot;onUpdateLayout&quot;
+  &gt;
     <GridItem
       v-for="item in layout"
       :key="item.i"
@@ -59,7 +60,6 @@
 <script lang="ts" setup>
 import { useLocalStorageCache } from '@/composables/cache'
 import { kInstance } from '@/composables/instance'
-import { kUpstream } from '@/composables/instanceUpdate'
 import { injection } from '@/util/inject'
 import debounce from 'lodash.debounce'
 import { GridItem, GridLayout } from 'vue-grid-layout'
@@ -68,8 +68,13 @@ import HomeResourcePacksCard from './HomeResourcePacksCard.vue'
 import HomeSavesCard from './HomeSavesCard.vue'
 import HomeScreenshotCard from './HomeScreenshotCard.vue'
 import HomeShaderPackCard from './HomeShaderPackCard.vue'
+import { kTheme } from '@/composables/theme'
+import { computed, ref, watch } from 'vue'
 
 const { instance } = injection(kInstance)
+const { visibleCards } = injection(kTheme)
+
+provide(kUpstream, computed(() => ({ upstream: instance.value.upstream, minecraft: instance.value.runtime.minecraft })))
 
 enum CardType {
   Mod,
@@ -78,8 +83,6 @@ enum CardType {
   Save,
   Screenshots,
 }
-
-provide(kUpstream, computed(() => ({ upstream: instance.value.upstream, minecraft: instance.value.runtime.minecraft })))
 
 function rawType(type: CardType) {
   return type + ''
@@ -104,7 +107,7 @@ interface GridItemType {
 
 const cols = { lg: 12, md: 12, sm: 6, xs: 4, xxs: 4 }
 
-const layouts = useLocalStorageCache('cardsLayout', () => ({
+const fullLayouts = useLocalStorageCache('cardsLayout', () => ({
   md: [
     { x: 0, y: 0, w: 3, h: 9, minW: 2, minH: 4, i: rawType(CardType.Mod) },
     { x: 9, y: 0, w: 3, h: 9, minW: 2, minH: 4, i: rawType(CardType.ResourcePack) },
@@ -135,16 +138,50 @@ const layouts = useLocalStorageCache('cardsLayout', () => ({
   ],
 }), JSON.stringify, JSON.parse)
 
-const layout = ref([] as GridItemType[])
+const layout = ref([])
 
 let lastBreakpoint = ''
 
-const onBreakpoint = (newBreakpoint: string) => {
-  if (lastBreakpoint) {
-    layouts.value[lastBreakpoint] = layout.value
-    localStorage.setItem('cardsLayout', JSON.stringify(layouts.value))
+function getCardKey(i: string) {
+  const type = Number(i)
+  switch (type) {
+    case CardType.Mod: return 'mods'
+    case CardType.ResourcePack: return 'resourcePacks'
+    case CardType.ShaderPack: return 'shaderPacks'
+    case CardType.Save: return 'saves'
+    case CardType.Screenshots: return 'screenshots'
   }
+  return ''
+}
+
+const filteredLayouts = computed(() => ({
+  lg: fullLayouts.value.lg.filter(item => visibleCards[getCardKey(item.i)]),
+  md: fullLayouts.value.md.filter(item => visibleCards[getCardKey(item.i)]),
+  sm: fullLayouts.value.sm.filter(item => visibleCards[getCardKey(item.i)]),
+  xs: fullLayouts.value.xs.filter(item => visibleCards[getCardKey(item.i)]),
+}))
+
+watch(filteredLayouts, () => {
+  layout.value = filteredLayouts.value[lastBreakpoint] ?? []
+}, { immediate: true })
+
+const onBreakpoint = (newBreakpoint: string) => {
   lastBreakpoint = newBreakpoint
+}
+
+const onUpdateLayout = (newLayout: GridItemType[]) => {
+  layout.value = newLayout
+  const full = fullLayouts.value[lastBreakpoint]
+  for (const f of full) {
+    const found = newLayout.find(n => n.i === f.i)
+    if (found) {
+      f.x = found.x
+      f.y = found.y
+      f.w = found.w
+      f.h = found.h
+    }
+  }
+  localStorage.setItem('cardsLayout', JSON.stringify(fullLayouts.value))
 }
 
 const containerWidths = reactive({
