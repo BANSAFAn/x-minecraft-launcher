@@ -192,46 +192,50 @@
                     "type": "boolean"
                 }
             }
-        }
-    },
-    "required": [
-        "allowPrerelease",
-        "allowTurn",
-        "apiSets",
-        "apiSetsPreference",
-        "autoDownload",
-        "autoInstallOnAppQuit",
-        "developerMode",
-        "disableTelemetry",
-        "discordPresence",
-        "enableDedicatedGPUOptimization",
-        "globalAssignMemory",
-        "globalDisableAuthlibInjector",
-        "globalDisableElyByAuthlib",
-        "globalEnv",
-        "globalFastLaunch",
-        "globalHideLauncher",
-        "globalMaxMemory",
-        "globalMcOptions",
-        "globalMinMemory",
-        "globalPreExecuteCommand",
-        "globalPrependCommand",
-        "globalResolution",
-        "globalShowLog",
-        "globalVmOptions",
-        "httpProxy",
-        "httpProxyEnabled",
-        "linuxTitlebar",
-        "locale",
-        "maxSockets",
-        "replaceNatives",
-        "theme"
-    ],
-    "definitions": {
-        "Record<string,string>": {
-            "type": "object"
-        }
-    },
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "additionalProperties": false
-}
+        },
+        "transparentBackground": {
+            "description": "Enable transparent background for the launcher window",
+            "default": false,
+            "type": "boolean"
+        }\n},
+        "required": [
+            "allowPrerelease",
+            "allowTurn",
+            "apiSets",
+            "apiSetsPreference",
+            "autoDownload",
+            "autoInstallOnAppQuit",
+            "developerMode",
+            "disableTelemetry",
+            "discordPresence",
+            "enableDedicatedGPUOptimization",
+            "globalAssignMemory",
+            "globalDisableAuthlibInjector",
+            "globalDisableElyByAuthlib",
+            "globalEnv",
+            "globalFastLaunch",
+            "globalHideLauncher",
+            "globalMaxMemory",
+            "globalMcOptions",
+            "globalMinMemory",
+            "globalPreExecuteCommand",
+            "globalPrependCommand",
+            "globalResolution",
+            "globalShowLog",
+            "globalVmOptions",
+            "httpProxy",
+            "httpProxyEnabled",
+            "linuxTitlebar",
+            "locale",
+            "maxSockets",
+            "replaceNatives",
+            "theme"
+        ],
+        "definitions": {
+            "Record<string,string>": {
+                "type": "object"
+            }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false
+    }

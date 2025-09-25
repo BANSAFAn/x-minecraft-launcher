@@ -345,64 +345,14 @@ export class ElectronController implements LauncherAppController {
     }
   }
 
-  async createAppWindow(isBootstrap: boolean) {
-    const man = this.activatedManifest!
-    const tracker = createWindowTracker(this.app, 'app-manager', man)
-    const config = await tracker.getConfig()
-
-    const restoredSession = this.app.session.getSession(man.url)
-    const minWidth = man.minWidth ?? 800
-    const minHeight = man.minHeight ?? 600
-    const defaultWidth = man.defaultWidth ?? 800
-    const defaultHeight = man.defaultHeight ?? 600
-
-    // Ensure the settings is loaded
-    if (this.app.platform.os === 'linux' && !this.settings) {
-      this.settings = await this.app.registry.get(kSettings)
-    }
-
-    const browser = new BrowserWindow({
-      title: man.name,
-      width: config.getWidth(defaultWidth, minWidth),
-      height: config.getHeight(defaultHeight, minHeight),
-      x: config.x,
-      y: config.y,
-      minWidth: man.minWidth,
-      minHeight: man.minHeight,
-      frame: this.getFrameOption(),
-      backgroundColor: man.backgroundColor,
-      vibrancy: man.vibrancy ? 'sidebar' : undefined, // or popover
-      icon: nativeTheme.shouldUseDarkColors ? man.iconSets.darkIcon : man.iconSets.icon,
-      titleBarStyle: this.getTitlebarStyle(),
-      trafficLightPosition: this.app.platform.os === 'osx' ? { x: 14, y: 10 } : undefined,
-      webPreferences: {
-        preload: indexPreload,
-        session: restoredSession,
-        webviewTag: true,
-      },
-      show: false,
-    })
-
-    if (man.ratio) {
+  async createAppWindow(isBootstrap: boolean) {\n  const man = this.activatedManifest!\n  const tracker = createWindowTracker(this.app, 'app-manager', man)\n  const config = await tracker.getConfig()\n  const restoredSession = this.app.session.getSession(man.url)\n  const minWidth = man.minWidth ?? 800\n  const minHeight = man.minHeight ?? 600\n  const defaultWidth = man.defaultWidth ?? 800\n  const defaultHeight = man.defaultHeight ?? 600\n  this.settings = await this.app.registry.get(kSettings)\n  const transparent = this.settings.transparentBackground ?? false\n  const browser = new BrowserWindow({\n    title: man.name,\n    width: config.getWidth(defaultWidth, minWidth),\n    height: config.getHeight(defaultHeight, minHeight),\n    x: config.x,\n    y: config.y,\n    minWidth: man.minWidth,\n    minHeight: man.minHeight,\n    frame: this.getFrameOption(),\n    transparent: transparent,\n    backgroundColor: transparent ? '#00000000' : man.backgroundColor,\n    vibrancy: transparent ? undefined : (man.vibrancy ? 'sidebar' : undefined),\n    icon: nativeTheme.shouldUseDarkColors ? man.iconSets.darkIcon : man.iconSets.icon,\n    titleBarStyle: this.getTitlebarStyle(),\n    trafficLightPosition: this.app.platform.os === 'osx' ? { x: 14, y: 10 } : undefined,\n    webPreferences: {\n      preload: indexPreload,\n      session: restoredSession,\n      webviewTag: true,\n    },\n    show: false,\n  })\n  if (man.ratio) {
       browser.setAspectRatio(minWidth / minHeight)
     }
 
     browser.on('ready-to-show', () => {
       this.logger.log('App Window is ready to show!')
 
-      if (man.vibrancy) {
-        this.setWindowBlurEffect(browser)
-      }
-
-      if (config.maximized) {
-        browser.maximize()
-      }
-
-      if (!this.app.deferredWindowOpen) {
-        browser.show()
-        browser.focus()
-      }
-    })
+      if (man.vibrancy && !transparent) {\n        this.setWindowBlurEffect(browser)\n      }\n      if (config.maximized) {\n        browser.maximize()\n      }\n      if (!this.app.deferredWindowOpen) {\n        browser.show()\n        browser.focus()\n      }\n    })
     browser.webContents.on('will-navigate', this.onWebContentWillNavigate)
     browser.webContents.on('did-create-window', this.onWebContentCreateWindow)
     browser.webContents.setWindowOpenHandler(this.windowOpenHandler)
