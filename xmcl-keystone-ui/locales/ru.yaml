@@ -1446,6 +1446,17 @@ setting:
     secondaryColor: Вторичный цвет
     sideBarColor: Цвет боковой панели
     warningColor: Цвет предупреждения
+  visibleCards: Видимые карточки
+  visibleCardsMods: Карточка модов
+  visibleCardsModsDescription: Переключить видимость карточки модов.
+  visibleCardsResourcePacks: Карточка пакетов ресурсов
+  visibleCardsResourcePacksDescription: Переключить видимость карточки пакетов ресурсов.
+  visibleCardsShaderPacks: Карточка пакетов шейдеров
+  visibleCardsShaderPacksDescription: Переключить видимость карточки пакетов шейдеров.
+  visibleCardsSaves: Карточка сохранений
+  visibleCardsSavesDescription: Переключить видимость карточки сохранений.
+  visibleCardsScreenshots: Карточка скриншотов
+  visibleCardsScreenshotsDescription: Переключить видимость карточки скриншотов.
   darkTheme: Тема
   darkThemeDescription: Выберите тёмную или светлую тему.
   developerMode: Режим разработчика
