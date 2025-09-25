@@ -8,6 +8,7 @@ import { Framework } from 'vuetify'
 import { useLocalStorageCacheStringValue } from './cache'
 import { useService } from './service'
 import { injection } from '@/util/inject'
+import { useLocalStorageCache } from '@vueuse/core'
 
 export const kTheme: InjectionKey<ReturnType<typeof useTheme>> = Symbol('theme')
 
@@ -658,5 +659,6 @@ export function useTheme(framework: Framework, { addMedia, removeMedia, exportTh
     addMusic,
     setBackgroundImage,
     clearBackgroundImage,
+    visibleCards,
   }
 }

@@ -472,6 +472,18 @@
         {{ t("setting.themeImport") }}
       </v-btn>
     </v-list-item>
+    <v-list-group :value=&quot;true&quot;&gt;
+      &lt;template v-slot:activator=&quot;{ props }&quot;&gt;
+        &lt;v-list-item-title v-bind=&quot;props&quot;&gt;
+          {{ t('appearanceSetting.visibleCards') }}
+        &lt;/v-list-item-title&gt;
+      &lt;/template&gt;
+      &lt;SettingItemCheckbox v-model=&quot;visibleCards.mods&quot; :title=&quot;t('appearanceSetting.modsCard')&quot; :description=&quot;t('appearanceSetting.modsCardDescription')&quot; /&gt;
+      &lt;SettingItemCheckbox v-model=&quot;visibleCards.resourcePacks&quot; :title=&quot;t('appearanceSetting.resourcePacksCard')&quot; :description=&quot;t('appearanceSetting.resourcePacksCardDescription')&quot; /&gt;
+      &lt;SettingItemCheckbox v-model=&quot;visibleCards.shaderPacks&quot; :title=&quot;t('appearanceSetting.shaderPacksCard')&quot; :description=&quot;t('appearanceSetting.shaderPacksCardDescription')&quot; /&gt;
+      &lt;SettingItemCheckbox v-model=&quot;visibleCards.saves&quot; :title=&quot;t('appearanceSetting.savesCard')&quot; :description=&quot;t('appearanceSetting.savesCardDescription')&quot; /&gt;
+      &lt;SettingItemCheckbox v-model=&quot;visibleCards.screenshots&quot; :title=&quot;t('appearanceSetting.screenshotsCard')&quot; :description=&quot;t('appearanceSetting.screenshotsCardDescription')&quot; /&gt;
+    &lt;/v-list-group&gt;
   </div>
 </template>
 <script lang="ts" setup>
@@ -491,7 +503,7 @@ import SettingAppearanceColor from './SettingAppearanceColor.vue'
 const { showOpenDialog, showSaveDialog } = windowController
 const { t } = useI18n()
 const { blurSidebar, blurAppBar, isDark, fontSize, blurCard, backgroundColorOverlay, backgroundImage, setBackgroundImage, blur, particleMode, backgroundType, backgroundImageFit, volume, clearBackgroundImage, exportTheme, importTheme } = injection(kTheme)
-const { sideBarColor, appBarColor, primaryColor, warningColor, errorColor, cardColor, backgroundColor, resetToDefault, currentTheme, font, setFont, resetFont, backgroundMusic, removeMusic } = injection(kTheme)
+const { sideBarColor, appBarColor, primaryColor, warningColor, errorColor, cardColor, backgroundColor, resetToDefault, currentTheme, font, setFont, resetFont, backgroundMusic, removeMusic, visibleCards } = injection(kTheme)
 const { state } = injection(kSettingsState)
 const env = injection(kEnvironment)
 
