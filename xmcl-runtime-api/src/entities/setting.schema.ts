@@ -153,5 +153,4 @@ export interface SettingSchema {
   /**
    * Enable transparent window background
    * @default false
-   */\n  transparentBackground: boolean
-}
+   */\n  transparentBackground: boolean\n}
