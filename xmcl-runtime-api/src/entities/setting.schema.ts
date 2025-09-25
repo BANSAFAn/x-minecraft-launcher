@@ -150,4 +150,9 @@ export interface SettingSchema {
    * @default {}
    */
   globalResolution: { width?: number; height?: number; fullscreen?: boolean }
+  /**
+   * Enable transparent window background
+   * @default false
+   */
+  transparentBackground: boolean
 }

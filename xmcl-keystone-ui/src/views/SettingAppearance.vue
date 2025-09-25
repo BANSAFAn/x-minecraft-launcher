@@ -309,7 +309,53 @@
         {{ t("setting.backgroundVideoSelect") }}
       </v-btn>
     </v-list-item>
-    <!-- <v-list-item>
+    <SettingItemCheckbox
+      v-model="transparent"
+      :title="t('appearanceSetting.transparent')"
+      :description="t('appearanceSetting.transparentDescription')"
+    />
+    <SettingItemCheckbox
+      v-model="transparentBackground"
+      :title="t('setting.transparentBackground')"
+      :description="t('setting.transparentBackgroundDescription')"
+    />
+    <SettingItemCheckbox
+      v-model="removeCardBlur"
+      :title="t('appearanceSetting.removeCardBlur')"
+      :description="t('appearanceSetting.removeCardBlurDescription')"
+    />
+    <v-list-item>
+      <v-list-item-content>
+        <v-list-item-title>
+          {{ t('appearanceSetting.textColor') }}
+        </v-list-item-title>
+        <v-list-item-subtitle>
+          {{ t('appearanceSetting.textColorDescription') }}
+        </v-list-item-subtitle>
+      </v-list-item-content>
+      <v-list-item-action>
+        <SettingAppearanceColor
+          v-model="textColor"
+          :text="t('appearanceSetting.textColor')"
+        />
+      </v-list-item-action>
+    </v-list-item>
+    <v-subheader>
+      {{ t('appearanceSetting.cards') }}
+    </v-subheader>
+    <div
+      class="grid grid-cols-3 gap-2 m-4"
+    >
+      <v-checkbox
+        v-for="card in availableCards"
+        :key="card.i"
+        v-model="visibleCards"
+        :label="card.name"
+        :value="card.i"
+        hide-details
+      />
+    </div>
+    <v-list-item>
       <v-list-item-content>
         <v-list-item-title>
           {{
@@ -364,7 +410,7 @@
         :hint="t('setting.blurAppBar')"
         :always-dirty="true"
       />
-    </v-list-item> -->
+    </v-list-item> <!--
     <v-list-item>
       <v-list-item-content>
         <v-list-item-title>
@@ -490,14 +536,27 @@ import SettingAppearanceColor from './SettingAppearanceColor.vue'
 
 const { showOpenDialog, showSaveDialog } = windowController
 const { t } = useI18n()
-const { blurSidebar, blurAppBar, isDark, fontSize, blurCard, backgroundColorOverlay, backgroundImage, setBackgroundImage, blur, particleMode, backgroundType, backgroundImageFit, volume, clearBackgroundImage, exportTheme, importTheme } = injection(kTheme)
+const { blurSidebar, blurAppBar, isDark, fontSize, blurCard, backgroundColorOverlay, backgroundImage, setBackgroundImage, blur, particleMode, backgroundType, backgroundImageFit, volume, clearBackgroundImage, exportTheme, importTheme, textColor, transparent, removeCardBlur, visibleCards } = injection(kTheme)
 const { sideBarColor, appBarColor, primaryColor, warningColor, errorColor, cardColor, backgroundColor, resetToDefault, currentTheme, font, setFont, resetFont, backgroundMusic, removeMusic } = injection(kTheme)
 const { state } = injection(kSettingsState)
 const env = injection(kEnvironment)
 
+const availableCards = computed(() => [
+  { i: '0', name: t('mod.name', 2) },
+  { i: '1', name: t('resourcepack.name', 2) },
+  { i: '2', name: t('shaderPack.name', 2) },
+  { i: '3', name: t('save.name', 2) },
+  { i: '4', name: t('screenshots.name', 2) },
+])
+
 const linuxTitlebar = computed({
   get: () => state.value?.linuxTitlebar ?? false,
   set: v => state.value?.linuxTitlebarSet(v),
+})
+
+const transparentBackground = computed({
+  get: () => state.value?.transparentBackground ?? false,
+  set: v => state.value?.transparentBackgroundSet(v),
 })
 
 const darkModel = computed({

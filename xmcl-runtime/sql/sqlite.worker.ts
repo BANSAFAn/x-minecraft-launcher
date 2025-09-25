@@ -98,3 +98,4 @@ const handler: DatabaseWorker = {
 }
 
 setHandler(handler)
+export default {} as any

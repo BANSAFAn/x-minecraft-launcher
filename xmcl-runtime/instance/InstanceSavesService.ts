@@ -21,7 +21,7 @@ import { FSWatcher } from 'chokidar'
 import filenamify from 'filenamify'
 import { existsSync } from 'fs'
 import { ensureDir, ensureFile, readdir, rename, rm, rmdir, stat, unlink, writeFile } from 'fs-extra'
-import { basename, dirname, extname, isAbsolute, join, relative, resolve } from 'path'
+import { basename, dirname, extname, isAbsolute, join, relative, resolve, sep } from 'path'
 import { Inject, LauncherAppKey, kGameDataPath, type PathResolver } from '~/app'
 import { InstanceService } from '~/instance'
 import { LaunchService } from '~/launch'
@@ -33,6 +33,7 @@ import { copyPassively, isDirectory, linkDirectory, missing, readdirIfPresent } 
 import { isNonnull, requireObject, requireString } from '../util/object'
 import { ZipTask } from '../util/zip'
 import { readlinkSafe } from './utils/readLinkSafe'
+import { kResourceManager } from '~/resource'
 
 /**
  * Provide the ability to preview saves data of an instance
@@ -41,7 +42,7 @@ import { readlinkSafe } from './utils/readLinkSafe'
 export class InstanceSavesService extends AbstractService implements IInstanceSavesService {
   constructor(@Inject(LauncherAppKey) app: LauncherApp,
     @Inject(InstanceService) private instanceService: InstanceService,
-    @Inject(ResourceManager) resourceManager: ResourceManager,
+    @Inject(kResourceManager) resourceManager: ResourceManager,
     @Inject(kGameDataPath) private getPath: PathResolver,
   ) {
     super(app, async () => {
@@ -183,10 +184,10 @@ export class InstanceSavesService extends AbstractService implements IInstanceSa
         depth: 2,
         ignored: (path, stat) => {
           if (resolve(path) === savesDir) return false
-          const depth = relative(savesDir, path).split('/').length
+          const depth = relative(savesDir, path).split(sep).length
           if (depth === 2) {
             const fileName = basename(path)
-            return fileName === 'level.dat'
+            return fileName !== 'level.dat'
           }
           if (depth > 2) {
             return true
