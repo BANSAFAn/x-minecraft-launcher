@@ -276,8 +276,6 @@ export class ModpackService extends AbstractService implements IModpackService {
 
           if (fileLike.curseforge) {
             curseforgeConfig?.files?.push({ projectID: fileLike.curseforge.projectId, fileID: fileLike.curseforge.fileId, required: true })
-          } else {
-            curseforgeZip?.addFile(filePath, `overrides/${file.path}`)
           }
           if (fileLike.modrinth) {
             // modrinth not allowed to include curseforge source by regulation
@@ -311,8 +309,6 @@ export class ModpackService extends AbstractService implements IModpackService {
             } else {
               modrinthManifest?.files.push(result)
             }
-          } else {
-            modrinthZip?.addFile(filePath, `overrides/${file.path}`)
           }
         }
       } else {
