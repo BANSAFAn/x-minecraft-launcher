@@ -1390,7 +1390,11 @@ setting:
   apiSets:
     auto: Автоматически (определяется сетью)
     official: Официальный (Mojang)
-  appearance: Внешний вид\n  transparentBackground: Прозрачный фон\n  removeCardBlur: Удалить размытие с карточек\n  textColor: Цвет основного текста\n  cards: Карточки
+  appearance: Внешний вид
+  transparentBackground: Прозрачный фон
+  removeCardBlur: Удалить размытие с карточек
+  textColor: Цвет основного текста
+  cards: Карточки
   appxUpdateHint: >-
     Лаунчер скачает и запустит установщик. Если всплывающее окно установщика не
     откроется автоматически, пожалуйста, запустите его вручную.
