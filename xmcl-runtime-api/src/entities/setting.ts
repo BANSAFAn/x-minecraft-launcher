@@ -26,8 +26,6 @@ export class Settings implements SettingSchema {
   developerMode = false
   disableTelemetry = false
   linuxTitlebar = false
-  transparentBackground = false
-  transparentWindow = false
 
   locale = ''
 
@@ -107,8 +105,6 @@ export class Settings implements SettingSchema {
     this.enableDedicatedGPUOptimization = config.enableDedicatedGPUOptimization
     this.replaceNatives = config.replaceNatives
     this.globalResolution = config.globalResolution
-    this.transparentBackground = config.transparentBackground
-    this.transparentWindow = config.transparentWindow
   }
 
   developerModeSet(developerMode: boolean) {
@@ -210,14 +206,6 @@ export class Settings implements SettingSchema {
 
   globalResolutionSet(resolution: { width?: number; height?: number; fullscreen?: boolean }) {
     this.globalResolution = resolution
-  }
-
-  transparentBackgroundSet(enabled: boolean) {
-    this.transparentBackground = enabled
-  }
-
-  transparentWindowSet(enabled: boolean) {
-    this.transparentWindow = enabled
   }
 
   diskFullErrorSet(diskFullError: boolean) {

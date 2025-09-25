@@ -2,7 +2,7 @@
   <v-card
     class="flex flex-col items-center justify-center gap-4 p-4"
     :color="cardColor"
-    :style="{ borderColor: '', 'backdrop-filter': removeCardBlur ? 'none' : `blur(${blurCard}px)` }"
+    :style="{ borderColor: '', 'backdrop-filter': `blur(${blurCard}px)` }"
     outlined
   >
     <v-img
@@ -96,7 +96,7 @@ defineProps<{
   dense?: boolean
 }>()
 
-const { cardColor, blurCard, removeCardBlur } = injection(kTheme)
+const { cardColor, blurCard } = injection(kTheme)
 
 </script>
 <style scoped>

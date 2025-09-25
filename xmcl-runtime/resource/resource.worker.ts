@@ -25,4 +25,3 @@ const handlers: ResourceWorker = {
   hashAndFileType: (file, size, dir) => hashAndFiletypeResource(file, size, dir),
 }
 setHandler(handlers)
-export default {} as any

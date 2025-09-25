@@ -2,7 +2,7 @@
   <v-card
     class="grid-cols-13 grid items-center gap-y-4 p-3 text-gray-700 dark:text-gray-300"
     :outlined="outlined"
-    :style="{ 'content-visibility': 'auto', 'backdrop-filter': removeCardBlur ? 'none' : `blur(${blurCard}px)`, borderColor: '' }"
+    :style="{ 'content-visibility': 'auto', 'backdrop-filter': `blur(${blurCard}px)`, borderColor: '' }"
     :color="cardColor"
   >
     <div class="col-span-4">
@@ -133,7 +133,7 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits(['update', 'duplicate', 'changelog'])
-const { cardColor, blurCard, removeCardBlur } = injection(kTheme)
+const { cardColor, blurCard } = injection(kTheme)
 const version = computed(() => props.version)
 const { getColorCode } = useVuetifyColor()
 const { t } = useI18n()

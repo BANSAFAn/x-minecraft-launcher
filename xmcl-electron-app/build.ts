@@ -123,8 +123,7 @@ async function start() {
       let src = join(context.appOutDir, 'resources/app.asar')
       if (!existsSync(src)) {
         src = join(context.appOutDir, 'X Minecraft Launcher.app/Contents/Resources/app.asar')
-      }
-      if (!existsSync(src)) {
+      } else if (!existsSync(src)) {
         console.log(`  ${chalk.yellow('•')} fallback to ${chalk.yellow('Resources/app.asar')} for ${chalk.yellow('resources/app.asar')} not found`)
       }
       await copyFile(src, dest)

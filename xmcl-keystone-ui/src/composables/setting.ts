@@ -193,9 +193,9 @@ export function useSettings() {
     get: () => state.value?.disableTelemetry ?? false,
     set: v => state.value?.disableTelemetrySet(v),
   })
-  const geminiApiKey = computed({
-    get: () => state.value?.geminiApiKey ?? '',
-    set: v => state.value?.geminiApiKeySet(v),
+  const enableDiscord = computed({
+    get: () => state.value?.discordPresence ?? false,
+    set: (v) => state.value?.discordPresenceSet(v),
   })
   const apiSets = computed(() => state.value?.apiSets || [])
 
@@ -243,7 +243,6 @@ export function useSettings() {
     apiSetsPreference,
     apiSets,
     disableTelemetry,
-    geminiApiKey,
     error,
     isValidating,
   }

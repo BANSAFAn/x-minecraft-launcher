@@ -227,7 +227,7 @@ diagnosis:
   corruptedAssets:
     message: Launcher will install assets for you
     name: >-
-      Corrupted asset: {name} | Corrupted asset {name} | {count} assets corrupted
+      Corrupted asset: {name} | Corrupted asset {name} | {count} assets
       corrupted
   corruptedAssetsIndex:
     message: Launcher will download assets index for you
@@ -235,7 +235,7 @@ diagnosis:
   corruptedLibraries:
     message: Launcher will install libraries for you
     name: >-
-      Corrupted library: {name} | Corrupted library: {name} | {count} libraries corrupted
+      Corrupted library: {name} | Corrupted library: {name} | {count} libraries
       corrupted
   corruptedVersionJar:
     message: Click to install this version
@@ -1349,8 +1349,6 @@ setting:
   backdropBlur: Backdrop Blur
   backgroundColorAbove: Show background color as overlay
   backgroundColorAboveDescription: This will make background color display above the background image or video.
-  transparentBackground: Transparent Background
-  transparentBackgroundDescription: Make the application background transparent.
   backgroundImage: Background image
   backgroundImageBlur: Image blur
   backgroundImageBlurDescription: Drag to blur, easy
@@ -1773,4 +1771,3 @@ versionType:
   name: Status
   release: Release
 'yes': 'Yes'
-

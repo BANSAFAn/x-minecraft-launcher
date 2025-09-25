@@ -22,7 +22,6 @@ import { getLoginSuccessHTML } from './utils/login'
 import { createWindowTracker } from './utils/windowSizeTracker'
 
 export class ElectronController implements LauncherAppController {
-  // @ts-ignore
   protected windowsVersion?: { major: number; minor: number; build: number }
 
   protected mainWin: BrowserWindow | undefined = undefined
@@ -296,9 +295,148 @@ export class ElectronController implements LauncherAppController {
     this.browserRef = browser
   }
 
-  public openMultiplayerWindow = openMultiplayerWindow
+  async openMultiplayerWindow() {
+    if (!this.multiplayerRef || this.multiplayerRef.isDestroyed()) {
+      const man = this.activatedManifest!
+      const tracker = createWindowTracker(this.app, 'multiplayer', man)
+      const config = await tracker.getConfig()
 
-  public createAppWindow = createAppWindow
+      const win = new BrowserWindow({
+        icon: nativeTheme.shouldUseDarkColors ? man.iconSets.darkIcon : man.iconSets.icon,
+        titleBarStyle: this.getTitlebarStyle(),
+        trafficLightPosition: this.app.platform.os === 'osx' ? { x: 14, y: 10 } : undefined,
+        minWidth: 400,
+        minHeight: 600,
+        width: config.getWidth(400, 400),
+        height: config.getHeight(600, 600),
+        x: config.x,
+        y: config.y,
+        show: false,
+        frame: this.getFrameOption(),
+
+        webPreferences: {
+          session: this.app.session.getSession(this.activatedManifest!.url),
+          contextIsolation: true,
+          sandbox: false,
+          preload: multiplayerPreload,
+          devTools: IS_DEV,
+        },
+      })
+
+      tracker.track(win)
+
+      const url = new URL(man.url)
+      url.pathname = '/app.html'
+      win.loadURL(url.toString())
+      this.onWebContentCreateWindow(win)
+      win.once('ready-to-show', () => {
+        win.show()
+      })
+      win.on('close', (e) => {
+        if (this.mainWin && !this.mainWin.isDestroyed()) {
+          win.hide()
+          e.preventDefault()
+        }
+      })
+      this.multiplayerRef = win
+    } else {
+      this.multiplayerRef.show()
+      this.multiplayerRef.focus()
+    }
+  }
+
+  async createAppWindow(isBootstrap: boolean) {
+    const man = this.activatedManifest!
+    const tracker = createWindowTracker(this.app, 'app-manager', man)
+    const config = await tracker.getConfig()
+
+    const restoredSession = this.app.session.getSession(man.url)
+    const minWidth = man.minWidth ?? 800
+    const minHeight = man.minHeight ?? 600
+    const defaultWidth = man.defaultWidth ?? 800
+    const defaultHeight = man.defaultHeight ?? 600
+
+    // Ensure the settings is loaded
+    if (this.app.platform.os === 'linux' && !this.settings) {
+      this.settings = await this.app.registry.get(kSettings)
+    }
+
+    const browser = new BrowserWindow({
+      title: man.name,
+      width: config.getWidth(defaultWidth, minWidth),
+      height: config.getHeight(defaultHeight, minHeight),
+      x: config.x,
+      y: config.y,
+      minWidth: man.minWidth,
+      minHeight: man.minHeight,
+      frame: this.getFrameOption(),
+      backgroundColor: man.backgroundColor,
+      vibrancy: man.vibrancy ? 'sidebar' : undefined, // or popover
+      icon: nativeTheme.shouldUseDarkColors ? man.iconSets.darkIcon : man.iconSets.icon,
+      titleBarStyle: this.getTitlebarStyle(),
+      trafficLightPosition: this.app.platform.os === 'osx' ? { x: 14, y: 10 } : undefined,
+      webPreferences: {
+        preload: indexPreload,
+        session: restoredSession,
+        webviewTag: true,
+      },
+      show: false,
+    })
+
+    if (man.ratio) {
+      browser.setAspectRatio(minWidth / minHeight)
+    }
+
+    browser.on('ready-to-show', () => {
+      this.logger.log('App Window is ready to show!')
+
+      if (man.vibrancy) {
+        this.setWindowBlurEffect(browser)
+      }
+
+      if (config.maximized) {
+        browser.maximize()
+      }
+
+      if (!this.app.deferredWindowOpen) {
+        browser.show()
+        browser.focus()
+      }
+    })
+    browser.webContents.on('will-navigate', this.onWebContentWillNavigate)
+    browser.webContents.on('did-create-window', this.onWebContentCreateWindow)
+    browser.webContents.setWindowOpenHandler(this.windowOpenHandler)
+    browser.on('closed', () => {
+      this.mainWin = undefined
+      this.multiplayerRef?.close()
+    })
+
+    this.setupBrowserLogger(browser, 'app')
+    tracker.track(browser)
+
+    const url = new URL(man.url)
+    if (isBootstrap) {
+      url.searchParams.append('bootstrap', 'true')
+    }
+    if (this.migrated) {
+      url.searchParams.append('from', this.migrated.from)
+      url.searchParams.append('to', this.migrated.to)
+    }
+    this.logger.log(url.toString())
+    browser.loadURL(url.toString())
+
+    this.logger.log(`Load main window url ${url.toString()}`)
+
+    this.mainWin = browser
+    browser.on('maximize', () => {
+      this.maximized = true
+    })
+    browser.on('unmaximize', () => {
+      this.maximized = false
+    })
+
+    this.app.emit('app-booted', man)
+  }
 
   getLoggerWindow() {
     if (this.loggerWin?.isDestroyed()) {

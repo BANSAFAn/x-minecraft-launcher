@@ -65,7 +65,7 @@ function loadDatabaseConfig(app: LauncherApp, flights: any) {
 class ParseException extends Exception<{ type: 'parseResourceException'; code: string }> {
 }
 
-const plugin: LauncherAppPlugin = async (app) => {
+export const pluginResourceWorker: LauncherAppPlugin = async (app) => {
   const workerLogger = app.getLogger('ResourceWorker')
 
   const [resourceWorker, dispose] = createLazyWorker<ResourceWorker>(createResourceWorker, {
@@ -159,4 +159,3 @@ const plugin: LauncherAppPlugin = async (app) => {
       })
     })
 }
-export default plugin
