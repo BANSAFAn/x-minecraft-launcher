@@ -1390,6 +1390,18 @@ setting:
     secondaryColor: Secondary Color
     sideBarColor: Side Bar
     warningColor: Warning Color
+    visibleCards: Visible Cards
+    visibleCardsDescription: Choose which cards to show on the home page.
+    visibleCardsMods: Mods Card
+    visibleCardsModsDescription: Show or hide the mods card.
+    visibleCardsResourcePacks: Resource Packs Card
+    visibleCardsResourcePacksDescription: Show or hide the resource packs card.
+    visibleCardsShaderPacks: Shader Packs Card
+    visibleCardsShaderPacksDescription: Show or hide the shader packs card.
+    visibleCardsSaves: Saves Card
+    visibleCardsSavesDescription: Show or hide the saves card.
+    visibleCardsScreenshots: Screenshots Card
+    visibleCardsScreenshotsDescription: Show or hide the screenshots card.
   darkTheme: Theme
   darkThemeDescription: Choose between dark or light theme
   developerMode: Developer Mode
@@ -1771,4 +1783,4 @@ versionType:
   name: Status
   release: Release
 'yes': 'Yes'
-
+
