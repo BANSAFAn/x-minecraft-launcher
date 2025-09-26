@@ -1315,7 +1315,19 @@ setting:
     primaryColor: 主要颜色
     secondaryColor: 次要颜色
     sideBarColor: 侧边栏
-    warningColor: 警告颜色\n    visibleCards: 可见卡片\n    visibleCardsDescription: 选择要在首页显示的卡片。\n    visibleCardsMods: 模组\n    visibleCardsModsDescription: 显示模组卡片。\n    visibleCardsResourcePacks: 资源包\n    visibleCardsResourcePacksDescription: 显示资源包卡片。\n    visibleCardsShaderPacks: 着色器包\n    visibleCardsShaderPacksDescription: 显示着色器包卡片。\n    visibleCardsSaves: 存档\n    visibleCardsSavesDescription: 显示存档卡片。\n    visibleCardsScreenshots: 截图\n    visibleCardsScreenshotsDescription: 显示截图卡片。\n
+    warningColor: 警告颜色
+    visibleCards: 可见卡片
+    visibleCardsDescription: 选择要在首页显示的卡片。
+    visibleCardsMods: 模组
+    visibleCardsModsDescription: 显示模组卡片。
+    visibleCardsResourcePacks: 资源包
+    visibleCardsResourcePacksDescription: 显示资源包卡片。
+    visibleCardsShaderPacks: 着色器包
+    visibleCardsShaderPacksDescription: 显示着色器包卡片。
+    visibleCardsSaves: 存档
+    visibleCardsSavesDescription: 显示存档卡片。
+    visibleCardsScreenshots: 截图
+    visibleCardsScreenshotsDescription: 显示截图卡片。
   darkTheme: 主题
   darkThemeDescription: 选择深色或浅色主题
   developerMode: 开发者模式

@@ -1414,8 +1414,8 @@ setting:
     name: Colore e sfocatura del tema
     primaryColor: Colore primario
     secondaryColor: Colore secondario
-    sideBarColor: Barra laterale
-        warningColor: Colore di avviso
+    sideBarColor: "Colore barra laterale"
+    warningColor: Colore di avviso
     visibleCards: Carte visibili
     visibleCardsDescription: Scegli quali carte mostrare sulla home page.
     visibleCardsMods: Mod
