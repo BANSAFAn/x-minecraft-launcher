@@ -1347,6 +1347,18 @@ setting:
     secondaryColor: 보조 색상
     sideBarColor: 사이드바
     warningColor: 경고 색상
+    visibleCards: 보이는 카드
+    visibleCardsDescription: 홈 페이지에 표시할 카드를 선택하세요.
+    visibleCardsMods: 모드 카드
+    visibleCardsModsDescription: 모드 카드를 표시하거나 숨깁니다.
+    visibleCardsResourcePacks: 리소스 팩 카드
+    visibleCardsResourcePacksDescription: 리소스 팩 카드를 표시하거나 숨깁니다.
+    visibleCardsShaderPacks: 셰이더 팩 카드
+    visibleCardsShaderPacksDescription: 셰이더 팩 카드를 표시하거나 숨깁니다.
+    visibleCardsSaves: 저장 카드
+    visibleCardsSavesDescription: 저장 카드를 표시하거나 숨깁니다.
+    visibleCardsScreenshots: 스크린샷 카드
+    visibleCardsScreenshotsDescription: 스크린샷 카드를 표시하거나 숨깁니다.
   darkTheme: 테마
   darkThemeDescription: 다크 또는 라이트 테마 중 선택
   developerMode: 개발자 모드

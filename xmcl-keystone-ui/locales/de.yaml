@@ -1535,6 +1535,18 @@ setting:
     secondaryColor: Sekundärfarbe
     sideBarColor: Seitenwand
     warningColor: Warnfarbe
+  visibleCards: Sichtbare Karten
+  visibleCardsDescription: Wählen Sie aus, welche Karten auf der Startseite angezeigt werden sollen.
+  visibleCardsMods: Mods-Karte
+  visibleCardsModsDescription: Die Mods-Karte anzeigen oder ausblenden.
+  visibleCardsResourcePacks: Ressourcenpakete-Karte
+  visibleCardsResourcePacksDescription: Die Ressourcenpakete-Karte anzeigen oder ausblenden.
+  visibleCardsShaderPacks: Shader-Pakete-Karte
+  visibleCardsShaderPacksDescription: Die Shader-Pakete-Karte anzeigen oder ausblenden.
+  visibleCardsSaves: Speicherstände-Karte
+  visibleCardsSavesDescription: Die Speicherstände-Karte anzeigen oder ausblenden.
+  visibleCardsScreenshots: Screenshots-Karte
+  visibleCardsScreenshotsDescription: Die Screenshots-Karte anzeigen oder ausblenden.
   darkTheme: Thema.
   darkThemeDescription: Wählen Sie ein dunkles oder helles Thema
   developerMode: Entwickler-Modus

@@ -1309,7 +1309,7 @@ setting:
     primaryColor: Негізгі түс
     secondaryColor: Екіншілік түс
     sideBarColor: Бүйірлік панель
-    warningColor: Ескерту түсі
+    warningColor: Ескерту түсі\n    visibleCards: Көрінетін карталар\n    visibleCardsDescription: Басты бетте қай карталарды көрсету керектігін таңдаңыз.\n    visibleCardsMods: Модтар\n    visibleCardsModsDescription: Модтар картасын көрсету.\n    visibleCardsResourcePacks: Ресурс пакеттері\n    visibleCardsResourcePacksDescription: Ресурс пакеттері картасын көрсету.\n    visibleCardsShaderPacks: Шейдер пакеттері\n    visibleCardsShaderPacksDescription: Шейдер пакеттері картасын көрсету.\n    visibleCardsSaves: Сақтаулар\n    visibleCardsSavesDescription: Сақтаулар картасын көрсету.\n    visibleCardsScreenshots: Скриншоттар\n    visibleCardsScreenshotsDescription: Скриншоттар картасын көрсету.\n
   darkTheme: Тақырып
   darkThemeDescription: Қараңғы немесе ашық тақырып арасында таңдаңыз
   developerMode: Әзірлеуші режимі

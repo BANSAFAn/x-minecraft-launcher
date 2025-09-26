@@ -1441,7 +1441,7 @@ setting:
     primaryColor: Cor primária
     secondaryColor: Cor secundária
     sideBarColor: Cor da barra lateral
-    warningColor: Cor de aviso
+    warningColor: Cor de aviso\n    visibleCards: Cartões visíveis\n    visibleCardsDescription: Escolha quais cartões mostrar na página inicial.\n    visibleCardsMods: Mods\n    visibleCardsModsDescription: Mostrar o cartão de mods.\n    visibleCardsResourcePacks: Pacotes de recursos\n    visibleCardsResourcePacksDescription: Mostrar o cartão de pacotes de recursos.\n    visibleCardsShaderPacks: Pacotes de shaders\n    visibleCardsShaderPacksDescription: Mostrar o cartão de pacotes de shaders.\n    visibleCardsSaves: Salvamentos\n    visibleCardsSavesDescription: Mostrar o cartão de salvamentos.\n    visibleCardsScreenshots: Capturas de tela\n    visibleCardsScreenshotsDescription: Mostrar o cartão de capturas de tela.\n
   darkTheme: Tema escuro
   darkThemeDescription: Escolha entre tema escuro ou claro
   developerMode: Modo de desenvolvedor

@@ -1424,6 +1424,18 @@ setting:
     secondaryColor: Másodlagos szín
     sideBarColor: Oldalsáv
     warningColor: Figyelmeztetés színe
+    visibleCards: Látható kártyák
+    visibleCardsDescription: Válaszd ki, hogy mely kártyák jelenjenek meg a kezdőlapon.
+    visibleCardsMods: Modok kártya
+    visibleCardsModsDescription: Modok kártya megjelenítése vagy elrejtése.
+    visibleCardsResourcePacks: Erőforrás csomagok kártya
+    visibleCardsResourcePacksDescription: Erőforrás csomagok kártya megjelenítése vagy elrejtése.
+    visibleCardsShaderPacks: Shader csomagok kártya
+    visibleCardsShaderPacksDescription: Shader csomagok kártya megjelenítése vagy elrejtése.
+    visibleCardsSaves: Mentések kártya
+    visibleCardsSavesDescription: Mentések kártya megjelenítése vagy elrejtése.
+    visibleCardsScreenshots: Képernyőképek kártya
+    visibleCardsScreenshotsDescription: Képernyőképek kártya megjelenítése vagy elrejtése.
   darkTheme: Téma
   darkThemeDescription: Válaszd a sötét vagy világos témát
   developerMode: Fejlesztői mód

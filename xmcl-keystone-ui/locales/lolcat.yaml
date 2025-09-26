@@ -1317,7 +1317,7 @@ setting:
     primaryColor: PRIMARY COLOR
     secondaryColor: SECONDARY COLOR
     sideBarColor: SIDE BAR
-    warningColor: WARNIN COLOR
+    warningColor: WARNIN COLOR\n    visibleCards: VISIBUL CARDZ\n    visibleCardsDescription: CHOOZ WHICH CARDZ 2 SHOW ON TEH HOME PAEG.\n    visibleCardsMods: MODZ\n    visibleCardsModsDescription: SHOW TEH MODZ CARD.\n    visibleCardsResourcePacks: RESOURCEZ PACKZ\n    visibleCardsResourcePacksDescription: SHOW TEH RESOURCEZ PACKZ CARD.\n    visibleCardsShaderPacks: SHADER PACKZ\n    visibleCardsShaderPacksDescription: SHOW TEH SHADER PACKZ CARD.\n    visibleCardsSaves: SAVEZ\n    visibleCardsSavesDescription: SHOW TEH SAVEZ CARD.\n    visibleCardsScreenshots: SCREENSHOTZ\n    visibleCardsScreenshotsDescription: SHOW TEH SCREENSHOTZ CARD.\n
   darkTheme: THEME
   darkThemeDescription: CHOOSE TWEEN DARK OR LIGHT THEME
   developerMode: DEVELOPR MODE

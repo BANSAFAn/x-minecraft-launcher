@@ -104,6 +104,29 @@ cancel: Annuleren
 checkUpdate:
   name: Controleer op updates
 color: Kleur
+colorTheme:
+  appBarColor: App bar kleur
+  backgroundColor: Achtergrond kleur
+  cardColor: Kaart kleur
+  description: Verander kleuren in het thema
+  errorColor: Fout kleur
+  name: Thema kleur en blur
+  primaryColor: Primaire kleur
+  secondaryColor: Secundaire kleur
+  sideBarColor: Zijbalk kleur
+  warningColor: Waarschuwings kleur
+  visibleCards: Zichtbare kaarten
+  visibleCardsDescription: Kies welke kaarten te tonen op de home page.
+  visibleCardsMods: Mods kaart
+  visibleCardsModsDescription: Toon of verberg de mods kaart.
+  visibleCardsResourcePacks: Resource packs kaart
+  visibleCardsResourcePacksDescription: Toon of verberg de resource packs kaart.
+  visibleCardsShaderPacks: Shader packs kaart
+  visibleCardsShaderPacksDescription: Toon of verberg de shader packs kaart.
+  visibleCardsSaves: Saves kaart
+  visibleCardsSavesDescription: Toon of verberg de saves kaart.
+  visibleCardsScreenshots: Screenshots kaart
+  visibleCardsScreenshotsDescription: Toon of verberg de screenshots kaart.
 confirm: Start
 copyClipboard:
   success: Gekopieerd naar klembord

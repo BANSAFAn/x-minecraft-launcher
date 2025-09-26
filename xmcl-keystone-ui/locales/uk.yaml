@@ -1428,7 +1428,7 @@ setting:
     primaryColor: Основний колір
     secondaryColor: Другорядний колір
     sideBarColor: Колір бічної панелі
-    warningColor: Колір попередження
+    warningColor: Колір попередження\n    visibleCards: Видимі картки\n    visibleCardsDescription: Оберіть, які картки показувати на домашній сторінці.\n    visibleCardsMods: Моди\n    visibleCardsModsDescription: Показати картку модів.\n    visibleCardsResourcePacks: Пакети ресурсів\n    visibleCardsResourcePacksDescription: Показати картку пакетів ресурсів.\n    visibleCardsShaderPacks: Пакети шейдерів\n    visibleCardsShaderPacksDescription: Показати картку пакетів шейдерів.\n    visibleCardsSaves: Збереження\n    visibleCardsSavesDescription: Показати картку збережень.\n    visibleCardsScreenshots: Скріншоти\n    visibleCardsScreenshotsDescription: Показати картку скріншотів.\n
   darkTheme: Тема
   darkThemeDescription: Виберіть між темною або світлою темою
   developerMode: Режим розробника
