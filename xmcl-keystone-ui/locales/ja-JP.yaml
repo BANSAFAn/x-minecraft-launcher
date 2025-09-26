@@ -1287,7 +1287,19 @@ setting:
     primaryColor: プライマリカラー
     secondaryColor: セカンダリカラー
     sideBarColor: サイドバー
-    warningColor: 警告の色\n    visibleCards: 表示カード\n    visibleCardsDescription: ホームページに表示するカードを選択します。\n    visibleCardsMods: モッド\n    visibleCardsModsDescription: モッドカードを表示します。\n    visibleCardsResourcePacks: リソースパック\n    visibleCardsResourcePacksDescription: リソースパックカードを表示します。\n    visibleCardsShaderPacks: シェーダーパック\n    visibleCardsShaderPacksDescription: シェーダーパックカードを表示します。\n    visibleCardsSaves: ワールド\n    visibleCardsSavesDescription: ワールドカードを表示します。\n    visibleCardsScreenshots: スクリーンショット\n    visibleCardsScreenshotsDescription: スクリーンショットカードを表示します。\n
+        warningColor: 警告の色
+    visibleCards: 表示カード
+    visibleCardsDescription: ホームページに表示するカードを選択します。
+    visibleCardsMods: モッド
+    visibleCardsModsDescription: モッドカードを表示します。
+    visibleCardsResourcePacks: リソースパック
+    visibleCardsResourcePacksDescription: リソースパックカードを表示します。
+    visibleCardsShaderPacks: シェーダーパック
+    visibleCardsShaderPacksDescription: シェーダーパックカードを表示します。
+    visibleCardsSaves: ワールド
+    visibleCardsSavesDescription: ワールドカードを表示します。
+    visibleCardsScreenshots: スクリーンショット
+    visibleCardsScreenshotsDescription: スクリーンショットカードを表示します。
   darkTheme: テーマ
   darkThemeDescription: ダークテーマかライトテーマを選択してください
   developerMode: 開発者モード
