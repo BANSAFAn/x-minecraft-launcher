@@ -14,47 +14,19 @@
     @breakpoint-changed=&quot;onBreakpoint&quot;
     @update:layout=&quot;onUpdateLayout&quot;
   &gt;
-    <GridItem
+    <HomeGridItem
       v-for="item in layout"
       :key="item.i"
-      :x="item.x"
-      :y="item.y"
-      :w="item.w"
-      :h="item.h"
-      :min-w="item.minW"
-      :min-h="item.minH"
-      :i="item.i"
-      drag-allow-from=".v-card__title"
-      drag-ignore-from=".no-drag"
-      :class="{ 'screenshot-item': Number(item.i) === CardType.Screenshots }"
-      @container-resized="onResized"
-      @resized="onResized"
-    >
-      <HomeModCard
-        v-if="isType(item.i, CardType.Mod)"
-        :row-count="modRowCount"
-        :row="item.h - 4"
-      />
-      <HomeResourcePacksCard
-        v-else-if="isType(item.i, CardType.ResourcePack)"
-        :row-count="resourcePackRowCount"
-        :row="item.h - 4"
-      />
-      <HomeShaderPackCard
-        v-else-if="isType(item.i, CardType.ShaderPack)"
-      />
-      <HomeSavesCard
-        v-else-if="isType(item.i, CardType.Save)"
-        :row-count="saveRowCount"
-        :row="item.h - 4"
-      />
-      <HomeScreenshotCard
-        v-else-if="isType(item.i, CardType.Screenshots)"
-        :width="item.w"
-        :height="screenshotHeight"
-        :instance="instance"
-      />
-    </GridItem>
+      :item="item"
+      :on-resized="onResized"
+      :mod-row-count="modRowCount"
+      :resource-pack-row-count="resourcePackRowCount"
+      :save-row-count="saveRowCount"
+      :screenshot-height="screenshotHeight"
+      :instance="instance"
+      :is-type="isType"
+      :CardType="CardType"
+    />
   </GridLayout>
 </template>
 <script lang="ts" setup>
@@ -68,6 +40,7 @@ import HomeResourcePacksCard from './HomeResourcePacksCard.vue'
 import HomeSavesCard from './HomeSavesCard.vue'
 import HomeScreenshotCard from './HomeScreenshotCard.vue'
 import HomeShaderPackCard from './HomeShaderPackCard.vue'
+import HomeGridItem from './HomeGridItem.vue'
 import { kTheme } from '@/composables/theme'
 import { computed, ref, watch } from 'vue'
 
