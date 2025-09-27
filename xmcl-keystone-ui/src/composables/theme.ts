@@ -8,7 +8,7 @@ import { Framework } from 'vuetify'
 import { useLocalStorageCacheStringValue } from './cache'
 import { useService } from './service'
 import { injection } from '@/util/inject'
-import { useLocalStorageCache } from '@vueuse/core'
+import { useLocalStorage } from '@vueuse/core'
 
 export const kTheme: InjectionKey<ReturnType<typeof useTheme>> = Symbol('theme')
 
@@ -186,7 +186,7 @@ export interface UIThemeData {
 }
 
 export function useTheme(framework: Framework, { addMedia, removeMedia, exportTheme, importTheme, getThemes, getTheme, setTheme } = useService(ThemeServiceKey)) {
-  const selectedThemeName = useLocalStorageCacheStringValue('selectedThemeName', 'default' as string)
+  const selectedThemeName = useLocalStorage('selectedThemeName', 'default')
   const currentTheme = ref<UIThemeDataV1>(getDefaultTheme())
   const themes = ref<UIThemeDataV1[]>([])
 
@@ -659,6 +659,12 @@ export function useTheme(framework: Framework, { addMedia, removeMedia, exportTh
     addMusic,
     setBackgroundImage,
     clearBackgroundImage,
-    visibleCards,
+    visibleCards: useLocalStorage('visibleCards', () => ({
+      mods: true,
+      resourcePacks: true,
+      shaderPacks: true,
+      saves: true,
+      screenshots: true
+    })),
   }
 }

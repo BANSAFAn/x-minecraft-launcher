@@ -472,18 +472,18 @@
         {{ t("setting.themeImport") }}
       </v-btn>
     </v-list-item>
-    <v-list-group :value=&quot;true&quot;&gt;
-      &lt;template v-slot:activator=&quot;{ props }&quot;&gt;
-        &lt;v-list-item-title v-bind=&quot;props&quot;&gt;
+    <v-list-group :value="true">
+      <template v-slot:activator="{ props }">
+        <v-list-item-title v-bind="props">
           {{ t('appearanceSetting.visibleCards') }}
-        &lt;/v-list-item-title&gt;
-      &lt;/template&gt;
-      &lt;SettingItemCheckbox v-model=&quot;visibleCards.mods&quot; :title=&quot;t('appearanceSetting.modsCard')&quot; :description=&quot;t('appearanceSetting.modsCardDescription')&quot; /&gt;
-      &lt;SettingItemCheckbox v-model=&quot;visibleCards.resourcePacks&quot; :title=&quot;t('appearanceSetting.resourcePacksCard')&quot; :description=&quot;t('appearanceSetting.resourcePacksCardDescription')&quot; /&gt;
-      &lt;SettingItemCheckbox v-model=&quot;visibleCards.shaderPacks&quot; :title=&quot;t('appearanceSetting.shaderPacksCard')&quot; :description=&quot;t('appearanceSetting.shaderPacksCardDescription')&quot; /&gt;
-      &lt;SettingItemCheckbox v-model=&quot;visibleCards.saves&quot; :title=&quot;t('appearanceSetting.savesCard')&quot; :description=&quot;t('appearanceSetting.savesCardDescription')&quot; /&gt;
-      &lt;SettingItemCheckbox v-model=&quot;visibleCards.screenshots&quot; :title=&quot;t('appearanceSetting.screenshotsCard')&quot; :description=&quot;t('appearanceSetting.screenshotsCardDescription')&quot; /&gt;
-    &lt;/v-list-group&gt;
+        </v-list-item-title>
+      </template>
+      <SettingItemCheckbox v-model="visibleCards.mods" :title="t('appearanceSetting.modsCard')" :description="t('appearanceSetting.modsCardDescription')" />
+      <SettingItemCheckbox v-model="visibleCards.resourcePacks" :title="t('appearanceSetting.resourcePacksCard')" :description="t('appearanceSetting.resourcePacksCardDescription')" />
+      <SettingItemCheckbox v-model="visibleCards.shaderPacks" :title="t('appearanceSetting.shaderPacksCard')" :description="t('appearanceSetting.shaderPacksCardDescription')" />
+      <SettingItemCheckbox v-model="visibleCards.saves" :title="t('appearanceSetting.savesCard')" :description="t('appearanceSetting.savesCardDescription')" />
+      <SettingItemCheckbox v-model="visibleCards.screenshots" :title="t('appearanceSetting.screenshotsCard')" :description="t('appearanceSetting.screenshotsCardDescription')" />
+    </v-list-group>
   </div>
 </template>
 <script lang="ts" setup>
