@@ -309,62 +309,62 @@
         {{ t("setting.backgroundVideoSelect") }}
       </v-btn>
     </v-list-item>
-    <!-- <v-list-item>
-      <v-list-item-content>
-        <v-list-item-title>
-          {{
-            t("setting.backgroundImageBlur")
-          }}
-        </v-list-item-title>
-        <v-list-item-subtitle>
-          {{
-            t("setting.backgroundImageBlurDescription")
-          }}
-        </v-list-item-subtitle>
-      </v-list-item-content>
-      <v-slider
-        v-model="blur"
-        :height="5"
-        :min="0"
-        :max="20"
-        :hint="t('setting.backgroundImageBlur')"
-        :always-dirty="true"
-      />
-    </v-list-item>
     <v-list-item>
-      <v-list-item-content>
-        <v-list-item-title>
-          {{
-            t("setting.blurSidebar")
-          }}
-        </v-list-item-title>
-      </v-list-item-content>
-      <v-slider
-        v-model="blurSidebar"
-        :height="5"
-        :min="0"
-        :max="20"
-        :hint="t('setting.blurSidebar')"
-        :always-dirty="true"
-      />
-    </v-list-item>
-    <v-list-item>
-      <v-list-item-content>
-        <v-list-item-title>
-          {{
-            t("setting.blurAppBar")
-          }}
-        </v-list-item-title>
-      </v-list-item-content>
-      <v-slider
-        v-model="blurAppBar"
-        :height="5"
-        :min="0"
-        :max="20"
-        :hint="t('setting.blurAppBar')"
-        :always-dirty="true"
-      />
-    </v-list-item> -->
+  <v-list-item-content>
+    <v-list-item-title>
+      {{
+        t("setting.backgroundImageBlur")
+      }}
+    </v-list-item-title>
+    <v-list-item-subtitle>
+      {{
+        t("setting.backgroundImageBlurDescription")
+      }}
+    </v-list-item-subtitle>
+  </v-list-item-content>
+  <v-slider
+    v-model="blur"
+    :height="5"
+    :min="0"
+    :max="20"
+    :hint="t('setting.backgroundImageBlur')"
+    :always-dirty="true"
+  />
+</v-list-item>
+<v-list-item>
+  <v-list-item-content>
+    <v-list-item-title>
+      {{
+        t("setting.blurSidebar")
+      }}
+    </v-list-item-title>
+  </v-list-item-content>
+  <v-slider
+    v-model="blurSidebar"
+    :height="5"
+    :min="0"
+    :max="20"
+    :hint="t('setting.blurSidebar')"
+    :always-dirty="true"
+  />
+</v-list-item>
+<v-list-item>
+  <v-list-item-content>
+    <v-list-item-title>
+      {{
+        t("setting.blurAppBar")
+      }}
+    </v-list-item-title>
+  </v-list-item-content>
+  <v-slider
+    v-model="blurAppBar"
+    :height="5"
+    :min="0"
+    :max="20"
+    :hint="t('setting.blurAppBar')"
+    :always-dirty="true"
+  />
+</v-list-item>
     <v-list-item>
       <v-list-item-content>
         <v-list-item-title>
@@ -484,6 +484,12 @@
       <SettingItemCheckbox v-model="visibleCards.saves" :title="t('appearanceSetting.savesCard')" :description="t('appearanceSetting.savesCardDescription')" />
       <SettingItemCheckbox v-model="visibleCards.screenshots" :title="t('appearanceSetting.screenshotsCard')" :description="t('appearanceSetting.screenshotsCardDescription')" />
     </v-list-group>
+    <SettingItemSelect
+      :select.sync="layout"
+      :title="t('setting.layoutTitle')"
+      :description="t('setting.layoutDescription')"
+      :items="layouts"
+    />
   </div>
 </template>
 <script lang="ts" setup>
