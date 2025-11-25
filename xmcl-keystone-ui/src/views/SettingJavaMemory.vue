@@ -1,65 +1,50 @@
 <template>
-  <div class="flex flex-col">
-    <v-progress-linear
-      class="mt-3 rounded"
-      :active="assignMemory !== false"
-      :value="minMemoryProgress"
-      color="deep-orange"
-      :buffer-value="maxMemoryProgress"
-      striped
-      stream
-      height="25"
-    >
-      <template #default>
-        <strong class="pl-4">
-          {{ t('java.minMemory') + ' ' + getExpectedSize(minMemory, 'B') }}
-        </strong>
-        <div class="flex-grow" />
-        <strong class="pr-4">
-          {{ t('java.maxMemory') + ' ' + getExpectedSize(maxMemory, 'B') }}
-        </strong>
-      </template>
-    </v-progress-linear>
-    <v-range-slider
-      v-if="assignMemory !== false"
-      :input-value="mem"
-      :disabled="assignMemory !== true"
-      :max="sysmem.total"
-      min="0"
-      :step="step"
-      class="z-10 mt-[-25px]"
-      height="25"
-      track-fill-color="transparent"
-      track-color="transparent"
-      color="red"
-      hide-details
-      @input="mem = $event"
-    >
-      <template #thumb-label="{ value }">
-        {{ getExpectedSize(value, '', 1) }}
-      </template>
-    </v-range-slider>
-    <v-progress-linear
-      class="mt-3 rounded"
-      :value="memoryProgress"
-      color="blue"
-      height="25"
-      reverse
-    >
-      <template #default>
-        <div class="flex items-center justify-center">
-          <v-icon left>
-            memory
-          </v-icon>
-          <strong class="flex flex-grow-0 items-center justify-center">
-            {{ t('java.systemMemory', { free: getExpectedSize(sysmem.free, 'B'), total: getExpectedSize(sysmem.total, 'B') }) }}
-            <!-- {{ getExpectedSize(sysmem.free, 'B') }} / {{ getExpectedSize(sysmem.total, 'B') }} -->
+  <div class="settings-card">
+    <h3 class="card-title">
+      <v-icon class="title-icon">memory</v-icon>
+      {{ t("java.memoryAllocation") }}
+    </h3>
+    <div class="memory-settings">
+      <v-progress-linear class="memory-progress-bar" :active="assignMemory !== false" :value="minMemoryProgress"
+        color="deep-orange" :buffer-value="maxMemoryProgress" striped stream height="25" rounded>
+        <template #default="{ value }">
+          <strong class="pl-4">
+            {{ t('java.minMemory') + ' ' + getExpectedSize(minMemory, 'B') }}
           </strong>
-        </div>
-      </template>
-    </v-progress-linear>
+          <div class="flex-grow" />
+          <strong class="pr-4">
+            {{ t('java.maxMemory') + ' ' + getExpectedSize(maxMemory, 'B') }}
+          </strong>
+        </template>
+      </v-progress-linear>
+
+      <v-range-slider v-if="assignMemory !== false" :input-value="mem" :disabled="assignMemory !== true"
+        :max="sysmem.total" min="0" :step="step" class="memory-range-slider" height="8"
+        track-fill-color="var(--v-primary)" track-color="var(--v-surface-variant)" thumb-color="white"
+        thumb-label="always" hide-details @input="mem = $event">
+        <template #thumb-label="{ value }">
+          <span class="thumb-label-text">{{ getExpectedSize(value, '', 1) }}</span>
+        </template>
+      </v-range-slider>
+
+      <v-progress-linear class="system-memory-bar mt-3" :value="memoryProgress" color="blue" height="25" rounded
+        reverse>
+        <template #default="{ value }">
+          <div class="flex items-center justify-center">
+            <v-icon left>memory</v-icon>
+            <strong class="flex flex-grow-0 items-center justify-center">
+              {{ t('java.systemMemory', {
+                free: getExpectedSize(sysmem.free, 'B'), total: getExpectedSize(sysmem.total,
+                  'B')
+              }) }}
+            </strong>
+          </div>
+        </template>
+      </v-progress-linear>
+    </div>
   </div>
 </template>
+
 <script lang="ts" setup>
 import { getExpectedSize } from '@/util/size'
 import { Ref } from 'vue'
@@ -133,5 +118,102 @@ onMounted(() => {
   updateTotalMemory()
   interval = setInterval(updateTotalMemory, 1000)
 })
-
 </script>
+
+<style scoped>
+.settings-card {
+  background-color: var(--v-surface-variant);
+  border: 2px solid var(--v-outline);
+  border-radius: 12px;
+  padding: 20px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+.settings-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(145deg, var(--v-primary) 0%, transparent 70%);
+  border-radius: 12px;
+  opacity: 0.1;
+  z-index: -1;
+}
+
+.settings-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  transform: translateY(-3px);
+  border-color: var(--v-primary);
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--v-on-surface);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--v-outline-variant);
+}
+
+.title-icon {
+  color: var(--v-primary);
+  font-size: 1.3rem;
+}
+
+.memory-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.memory-range-slider {
+  margin-top: -25px;
+  margin-bottom: 8px;
+  z-index: 1;
+}
+
+.thumb-label-text {
+  color: rgba(0, 0, 0, 0.87);
+  font-weight: 500;
+}
+
+/* Deep styles for Vuetify components */
+:deep(.v-progress-linear__background) {
+  background-color: var(--v-surface-variant) !important;
+}
+
+:deep(.v-progress-linear__buffer) {
+  background-color: var(--v-surface-container-highest) !important;
+}
+
+:deep(.v-slider__track-container) {
+  border-radius: 4px;
+}
+
+:deep(.v-slider__track-background) {
+  background-color: var(--v-surface-variant) !important;
+}
+
+:deep(.v-slider__track-fill) {
+  background-color: var(--v-primary) !important;
+}
+
+:deep(.v-slider__thumb) {
+  width: 20px !important;
+  height: 20px !important;
+  border: 2px solid white !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+:deep(.v-slider__thumb-label) {
+  background-color: white !important;
+  color: rgba(0, 0, 0, 0.87) !important;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  font-weight: 500;
+}
+</style>
