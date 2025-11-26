@@ -1,44 +1,20 @@
 <template>
-  <div
-    class="grid xl:gap-4 gap-1 home-actions"
-    :style="{
-      'grid-template-columns': `repeat(3, minmax(0, 1fr))`,
-    }"
-  >
-    <v-btn
-      v-shared-tooltip="() => t('logsCrashes.title')"
-      text
-      icon
-      :loading="isValidating"
-      @click="showLogDialog()"
-    >
+  <div class="grid xl:gap-4 gap-1 home-actions" :style="{
+    'grid-template-columns': `repeat(${instance && !instance.upstream ? 4 : 3
+      }, minmax(0, 1fr))`,
+  }">
+    <v-btn v-shared-tooltip="() => t('logsCrashes.title')" text icon :loading="isValidating" @click="showLogDialog()">
       <v-icon> subtitles </v-icon>
     </v-btn>
-    <v-btn
-      v-shared-tooltip="() => t('instance.showInstance')"
-      text
-      icon
-      :loading="isValidating"
-      @click="showInstanceFolder"
-    >
+    <v-btn v-shared-tooltip="() => t('instance.showInstance')" text icon :loading="isValidating"
+      @click="showInstanceFolder">
       <v-icon> folder </v-icon>
     </v-btn>
-    <v-btn
-      v-shared-tooltip.left="() => t('server.export')"
-      icon
-      :loading="isValidating"
-      @click="showExportServer()"
-    >
+    <v-btn v-shared-tooltip.left="() => t('server.export')" icon :loading="isValidating" @click="showExportServer()">
       <v-icon> ios_share </v-icon>
     </v-btn>
-    <v-btn
-      v-if="instance && !instance.upstream"
-      v-shared-tooltip.left="() => t('instance.installModpack')"
-      text
-      icon
-      :loading="isValidating || loading"
-      @click="onClickInstallFromModpack()"
-    >
+    <v-btn v-if="instance && !instance.upstream" v-shared-tooltip.left="() => t('instance.installModpack')" text icon
+      :loading="isValidating || loading" @click="onClickInstallFromModpack()">
       <v-icon> drive_folder_upload </v-icon>
     </v-btn>
   </div>

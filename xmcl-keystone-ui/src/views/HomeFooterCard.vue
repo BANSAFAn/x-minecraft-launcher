@@ -1,36 +1,22 @@
 <template>
-  <v-card
-    ref="root"
-    flat
-    class="rounded-lg overflow-hidden tabs-card"
-  >
-    <HomeScreenshotCard
-      v-if="selected === 0"
-      class="h-full"
-      :height="240"
-      :instance="instance"
-      :galleries="galleries"
-    />
-    <HomeUpstreamHeader
-      v-else-if="headerData"
-      class="h-full rounded-t-lg"
-      :value="headerData"
-      dense
-    />
-    <div
-      class="flex h-full flex-col transition-all duration-500 home-card rounded-lg"
-      style="box-sizing: border-box"
-    >
+  <v-card ref="root" flat class="rounded-lg overflow-hidden tabs-card">
+    <HomeScreenshotCard v-if="selected === 0" class="h-full" :height="240" :instance="instance"
+      :galleries="galleries" />
+    <HomeUpstreamHeader v-else-if="headerData" class="h-full rounded-t-lg" :value="headerData" dense />
+    <div class="flex h-full flex-col transition-all duration-500 home-card rounded-lg" style="box-sizing: border-box">
       <v-card-text class="flex flex-col gap-2 p-3 pt-2">
         <div class="flex gap-4 items-center">
-        <div class="tabs flex gap-4 items-center" :style="{ '--underline-left': underlineLeft + 'px', '--underline-width': underlineWidth + 'px' }">
-          <span ref="contentRef" @click="onSelectContent" class="cursor-pointer" :class="{ 'selected': selected === 0 }">
-            {{ t('instance.contents') }}
-          </span>
-          <span v-if="!!upstream" ref="newsRef" @click="onSelectUpdates" class="cursor-pointer" :class="{ 'selected': selected === 1 }">
-            {{ t('instance.updates') }}
-          </span>
-        </div>
+          <div class="tabs flex gap-4 items-center"
+            :style="{ '--underline-left': underlineLeft + 'px', '--underline-width': underlineWidth + 'px' }">
+            <span ref="contentRef" @click="onSelectContent" class="cursor-pointer"
+              :class="{ 'selected': selected === 0 }">
+              {{ t('instance.contents') }}
+            </span>
+            <span v-if="!!upstream" ref="newsRef" @click="onSelectUpdates" class="cursor-pointer"
+              :class="{ 'selected': selected === 1 }">
+              {{ t('instance.updates') }}
+            </span>
+          </div>
           <div class="flex-grow" />
           <div class="controls" style="margin-right: 0.18rem">
             <v-btn icon small @click="onViewDashboard">
@@ -40,30 +26,16 @@
             </v-btn>
           </div>
         </div>
-        <div class="flex flex-col gap-2 transition-all duration-400" :style="(active || dragover) ? { 'height': '136px', overflow: selected === 1 ? 'auto' : 'unset' } : { 'height': '4rem' }">
-          <HomeCardListItem
-            v-for="item in items"
-            :key="item.icon + item.text"
-            :icon="item.icon"
-            :tooltip="item.tooltip"
-            :text="item.text"
-            :highlighted="item.highlighted"
-            :loading="updating"
-            @install="item.install"
-            @setting="item.setting"
-            @drop="item.drop"
-          />
+        <div class="flex flex-col gap-2 transition-all duration-400"
+          :style="(active || dragover) ? { 'height': '136px', overflow: selected === 1 ? 'auto' : 'unset' } : { 'height': '4rem' }">
+          <HomeCardListItem v-for="item in items" :key="item.icon + item.text" :icon="item.icon" :tooltip="item.tooltip"
+            :text="item.text" :highlighted="item.highlighted" :loading="updating" @install="item.install"
+            @setting="item.setting" @drop="item.drop" />
         </div>
       </v-card-text>
-      <StoreProjectInstallVersionDialog
-        no-back
-        :value="showVersionDialog"
-        :versions="dialogVersions"
-        :initial-selected-detail="selectedVersion"
-        :get-version-detail="getVersionDetail"
-        @input="showVersionDialog = $event"
-        @install="onInstallVersion"
-      />
+      <StoreProjectInstallVersionDialog no-back :value="showVersionDialog" :versions="dialogVersions"
+        :initial-selected-detail="selectedVersion" :get-version-detail="getVersionDetail" :installing="updating"
+        @input="showVersionDialog = $event" @install="onInstallVersion" />
     </div>
   </v-card>
 </template>
@@ -136,7 +108,7 @@ watch(upstream, (u) => {
     curseforgeProjectId.value = undefined
   }
 }, { immediate: true })
-const modrinthVersions = useSWRVModel(getModrinthVersionModel(modrinthProjectId, undefined, modLoaderType , computed(() => minecraftVersion.value ? [minecraftVersion.value] : undefined)))
+const modrinthVersions = useSWRVModel(getModrinthVersionModel(modrinthProjectId, undefined, modLoaderType, computed(() => minecraftVersion.value ? [minecraftVersion.value] : undefined)))
 const curseforgeModLoaderTypeRef = computed(() => {
   const type = modLoaderType.value
   if (type === 'forge') return 1
@@ -145,7 +117,7 @@ const curseforgeModLoaderTypeRef = computed(() => {
   if (type === 'quilt') return 5
   return undefined
 })
-const curseforgeFiles = useSWRVModel(getCurseforgeProjectFilesModel(curseforgeProjectId, minecraftVersion , curseforgeModLoaderTypeRef ) )
+const curseforgeFiles = useSWRVModel(getCurseforgeProjectFilesModel(curseforgeProjectId, minecraftVersion, curseforgeModLoaderTypeRef))
 
 const showVersionDialog = ref(false)
 const selectedVersion = ref<StoreProjectVersion | undefined>(undefined)
@@ -154,7 +126,7 @@ const latestVersions = computed(() => {
   if (upstream.value?.type === 'modrinth-modpack') {
     return modrinthVersions.data.value || []
   } else if (upstream.value?.type === 'curseforge-modpack') {
-    return (curseforgeFiles.data.value )?.data || []
+    return (curseforgeFiles.data.value)?.data || []
   }
   return []
 })
@@ -188,10 +160,10 @@ async function getVersionDetail(version: StoreProjectVersion): Promise<StoreProj
   if (upstream.value?.type === 'modrinth-modpack') {
     const target = (modrinthVersions.data.value || []).find(v => v.id === version.id)
     if (!target) return { changelog: '', dependencies: [], version }
-    
+
     const projects = target.dependencies?.map(v => v.project_id).filter(v => !!v) || []
     const lookup = Object.fromEntries(target.dependencies?.map(p => [p.project_id, p.dependency_type]) || [])
-    
+
     try {
       const { clientModrinthV2 } = await import('@/util/clients')
       const matched = projects.length > 0 ? await clientModrinthV2.getProjects(projects) : []
@@ -214,11 +186,11 @@ async function getVersionDetail(version: StoreProjectVersion): Promise<StoreProj
   } else if (upstream.value?.type === 'curseforge-modpack') {
     const target = ((curseforgeFiles.data.value)?.data || []).find(v => v.id.toString() === version.id)
     if (!target) return { changelog: '', dependencies: [], version }
-    
+
     try {
       const { clientCurseforgeV1 } = await import('@/util/clients')
       const { FileRelationType } = await import('@xmcl/curseforge')
-      
+
       const mapping = {
         [FileRelationType.EmbeddedLibrary]: 'embedded',
         [FileRelationType.Include]: 'embedded',
@@ -238,7 +210,7 @@ async function getVersionDetail(version: StoreProjectVersion): Promise<StoreProj
         href: d?.links.websiteUrl ?? '',
         dependencyType: lookup[d.id] || 'optional',
       }))
-      
+
       // Fetch changelog
       let changelog = ''
       if (curseforgeProjectId.value) {
@@ -249,7 +221,7 @@ async function getVersionDetail(version: StoreProjectVersion): Promise<StoreProj
           console.error('Failed to fetch changelog:', e)
         }
       }
-      
+
       return {
         changelog,
         dependencies,
@@ -260,7 +232,7 @@ async function getVersionDetail(version: StoreProjectVersion): Promise<StoreProj
       return { changelog: '', dependencies: [], version }
     }
   }
-  
+
   return { changelog: '', dependencies: [], version }
 }
 
@@ -336,6 +308,7 @@ const { show: showInstallDialog } = useDialog(InstanceInstallDialog)
 const updating = ref(false)
 const { installModapckFromMarket } = useService(ModpackServiceKey)
 async function onInstallVersion(v: StoreProjectVersion) {
+  if (updating.value) return
   try {
     updating.value = true
     const instancePath = instance.value.path
@@ -346,6 +319,7 @@ async function onInstallVersion(v: StoreProjectVersion) {
       market: 0,
       version: { versionId: v.id, icon: headerData.value?.icon || '' }
     })
+    showVersionDialog.value = false
     showInstallDialog({
       type: 'upstream',
       modpack,
@@ -434,7 +408,7 @@ const items = computed(() => {
           selectedVersion.value = version
           showVersionDialog.value = true
         },
-        drop: () => {}
+        drop: () => { }
       }
     })
   } else {
@@ -463,8 +437,9 @@ watch(instance, () => {
 })
 </script>
 <style scoped>
-.tabs-card>.icons, .tabs-card>.tabs-items {
-transition: all 0.2s ease-in-out;
+.tabs-card>.icons,
+.tabs-card>.tabs-items {
+  transition: all 0.2s ease-in-out;
   opacity: 0;
 }
 
@@ -497,8 +472,9 @@ transition: all 0.2s ease-in-out;
   min-width: 450px;
 }
 
-.tabs-card>.icons, .tabs-card>.tabs-items {
-transition: all 0.2s ease-in-out;
+.tabs-card>.icons,
+.tabs-card>.tabs-items {
+  transition: all 0.2s ease-in-out;
   opacity: 0;
 }
 
@@ -515,11 +491,12 @@ transition: all 0.2s ease-in-out;
 }
 
 .tabs {
-  @apply rounded-md!;
+  @apply rounded-md !;
   margin-bottom: 0.125rem;
 }
 
-.tabs-items, .tabs-items .v-window-item {
+.tabs-items,
+.tabs-items .v-window-item {
   min-height: 8rem;
   max-height: 8rem;
   height: 8rem;

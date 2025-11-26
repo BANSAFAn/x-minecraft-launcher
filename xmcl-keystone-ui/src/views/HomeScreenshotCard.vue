@@ -1,49 +1,21 @@
 <template>
-  <v-card
-    class="w-full items-center justify-center flex"
-    :color="cardColor"
-    outlined
-    :style="{
+  <v-card v-if="display.length > 0 || persistent" class="w-full items-center justify-center flex" :color="cardColor"
+    outlined :style="{
       borderColor: refreshing ? 'white' : '',
       'backdrop-filter': `blur(${blurCard}px)`,
-    }"
-  >
-    <v-btn
-      v-shared-tooltip="_ => randomPlayScreenshot ? t('screenshots.playRandom') : t('screenshots.playSequence')"
-      text
-      icon
-      class="z-6 absolute bottom-2 right-2"
-      @click="randomPlayScreenshot = !randomPlayScreenshot"
-    >
+    }">
+    <v-btn v-shared-tooltip="_ => randomPlayScreenshot ? t('screenshots.playRandom') : t('screenshots.playSequence')"
+      text icon class="z-6 absolute bottom-2 right-2" @click="randomPlayScreenshot = !randomPlayScreenshot">
       <v-icon>
         {{ randomPlayScreenshot ? 'shuffle' : 'repeat' }}
       </v-icon>
     </v-btn>
-    <v-carousel
-      hide-delimiters
-      :height="height"
-      show-arrows-on-hover
-      :show-arrows="display.length > 0"
-      cycle
-      interval="5000"
-      class="rounded"
-    >
+    <v-carousel hide-delimiters :height="height" show-arrows-on-hover :show-arrows="display.length > 0" cycle
+      interval="5000" class="rounded">
       <template v-if="display.length > 0">
-        <v-carousel-item
-          v-for="(i, idx) of display"
-          :key="i"
-          class="cursor-pointer"
-          @click="show(i, idx)"
-        >
-          <img
-            :src="i"
-            draggable="true"
-            @dragstart.stop="onDragStart($event, i)"
-            class="w-full h-full object-cover"
-          />
-          <div
-            class="absolute w-full bottom-2 flex justify-center items-center justify-center z-10"
-          >
+        <v-carousel-item v-for="(i, idx) of display" :key="i" class="cursor-pointer" @click="show(i, idx)">
+          <img :src="i" draggable="true" @dragstart.stop="onDragStart($event, i)" class="w-full h-full object-cover" />
+          <div class="absolute w-full bottom-2 flex justify-center items-center justify-center z-10">
             <div>
               <AppImageControls :image="i" />
             </div>
@@ -51,13 +23,8 @@
         </v-carousel-item>
       </template>
       <template v-else>
-        <v-carousel-item
-          :key="-1"
-        >
-          <v-sheet
-            color="transparent"
-            class="flex h-full items-center justify-center"
-          >
+        <v-carousel-item :key="-1">
+          <v-sheet color="transparent" class="flex h-full items-center justify-center">
             <v-icon left>
               image
             </v-icon>
@@ -88,6 +55,7 @@ const props = defineProps<{
     url: string
     rawUrl?: string
   }[]
+  persistent?: boolean
 }>()
 
 const { cardColor, blurCard } = injection(kTheme)
