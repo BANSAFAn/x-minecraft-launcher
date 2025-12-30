@@ -75,12 +75,13 @@
         <!-- Scroll View: Render all sections -->
         <template v-if="viewMode === 'scroll'">
           <section id="general" class="mb-8 scroll-target"><SettingGeneral /></section>
-          <section id="appearance" class="mb-8 scroll-target"><SettingAppearance /></section>
+          <section id="appearance" class="mb-8 scroll-target">
+            <SettingGlobalUI />
+          </section>
           <section id="global" class="mb-8 scroll-target"><SettingGlobal /></section>
           <section id="update" class="mb-8 scroll-target"><SettingUpdate /></section>
           <section id="network" class="mb-8 scroll-target">
             <SettingNetwork />
-            <SettingYggdrasilServices class="mt-4" />
           </section>
           <section id="about" class="mb-12 scroll-target"><SettingAbout /></section>
         </template>
@@ -90,12 +91,11 @@
           <v-fade-transition mode="out-in">
             <div :key="activeSectionIndex" class="tab-content">
               <SettingGeneral v-if="activeSectionIndex === 0" />
-              <SettingAppearance v-if="activeSectionIndex === 1" />
+              <SettingGlobalUI v-if="activeSectionIndex === 1" />
               <SettingGlobal v-if="activeSectionIndex === 2" />
               <SettingUpdate v-if="activeSectionIndex === 3" />
               <div v-if="activeSectionIndex === 4">
                 <SettingNetwork />
-                <SettingYggdrasilServices class="mt-4" />
               </div>
               <SettingAbout v-if="activeSectionIndex === 5" />
             </div>
@@ -113,7 +113,6 @@
 import { ref, computed, onMounted, onUnmounted, provide, watch, Ref } from 'vue'
 import { useI18n } from 'vue-i18n-bridge'
 import SettingUpdateInfoDialog from './SettingUpdateInfoDialog.vue'
-import SettingAppearance from './SettingAppearance.vue'
 import SettingUpdate from './SettingUpdate.vue'
 import SettingGeneral from './SettingGeneral.vue'
 import SettingMigrationDialog from './SettingMigrationDialog.vue'
@@ -126,6 +125,7 @@ import { kUpdateSettings, useUpdateSettings } from '@/composables/setting'
 import { injection } from '@/util/inject'
 import { kTheme } from '@/composables/theme'
 import { useLocalStorageCacheStringValue } from '@/composables/cache'
+import SettingGlobalUI from './SettingGlobalUI.vue'
 
 const { t } = useI18n()
 usePresence(computed(() => t('presence.setting')))

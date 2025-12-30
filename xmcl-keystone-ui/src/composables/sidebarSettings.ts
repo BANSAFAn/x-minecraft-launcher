@@ -1,5 +1,5 @@
 import { InjectionKey, Ref } from 'vue'
-import { useLocalStorageCacheStringValue, useLocalStorageCacheInt } from './cache'
+import { useLocalStorageCacheStringValue, useLocalStorageCacheInt, useLocalStorageCacheBool } from './cache'
 import { injection } from '@/util/inject'
 
 export type SidebarPosition = 'left' | 'right' | 'top' | 'bottom'
@@ -11,6 +11,7 @@ export interface SidebarSettings {
   style: Ref<SidebarStyle>
   align: Ref<SidebarAlign>
   scale: Ref<number>
+  autoHide: Ref<boolean>
 }
 
 export const kSidebarSettings: InjectionKey<SidebarSettings> = Symbol('SidebarSettings')
@@ -20,12 +21,14 @@ export function useSidebarSettings(): SidebarSettings {
   const style = useLocalStorageCacheStringValue('sidebar_style', 'classic' as SidebarStyle)
   const align = useLocalStorageCacheStringValue('sidebar_align', 'center' as SidebarAlign)
   const scale = useLocalStorageCacheInt('sidebar_scale', 100)
+  const autoHide = useLocalStorageCacheBool('sidebar_autoHide', false)
 
   return {
     position,
     style,
     align,
     scale,
+    autoHide,
   }
 }
 

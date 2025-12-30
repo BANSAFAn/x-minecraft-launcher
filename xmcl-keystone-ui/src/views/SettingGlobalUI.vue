@@ -1,4 +1,3 @@
-<!-- src/components/SettingGlobalUI.vue -->
 <template>
   <v-card class="mb-4" elevation="2" color="transparent">
     <v-card-title class="text-subtitle-1 pb-2">
@@ -10,7 +9,11 @@
     </v-card-subtitle>
 
     <v-card-text class="pa-4">
-      <v-tabs v-model="activeTab" background-color="transparent" color="primary" grow>
+      <v-tabs v-model="activeTab" background-color="transparent" color="primary" show-arrows grow>
+        <v-tab>
+          <v-icon left small>style</v-icon>
+          {{ t('setting.themeSettings') }}
+        </v-tab>
         <v-tab>
           <v-icon left small>home</v-icon>
           {{ t('setting.myStuffStyle') }}
@@ -22,6 +25,83 @@
       </v-tabs>
 
       <v-tabs-items v-model="activeTab" class="mt-4 transparent-bg">
+        
+        <!-- Theme & Layout Tab -->
+        <v-tab-item>
+          <!-- Layout Selection Card -->
+          <v-card class="style-option-card mb-4" outlined>
+            <v-card-text class="pa-4">
+              <div class="d-flex align-center mb-3">
+                <v-icon color="primary" class="mr-2">view_quilt</v-icon>
+                <div>
+                  <div class="font-weight-medium">{{ t('setting.layoutTitle') || 'Interface Layout' }}</div>
+                  <div class="text-caption text--secondary">{{ t('setting.layoutDescription') || 'Choose your preferred interface style' }}</div>
+                </div>
+              </div>
+              <v-chip-group v-model="layout" active-class="primary--text" mandatory>
+                <v-chip v-for="item in layouts" :key="item.value" :value="item.value" filter outlined class="mr-2">
+                  <v-icon left small>{{ item.value === 'focus' ? 'fullscreen' : 'dashboard' }}</v-icon>
+                  {{ item.text }}
+                </v-chip>
+              </v-chip-group>
+            </v-card-text>
+          </v-card>
+
+          <!-- Market Design Card -->
+          <v-card class="style-option-card mb-4" outlined>
+            <v-card-text class="pa-4">
+              <div class="d-flex align-center mb-3">
+                <v-icon color="primary" class="mr-2">store</v-icon>
+                <div>
+                  <div class="font-weight-medium">Market Design</div>
+                  <div class="text-caption text--secondary">Choose between Classic or Modern AppStore style for the market</div>
+                </div>
+              </div>
+              <v-chip-group v-model="marketLayout" active-class="primary--text" mandatory>
+                <v-chip value="classic" filter outlined class="mr-2">
+                  <v-icon left small>view_list</v-icon>
+                  Classic
+                </v-chip>
+                <v-chip value="modern" filter outlined class="mr-2">
+                  <v-icon left small>apps</v-icon>
+                  Modern
+                </v-chip>
+              </v-chip-group>
+            </v-card-text>
+          </v-card>
+
+          <!-- Linux Titlebar (Linux only) -->
+          <v-card v-if="env?.os === 'linux'" class="style-option-card mb-4" outlined>
+            <v-card-text class="pa-4">
+              <v-list-item class="px-0">
+                <v-list-item-content>
+                  <v-list-item-title class="font-weight-medium">
+                    <v-icon left small color="primary">window</v-icon>
+                    {{ t('setting.linuxTitlebar') }}
+                  </v-list-item-title>
+                  <v-list-item-subtitle>
+                    {{ t('setting.linuxTitlebarDescription') }}
+                  </v-list-item-subtitle>
+                </v-list-item-content>
+                <v-list-item-action>
+                  <v-switch v-model="linuxTitlebar" color="primary" hide-details />
+                </v-list-item-action>
+              </v-list-item>
+            </v-card-text>
+          </v-card>
+
+          <!-- Theme Settings Card -->
+          <v-card class="style-option-card" outlined>
+            <v-card-title class="pb-2 text-body-1 font-weight-bold">
+              <v-icon left color="primary" small>style</v-icon>
+              {{ t('setting.themeSettings') }}
+            </v-card-title>
+            <v-card-text>
+              <AppearanceItems :theme="currentTheme" @save="onSave" />
+            </v-card-text>
+          </v-card>
+        </v-tab-item>
+
         <!-- Home Page Style Tab -->
         <v-tab-item>
           <v-row>
@@ -183,6 +263,17 @@
                   <v-divider class="my-2" />
                   <v-list-item>
                     <v-list-item-content>
+                      <v-list-item-title class="font-weight-medium">{{ t('setting.sidebarAutoHide') }}</v-list-item-title>
+                      <v-list-item-subtitle>{{ t('setting.sidebarAutoHideHint') }}</v-list-item-subtitle>
+                    </v-list-item-content>
+                    <v-list-item-action>
+                      <v-switch v-model="sidebarAutoHide" color="primary" hide-details dense />
+                    </v-list-item-action>
+                  </v-list-item>
+
+                  <v-divider class="my-2" />
+                  <v-list-item>
+                    <v-list-item-content>
                       <v-list-item-title class="font-weight-medium">{{ t('setting.sidebarScale') }} ({{ sidebarScale }}%)</v-list-item-title>
                     </v-list-item-content>
                     <v-list-item-action class="w-32">
@@ -204,9 +295,41 @@ import { computed, watch, Ref, ref } from 'vue'
 import { useI18n } from 'vue-i18n-bridge'
 import { useInjectSidebarSettings } from '@/composables/sidebarSettings'
 import { useLocalStorageCacheStringValue } from '@/composables/cache'
+import { useMarketLayout } from '@/composables/marketLayout'
+import AppearanceItems from '@/components/AppearanceItems.vue'
+import { kTheme } from '@/composables/theme'
+import { kUIDefaultLayout } from '@/composables/uiLayout'
+import { kEnvironment } from '@/composables/environment'
+import { kSettingsState } from '@/composables/setting'
+import { injection } from '@/util/inject'
 
 const { t } = useI18n()
 const activeTab = ref(0)
+const env = injection(kEnvironment)
+const { currentTheme, update, setTheme, serialize } = injection(kTheme)
+const layout = injection(kUIDefaultLayout)
+const { state } = injection(kSettingsState)
+const marketLayout = useMarketLayout()
+
+// --- Layout & Theme Logic ---
+const layouts = computed(() => [{
+  text: t('setting.layout.default'),
+  value: 'default',
+}, {
+  text: t('setting.layout.focus'),
+  value: 'focus',
+}])
+
+const linuxTitlebar = computed({
+  get: () => state.value?.linuxTitlebar ?? false,
+  set: (v) => state.value?.linuxTitlebarSet(v),
+})
+
+function onSave() {
+  setTheme(currentTheme.value.name, serialize(currentTheme.value)).then(() => {
+    update()
+  })
+}
 
 // --- UI Customization State ---
 const sidebarSettings = useInjectSidebarSettings()
@@ -214,6 +337,7 @@ const sidebarPosition = sidebarSettings.position
 const sidebarStyle = sidebarSettings.style
 const sidebarAlign = sidebarSettings.align
 const sidebarScale = sidebarSettings.scale
+const sidebarAutoHide = sidebarSettings.autoHide
 const myStuffStyle = useLocalStorageCacheStringValue('myStuffStyle', 'new') as Ref<'old' | 'new'>
 
 // --- Computed Properties for UI Controls ---
@@ -418,6 +542,25 @@ watch(sidebarStyle, (newStyle) => {
   display: flex;
   padding: 4px;
   gap: 4px;
+  background-color: transparent; /* Ensure visibility against main bg */
+}
+
+/* Horizontal alignment for Top/Bottom */
+.sidebar-preview.position-top .sidebar-preview-notch,
+.sidebar-preview.position-bottom .sidebar-preview-notch {
+  width: 100%;
+  flex-direction: row;
+  height: 24px;
+  align-items: center;
+}
+
+/* Vertical alignment for Left/Right */
+.sidebar-preview.position-left .sidebar-preview-notch,
+.sidebar-preview.position-right .sidebar-preview-notch {
+  height: 100%;
+  flex-direction: column;
+  width: 24px;
+  justify-content: center; /* Default vertical align */
 }
 
 .sidebar-preview-notch-item {
@@ -425,12 +568,24 @@ watch(sidebarStyle, (newStyle) => {
   height: 12px;
   background-color: #bdbdbd;
   border-radius: 3px;
+  flex-shrink: 0;
 }
 
-/* Notch Alignment */
-.sidebar-preview.align-start .sidebar-preview-notch { justify-content: flex-start; }
-.sidebar-preview.align-center .sidebar-preview-notch { justify-content: center; }
-.sidebar-preview.align-end .sidebar-preview-notch { justify-content: flex-end; }
+/* Notch Alignment - Horizontal (Top/Bottom) */
+.sidebar-preview.position-top.align-start .sidebar-preview-notch,
+.sidebar-preview.position-bottom.align-start .sidebar-preview-notch { justify-content: flex-start; }
+.sidebar-preview.position-top.align-center .sidebar-preview-notch,
+.sidebar-preview.position-bottom.align-center .sidebar-preview-notch { justify-content: center; }
+.sidebar-preview.position-top.align-end .sidebar-preview-notch,
+.sidebar-preview.position-bottom.align-end .sidebar-preview-notch { justify-content: flex-end; }
+
+/* Notch Alignment - Vertical (Left/Right) */
+.sidebar-preview.position-left.align-start .sidebar-preview-notch,
+.sidebar-preview.position-right.align-start .sidebar-preview-notch { justify-content: flex-start; }
+.sidebar-preview.position-left.align-center .sidebar-preview-notch,
+.sidebar-preview.position-right.align-center .sidebar-preview-notch { justify-content: center; }
+.sidebar-preview.position-left.align-end .sidebar-preview-notch,
+.sidebar-preview.position-right.align-end .sidebar-preview-notch { justify-content: flex-end; }
 
 .sidebar-preview-content {
   flex-grow: 1;
