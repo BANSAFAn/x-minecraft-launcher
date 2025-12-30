@@ -553,11 +553,7 @@ instanceInstallSkip:
     Some files are downloaded multiple times with checksum unmatching. This may
     be due to the fact that the original checksum is incorrect. Please check. If
     you confirm the current files are valid, you can skip the validation check.
-instanceLauncher:
-  createNew: Create New Instance
-  search: Search instances...
-  showAll: Show All Instances
-  title: All Instances
+
 instanceSetting:
   disableAuthlibInjector: Disable authlib injector
   disableAuthlibInjectorDescription: >-
@@ -1574,11 +1570,7 @@ setting:
   hideNewsHeader: Hide News Showcase
   importSettings: Import Settings
   importSettingsHint: Load settings from a previously exported file
-  instanceLauncher:
-    createNew: Create New Instance
-    search: Search instances...
-    showAll: Show All Instances
-    title: All Instances
+
   instanceTheme:
     activeDescription: >-
       This instance is using a custom theme. You can delete it to use the global
@@ -1634,7 +1626,7 @@ setting:
   myStuffStyleTitle: Page Design
   name: Global Setting | Global Settings
   network: Network Settings
-  newsPosition: Move News Section
+
   officialWebsite: Official Website
   particleMode:
     bubble: Bubble
@@ -1658,35 +1650,16 @@ setting:
   resetAllSettingsSuccess: All settings have been reset. The launcher will restart.
   resetToDefault: Reset to Default
   select: Select
-  setting:
-    title: Settings
+
   settingsExported: Settings exported successfully
   settingsImportError: Failed to import settings. Please check the file format.
   settingsImported: Settings imported successfully
   showNewsHeader: Unhide News showcase
   showRoot: Show
-  sidebarAlign: Sidebar Alignment
-  sidebarAlignCenter: Center
-  sidebarAlignEnd: End
-  sidebarAlignHint: Align the sidebar content
-  sidebarAlignStart: Start
+
   sidebarAutoHide: Auto-hide Sidebar
   sidebarAutoHideHint: Hide sidebar automatically and show on hover
-  sidebarBottom: Bottom
-  sidebarClassic: Classic
-  sidebarLeft: Left
-  sidebarNotch: Notch
-  sidebarPosition: Sidebar Position
-  sidebarPositionHint: Choose where the sidebar appears
-  sidebarPositionHintClassic: Classic style supports Left and Right positions only
-  sidebarRight: Right
-  sidebarScale: Sidebar Scale
-  sidebarScaleHint: Adjust the size of the sidebar
-  sidebarSettings: Sidebar Settings
-  sidebarSettingsHint: Customize sidebar appearance and behavior
-  sidebarStyle: Sidebar Style
-  sidebarStyleHint: Choose between classic and modern notch design
-  sidebarTop: Top
+
   streamerMode: Streaming Mode
   streamerModeDescription: This will hide your private information like email in launcher.
   theme:
@@ -1704,7 +1677,7 @@ setting:
   themeSettings: Theme Settings
   themeShare: Share Theme
   themeShareDescription: You can share the theme with your friend.
-  title: Settings
+
   update: Update
   useBmclAPI: Use BMCL API
   useBmclAPIDescription: >-
